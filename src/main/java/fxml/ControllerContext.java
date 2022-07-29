@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 public class ControllerContext extends Application {
     private static Stage mainStage;
-//    private static String theme = ControllerContext.class.getResource("theme.css").toExternalForm();
 
     @Override
     public void start(Stage stage) {

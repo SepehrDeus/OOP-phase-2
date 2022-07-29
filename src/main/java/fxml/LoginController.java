@@ -19,10 +19,6 @@ public class LoginController {
         }
     }
     private static final Scene scene = new Scene(root);
-//    private static final String css = ControllerContext.class.getResource("air.css").toExternalForm();
-//    static {
-//        scene.getStylesheets().addAll(ControllerContext.getTheme(),css);
-//    }
 
 
 
