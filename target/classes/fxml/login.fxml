@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LoginController">
    <center>
@@ -12,8 +13,12 @@
          <children>
             <TextField fx:id="usernameField" layoutX="360.0" layoutY="239.0" prefHeight="40.0" prefWidth="180.0" promptText="username" />
             <PasswordField fx:id="passwordField" layoutX="360.0" layoutY="295.0" prefHeight="40.0" prefWidth="180.0" promptText="password" />
-            <Button id="big-yellow" fx:id="loginButton" layoutX="394.0" layoutY="341.0" mnemonicParsing="false" text="Log in" />
-            <Button id="big-yellow" fx:id="registerButton" layoutX="386.0" layoutY="407.0" mnemonicParsing="false" text="Register" />
+            <Button id="big-yellow" fx:id="loginButton" layoutX="403.0" layoutY="349.0" mnemonicParsing="false" text="Log in">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button id="big-yellow" fx:id="registerButton" layoutX="398.0" layoutY="414.0" mnemonicParsing="false" text="Register" />
          </children>
       </AnchorPane>
    </center>
