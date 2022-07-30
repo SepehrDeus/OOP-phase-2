@@ -1,8 +1,12 @@
 package fxml;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import jdbc.Database;
 
 import java.io.IOException;
 
@@ -45,5 +49,21 @@ public class EditController {
 
     //-----------------------------------------------------------------------------------------------------------------
 
+    @FXML
+    private TextField usernameField;
+    @FXML
 
+
+
+
+
+    public void change_username(ActionEvent event) {
+        if (!username.isEmpty()) {
+            if (Database.update_username(id, username)>0) {
+                System.out.println("Username changed successfully.");
+                return;
+            }
+        }
+        else System.err.println("username can't be empty.");
+    }
 }

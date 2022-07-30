@@ -64,7 +64,8 @@ public class MainMenuController {
     private Button logoutButton;
 
     public void go_to_edit(ActionEvent event) {
-
+        EditController.setUserID(userID);
+        ControllerContext.change_scene(EditController.SCENE_NUM);
     }
 
     public void go_to_login(ActionEvent event) {

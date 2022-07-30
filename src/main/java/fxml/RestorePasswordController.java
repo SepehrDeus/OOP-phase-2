@@ -17,10 +17,10 @@ import java.util.regex.Pattern;
 
 public class RestorePasswordController {
     public static final int SCENE_NUM = 4;
-    private String userID;
+    private static String userID;
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public static void setUserID(String userID) {
+        RestorePasswordController.userID = userID;
     }
 
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("restore-password.fxml"));
