@@ -43,10 +43,11 @@ public class ControllerContext extends Application {
             case LoginController.SCENE_NUM -> mainStage.setScene(LoginController.getScene());
             case RegisterController.SCENE_NUM -> mainStage.setScene(RegisterController.getScene());
             case MainMenuController.SCENE_NUM -> mainStage.setScene(MainMenuController.getScene());
+            case EditController.SCENE_NUM -> mainStage.setScene(EditController.getScene());
         }
     }
-
     // login = 0
     // register = 1
     // mainMenu = 2
+    // edit = 3
 }

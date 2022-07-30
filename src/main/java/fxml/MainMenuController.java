@@ -63,6 +63,10 @@ public class MainMenuController {
     @FXML
     private Button logoutButton;
 
+    public void go_to_edit(ActionEvent event) {
+
+    }
+
     public void go_to_login(ActionEvent event) {
         String id = null;
         try {
