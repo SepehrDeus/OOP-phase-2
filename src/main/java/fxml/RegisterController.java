@@ -41,7 +41,7 @@ public class RegisterController {
         return scene;
     }
 
-    public static LoginController getLoginController() {
+    public static RegisterController getRegisterController() {
         return fxmlLoader.getController();
     }
 
@@ -73,12 +73,17 @@ public class RegisterController {
     private Button cancelButton;
     @FXML
     private Label endLabel;
+    @FXML
+    private TextField petField;
+    @FXML
+    private Label petErrLabel;
 
 
     public void register(ActionEvent event) throws SQLException {
         idErrLabel.setText("");
         unErrLabel.setText("");
         pwErrLabel.setText("");
+        petErrLabel.setText("");
         endLabel.setText("");
         String id = idField.getText();
         String username = usernameField.getText();
@@ -87,9 +92,10 @@ public class RegisterController {
         String biography = biographyArea.getText();
         String email = emailField.getText();
         String website = websiteField.getText();
+        String pet = petField.getText();
 
-        if (safe_id(id) && safe_username(username) && safe_password(password)) {
-            if (Database.add_user(new User(id, username, password, business, biography, email, website)) > 0) {
+        if (safe_id(id) && safe_username(username) && safe_password(password) && safe_pet(pet)) {
+            if (Database.add_user(new User(id, username, password, business, biography, email, website, pet)) > 0) {
                 idField.setText("");
                 usernameField.setText("");
                 passwordField.setText("");
@@ -97,6 +103,7 @@ public class RegisterController {
                 biographyArea.setText("");
                 emailField.setText("");
                 websiteField.setText("");
+                petField.setText("");
                 endLabel.setText("Registered successfully.");
             }
             else endLabel.setText("Something went wrong!\nPlease try again.");
@@ -159,6 +166,16 @@ public class RegisterController {
         if (!matcher1.find() || !matcher2.find() || !matcher3.find()) {
             pwErrLabel.setText("password must consist small and capital letters and numbers.");
             passwordField.setText("");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean safe_pet(String pet) {
+        if (pet.isEmpty()) {
+            petErrLabel.setText("pet can't be empty.");
+            petField.setText("");
             return false;
         }
 

@@ -44,7 +44,7 @@ public class MainMenuController {
         return scene;
     }
 
-    public static LoginController getLoginController() {
+    public static MainMenuController getMainMenuController() {
         return fxmlLoader.getController();
     }
 

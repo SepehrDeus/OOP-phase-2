@@ -21,6 +21,7 @@ public class ControllerContext extends Application {
         mainStage.setOnCloseRequest(
                 event -> {
                     event.consume();
+                    logout();
                     exit();
                 }
         );
@@ -38,16 +39,22 @@ public class ControllerContext extends Application {
         if (alert.showAndWait().get()== ButtonType.OK) mainStage.close();
     }
 
+    private static void logout() {
+
+    }
+
     public static void change_scene(int sceneNum) {
         switch (sceneNum) {
             case LoginController.SCENE_NUM -> mainStage.setScene(LoginController.getScene());
             case RegisterController.SCENE_NUM -> mainStage.setScene(RegisterController.getScene());
             case MainMenuController.SCENE_NUM -> mainStage.setScene(MainMenuController.getScene());
             case EditController.SCENE_NUM -> mainStage.setScene(EditController.getScene());
+            case RestorePasswordController.SCENE_NUM -> mainStage.setScene(RestorePasswordController.getScene());
         }
     }
     // login = 0
     // register = 1
     // mainMenu = 2
     // edit = 3
+    // restore password = 4
 }
