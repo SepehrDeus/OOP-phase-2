@@ -50,6 +50,7 @@ public class ControllerContext extends Application {
             case MainMenuController.SCENE_NUM -> mainStage.setScene(MainMenuController.getScene());
             case EditController.SCENE_NUM -> mainStage.setScene(EditController.getScene());
             case RestorePasswordController.SCENE_NUM -> mainStage.setScene(RestorePasswordController.getScene());
+            case PostsController.SCENE_NUM -> mainStage.setScene(PostsController.getScene());
         }
     }
     // login = 0
@@ -57,4 +58,5 @@ public class ControllerContext extends Application {
     // mainMenu = 2
     // edit = 3
     // restore password = 4
+    // posts = 10
 }

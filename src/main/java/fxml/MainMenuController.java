@@ -82,4 +82,10 @@ public class MainMenuController {
         setUserID(null);
         ControllerContext.change_scene(LoginController.SCENE_NUM);
     }
+
+    public void go_to_posts(ActionEvent event) {
+        PostsController.setUserID(userID);
+        ControllerContext.change_scene(PostsController.SCENE_NUM);
+
+    }
 }

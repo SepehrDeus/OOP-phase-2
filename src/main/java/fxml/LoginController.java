@@ -15,6 +15,7 @@ public class LoginController {
     public static final int SCENE_NUM = 0;
 
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("login.fxml"));
+
     private static Parent root;
     static {
         try {
