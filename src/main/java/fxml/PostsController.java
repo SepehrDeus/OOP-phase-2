@@ -6,12 +6,15 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class CreatePostMenu {
-    public static final int SCENE_NUM = 6;
+public class PostsController {
+    public static final int SCENE_NUM = 10;
+    private static String userID;
 
+    public static void setUserID(String userID) {
+        PostsController.userID = userID;
+    }
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("login.fxml"));
-
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("Posts.fxml"));
     private static Parent root;
     static {
         try {
@@ -21,12 +24,6 @@ public class CreatePostMenu {
         }
     }
     private static final Scene scene = new Scene(root);
-
-
-
-
-
-
 
 
     public static FXMLLoader getFxmlLoader() {
@@ -41,7 +38,13 @@ public class CreatePostMenu {
         return scene;
     }
 
-    public static LoginController getLoginController() {
+    public static PostsController getPostsController() {
         return fxmlLoader.getController();
     }
+
+    //-----------------------------------------------------------------------------------------------------------------
+
+
+
+
 }
