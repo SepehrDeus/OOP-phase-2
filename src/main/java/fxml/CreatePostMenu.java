@@ -6,8 +6,9 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class LoginController {
-    public static final int SCENE_NUM = 0;
+public class CreatePostMenu {
+    public static final int SCENE_NUM = 6;
+
 
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("login.fxml"));
 
