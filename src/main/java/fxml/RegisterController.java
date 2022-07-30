@@ -75,7 +75,7 @@ public class RegisterController {
     private Label endLabel;
 
 
-    public void register() throws SQLException {
+    public void register(ActionEvent event) throws SQLException {
         idErrLabel.setText("");
         unErrLabel.setText("");
         pwErrLabel.setText("");
@@ -165,7 +165,7 @@ public class RegisterController {
         return true;
     }
 
-    public void go_to_login() {
+    public void go_to_login(ActionEvent event) {
         ControllerContext.change_scene(LoginController.SCENE_NUM);
     }
 }

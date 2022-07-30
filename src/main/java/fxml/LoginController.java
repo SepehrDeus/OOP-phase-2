@@ -9,8 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import jdbc.Database;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
     public static final int SCENE_NUM = 0;
@@ -46,7 +48,7 @@ public class LoginController {
     //-----------------------------------------------------------------------------------------------------------------
 
     @FXML
-    private TextField usernameField;
+    private TextField idField;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -54,13 +56,57 @@ public class LoginController {
     @FXML
     private Button registerButton;
     @FXML
-    private Label errorLabel;
+    private Label idErrLabel;
+    @FXML
+    private Label pwErrLabel;
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws SQLException {
+        idErrLabel.setText("");
+        pwErrLabel.setText("");
 
+        if (Database.number_of_users() == 0) {
+            idErrLabel.setText("No user has registered yet.");
+            return;
+        }
+
+        String id = idField.getText();
+        String password = passwordField.getText();
+        if (correct_id(id) && correct_password(id, password)) {
+            idField.setText("");
+            passwordField.setText("");
+            MainMenuController.setUserID(id);
+            ControllerContext.change_scene(MainMenuController.SCENE_NUM);
+        }
     }
 
-    public void go_to_register() {
+    private boolean correct_id(String id) throws SQLException {
+        if (Database.user_exists(id)) {
+            if(Database.Update_logged_in_yes(id)>0){
+                return true;
+            }
+            else {
+                idErrLabel.setText("could not update index!");
+                idField.setText("");
+            }
+        }
+        else {
+            idErrLabel.setText("user doesn't exist.");
+            idField.setText("");
+        }
+
+        return false;
+    }
+
+    private boolean correct_password(String id, String password) throws SQLException {
+        if (Database.check_password(id, password)) return true;
+        else {
+            pwErrLabel.setText("wrong password!");
+            passwordField.setText("");
+        }
+        return false;
+    }
+
+    public void go_to_register(ActionEvent event) {
         ControllerContext.change_scene(RegisterController.SCENE_NUM);
     }
 }
