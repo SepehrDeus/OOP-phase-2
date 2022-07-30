@@ -1,8 +1,14 @@
 package fxml;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
@@ -21,12 +27,6 @@ public class LoginController {
     private static final Scene scene = new Scene(root);
 
 
-
-
-
-
-
-
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
     }
@@ -41,5 +41,26 @@ public class LoginController {
 
     public static LoginController getLoginController() {
         return fxmlLoader.getController();
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
+
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private Button registerButton;
+    @FXML
+    private Label errorLabel;
+
+    public void login(ActionEvent event) {
+
+    }
+
+    public void go_to_register() {
+        ControllerContext.change_scene(RegisterController.SCENE_NUM);
     }
 }

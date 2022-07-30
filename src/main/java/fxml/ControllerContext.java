@@ -30,12 +30,6 @@ public class ControllerContext extends Application {
         launch();
     }
 
-    public static void change_scene(int sceneNum) {
-        switch (sceneNum) {
-            case LoginController.SCENE_NUM -> mainStage.setScene(LoginController.getScene());
-        }
-    }
-
     private static void exit() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("exit");
@@ -43,4 +37,14 @@ public class ControllerContext extends Application {
         alert.setContentText("Are you sure?");
         if (alert.showAndWait().get()== ButtonType.OK) mainStage.close();
     }
+
+    public static void change_scene(int sceneNum) {
+        switch (sceneNum) {
+            case LoginController.SCENE_NUM -> mainStage.setScene(LoginController.getScene());
+            case RegisterController.SCENE_NUM -> mainStage.setScene(RegisterController.getScene());
+        }
+    }
+
+    // login = 0
+    // register = 1
 }

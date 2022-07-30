@@ -15,16 +15,19 @@ public class Database {
     // USERS
     public static int add_user(User user) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO users VALUES (?, ?, ?, ?, null, null, null, ?, 0, ?, 0, 0, ?, ?)"
+                "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?)"
         );
         preparedStatement.setString(1, user.getId());
         preparedStatement.setString(2, user.getUsername());
         preparedStatement.setString(3, user.getPassword());
         preparedStatement.setInt(4, user.isBusiness());
-        preparedStatement.setString(5, user.getFollowersTableName());
-        preparedStatement.setString(6, user.getFollowingTableName());
-        preparedStatement.setString(7, user.getGroupsTableName());
-        preparedStatement.setString(8, "no");
+        preparedStatement.setString(5, user.getBiography());
+        preparedStatement.setString(6, user.getEmail());
+        preparedStatement.setString(7, user.getWebsite());
+        preparedStatement.setString(8, user.getFollowersTableName());
+        preparedStatement.setString(9, user.getFollowingTableName());
+        preparedStatement.setString(10, user.getGroupsTableName());
+        preparedStatement.setString(11, "no");
 
         return preparedStatement.executeUpdate();
     }

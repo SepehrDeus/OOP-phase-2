@@ -18,11 +18,14 @@ public class User {
     private String groupsTableName; // id+"GroupsTable"
     private String Logged_in;
 
-    public User(String id, String username, String password, boolean business) {
+    public User(String id, String username, String password, boolean business, String biography, String email, String website) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.business = business;
+        this.biography = biography;
+        this.email = email;
+        this.website = website;
         followersNum = followingNum = postsNum = 0;
         followersTableName = Database.create_followersTable(id);
         followingTableName = Database.create_followingTable(id);
@@ -42,6 +45,18 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getWebsite() {
+        return website;
     }
 
     public String getFollowersTableName() {
