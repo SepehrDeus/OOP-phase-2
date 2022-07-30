@@ -24,7 +24,6 @@ public class Post {
         this.location=null;
         this.field=field;
         this.likesNum=this.commentsNum=viewsNum=0;
-
     }
 
 
