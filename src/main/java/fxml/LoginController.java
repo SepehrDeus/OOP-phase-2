@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import jdbc.Database;
 
 import java.io.IOException;
@@ -60,6 +57,9 @@ public class LoginController {
     private Label idErrLabel;
     @FXML
     private Label pwErrLabel;
+    @FXML
+    private Button forgotButton;
+
 
     public void login(ActionEvent event) throws SQLException {
         idErrLabel.setText("");
@@ -109,5 +109,14 @@ public class LoginController {
 
     public void go_to_register(ActionEvent event) {
         ControllerContext.change_scene(RegisterController.SCENE_NUM);
+    }
+
+    public void go_to_restorePassword(ActionEvent event) {
+        String id = idField.getText();
+        if (!id.isEmpty()) {
+            RestorePasswordController.getRestorePasswordController().setUserID(id);
+            ControllerContext.change_scene(RestorePasswordController.SCENE_NUM);
+        }
+        else idErrLabel.setText("id can't be empty.");
     }
 }

@@ -17,8 +17,9 @@ public class User {
     private int postsNum;
     private String groupsTableName; // id+"GroupsTable"
     private String Logged_in;
+    private String pet;
 
-    public User(String id, String username, String password, boolean business, String biography, String email, String website) {
+    public User(String id, String username, String password, boolean business, String biography, String email, String website, String pet) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -31,6 +32,7 @@ public class User {
         followingTableName = Database.create_followingTable(id);
         groupsTableName = Database.create_groupsTable(id);
         this.Logged_in="no";
+        this.pet = pet;
     }
 
     public User() {}
@@ -69,6 +71,10 @@ public class User {
 
     public String getGroupsTableName() {
         return groupsTableName;
+    }
+
+    public String getPet() {
+        return pet;
     }
 
     public int isBusiness() {
@@ -113,6 +119,10 @@ public class User {
 
     public void setLogged_in(String logged_in) {
         Logged_in = logged_in;
+    }
+
+    public void setPet(String pet) {
+        this.pet = pet;
     }
 
     @Override

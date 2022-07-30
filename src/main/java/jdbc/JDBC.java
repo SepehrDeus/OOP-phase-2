@@ -58,6 +58,7 @@ public class JDBC {
                         "postsNum int NOT NULL , " +
                         "groupsTableName varchar (300) NOT NULL , " +
                         "Logged_in varchar(10) NOT NULL, " +
+                        "Pet varchar(255) NOT NULL, " +
                         "PRIMARY KEY (id))"
         );
 

@@ -15,7 +15,7 @@ public class Database {
     // USERS
     public static int add_user(User user) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?)"
+                "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?, ?)"
         );
         preparedStatement.setString(1, user.getId());
         preparedStatement.setString(2, user.getUsername());
@@ -28,6 +28,7 @@ public class Database {
         preparedStatement.setString(9, user.getFollowingTableName());
         preparedStatement.setString(10, user.getGroupsTableName());
         preparedStatement.setString(11, "no");
+        preparedStatement.setString(12, user.getPet());
 
         return preparedStatement.executeUpdate();
     }
@@ -380,6 +381,16 @@ public class Database {
         }else {
             return "";
         }
+    }
+
+    public static String check_pet(String id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT Pet FROM users WHERE id=?"
+        );
+        preparedStatement.setString(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getString(1);
     }
 
 

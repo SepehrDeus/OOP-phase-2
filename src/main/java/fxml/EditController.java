@@ -39,7 +39,7 @@ public class EditController {
         return scene;
     }
 
-    public static LoginController getLoginController() {
+    public static EditController getEditController() {
         return fxmlLoader.getController();
     }
 

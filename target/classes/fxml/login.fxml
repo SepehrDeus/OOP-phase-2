@@ -13,12 +13,12 @@
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <TextField fx:id="idField" layoutX="360.0" layoutY="200.0" prefHeight="40.0" prefWidth="180.0" promptText="\@id" />
          <PasswordField fx:id="passwordField" layoutX="358.0" layoutY="247.0" prefHeight="40.0" prefWidth="180.0" promptText="password" />
-         <Button id="big-yellow" fx:id="loginButton" layoutX="394.0" layoutY="356.0" mnemonicParsing="false" onAction="#login" text="Log in">
+         <Button id="big-yellow" fx:id="loginButton" layoutX="393.0" layoutY="315.0" mnemonicParsing="false" onAction="#login" text="Log in">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button id="big-yellow" fx:id="registerButton" layoutX="386.0" layoutY="428.0" mnemonicParsing="false" onAction="#go_to_register" text="Register" />
+         <Button id="big-yellow" fx:id="registerButton" layoutX="385.0" layoutY="395.0" mnemonicParsing="false" onAction="#go_to_register" text="Register" />
          <Label layoutX="368.0" layoutY="89.0" text="welcome">
             <font>
                <Font size="41.0" />
@@ -26,6 +26,7 @@
          </Label>
          <Label fx:id="idErrLabel" layoutX="552.0" layoutY="202.0" prefHeight="34.0" prefWidth="338.0" />
          <Label fx:id="pwErrLabel" layoutX="552.0" layoutY="253.0" prefHeight="27.0" prefWidth="340.0" />
+         <Button fx:id="forgotButton" layoutX="382.0" layoutY="473.0" mnemonicParsing="false" onAction="#go_to_restorePassword" text="I forgot my password." />
       </AnchorPane>
    </center>
 </BorderPane>
