@@ -5,15 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MessagesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MessagesController">
    <children>
-      <Button fx:id="inboxButton" layoutX="427.0" layoutY="191.0" mnemonicParsing="false" onAction="#go_to_inbox" text="Inbox" />
-      <Label layoutX="393.0" layoutY="54.0" text="Messages">
+      <Button fx:id="inboxButton" layoutX="277.0" layoutY="141.0" mnemonicParsing="false" onAction="#go_to_inbox" text="Inbox" />
+      <Label layoutX="244.0" layoutY="42.0" text="Messages">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="sendButton" layoutX="390.0" layoutY="144.0" mnemonicParsing="false" text="Send new message" />
-      <Button fx:id="searchButton" layoutX="398.0" layoutY="233.0" mnemonicParsing="false" text="Search message" />
+      <Button fx:id="sendButton" layoutX="241.0" layoutY="100.0" mnemonicParsing="false" onAction="#go_to_send" text="Send new message" />
+      <Button fx:id="sentButton" layoutX="280.0" layoutY="187.0" mnemonicParsing="false" onAction="#go_to_sent" text="Sent" />
    </children>
 </AnchorPane>

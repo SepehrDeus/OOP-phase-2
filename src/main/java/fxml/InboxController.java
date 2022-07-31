@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import jdbc.Database;
 
 import java.io.IOException;
 
@@ -18,10 +22,11 @@ public class InboxController {
 
 
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("inbox.fxml"));
-    private static Parent root;
+    private static BorderPane root;
     static {
         try {
             root = fxmlLoader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,8 +53,13 @@ public class InboxController {
     //-----------------------------------------------------------------------------------------------------------------
 
     @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private VBox vBox;
+    @FXML
     private Button returnButton;
-
 
     public void go_to_messages(ActionEvent event) {
         setUserID(null);

@@ -3,21 +3,26 @@ package fxml;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MessagesController {
+public class SentController implements Initializable {
     private static String userID;
 
     public static void setUserID(String userID) {
-        MessagesController.userID = userID;
+        SentController.userID = userID;
     }
 
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("messages.fxml"));
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("sent.fxml"));
     private static Parent root;
     static {
         try {
@@ -41,32 +46,29 @@ public class MessagesController {
         return scene;
     }
 
-    public static MessagesController getController() {
+    public static SentController getController() {
         return fxmlLoader.getController();
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
     @FXML
-    private Button sendButton;
+    private TextField searchField;
     @FXML
-    private Button inboxButton;
+    private Button searchButton;
     @FXML
-    private Button sentButton;
+    private VBox vBox;
+    @FXML
+    private Button returnButton;
 
 
-    public void go_to_send(ActionEvent event) {
-        SendMessage1Controller.setUserID(userID);
-        ControllerContext.change_scene(SendMessage1Controller.getScene());
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 
-    public void go_to_inbox(ActionEvent event) {
-        InboxController.setUserID(userID);
-        ControllerContext.change_scene(InboxController.getScene());
-    }
-
-    public void go_to_sent(ActionEvent event) {
-        SentController.setUserID(userID);
-        ControllerContext.change_scene(SentController.getScene());
+    public void go_to_messages(ActionEvent event) {
+        setUserID(null);
+        ControllerContext.change_scene(MessagesController.getScene());
     }
 }

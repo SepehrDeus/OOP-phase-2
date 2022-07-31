@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.SendMessage1Controller">
+   <children>
+      <TextField fx:id="receiverField" layoutX="226.0" layoutY="72.0" promptText="receiver id" />
+      <Label layoutX="224.0" layoutY="24.0" text="Send message">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="textArea" layoutX="181.0" layoutY="130.0" prefHeight="140.0" prefWidth="240.0" promptText="text" />
+      <Button fx:id="sendButton" layoutX="279.0" layoutY="312.0" mnemonicParsing="false" onAction="#send_message" text="Send" />
+      <Button fx:id="returnButton" layoutX="275.0" layoutY="347.0" mnemonicParsing="false" onAction="#go_to_messages" text="Return" />
+      <Label fx:id="rcvrErrLabel" alignment="CENTER" layoutX="208.0" layoutY="104.0" prefHeight="18.0" prefWidth="185.0" />
+      <Label fx:id="txtErrLabel" alignment="CENTER" layoutX="207.0" layoutY="282.0" prefHeight="18.0" prefWidth="185.0" />
+      <Label fx:id="endLabel" alignment="CENTER" layoutX="208.0" layoutY="282.0" prefHeight="18.0" prefWidth="185.0" />
+   </children>
+</AnchorPane>
