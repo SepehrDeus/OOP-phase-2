@@ -15,7 +15,7 @@ public class Database {
     // USERS
     public static int add_user(User user) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?, ?)"
+                "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 0, ?, ?, ?, ?)"
         );
         preparedStatement.setString(1, user.getId());
         preparedStatement.setString(2, user.getUsername());
@@ -29,6 +29,7 @@ public class Database {
         preparedStatement.setString(10, user.getGroupsTableName());
         preparedStatement.setString(11, "no");
         preparedStatement.setString(12, user.getPet());
+        preparedStatement.setString(13, user.getProfilePicture());
 
         return preparedStatement.executeUpdate();
     }
@@ -110,6 +111,7 @@ public class Database {
         user.setFollowersNum(resultSet.getInt("followersNum"));
         user.setFollowingNum(resultSet.getInt("followingNum"));
         user.setPostsNum(resultSet.getInt("postsNum"));
+        user.setProfilePicture(resultSet.getString("profilePicture"));
 
         return user;
     }
@@ -174,6 +176,15 @@ public class Database {
                 "UPDATE users SET website=? WHERE id=?"
         );
         preparedStatement.setString(1, website);
+        preparedStatement.setString(2, id);
+        return preparedStatement.executeUpdate();
+    }
+
+    public static int update_profilePicture(String id, String profilePicture) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE users SET profilePicture=? WHERE id=?"
+        );
+        preparedStatement.setString(1, profilePicture);
         preparedStatement.setString(2, id);
         return preparedStatement.executeUpdate();
     }

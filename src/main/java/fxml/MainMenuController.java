@@ -62,6 +62,8 @@ public class MainMenuController {
     private Button editButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private Button profileButton;
 
     public void go_to_edit(ActionEvent event) {
         EditController.setUserID(userID);

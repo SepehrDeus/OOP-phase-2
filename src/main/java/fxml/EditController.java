@@ -9,8 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jdbc.Database;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
@@ -85,6 +91,16 @@ public class EditController {
     private Button websiteButton;
     @FXML
     private Label websiteLabel;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private TextField imageField;
+    @FXML
+    private Button browseButton;
+    @FXML
+    private Button imageChangeButton;
+    @FXML
+    private Label imageLabel;
     @FXML
     private Button mainMenuButton;
 
@@ -162,6 +178,33 @@ public class EditController {
         }
     }
 
+    public void change_profilePicture(ActionEvent event) throws SQLException {
+        String profilePicture = imageField.getText();
+        if (profilePicture.isEmpty()) imageLabel.setText("Field shouldn't be empty.");
+        else if (Database.update_profilePicture(userID, profilePicture) > 0) {
+            imageLabel.setText("Changed successfully.");
+            imageField.setText("");
+        }
+    }
+
+    public void browse_image(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.setTitle("Choose image");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose image");
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            String profilePicture = file.toURI().toString();
+            Image image = new Image(profilePicture);
+
+            imageField.setText(profilePicture);
+            imageView.setImage(image);
+        }
+    }
+
     public void go_to_mainMenu(ActionEvent event) {
         usernameField.setText("");
         usernameLabel.setText("");
@@ -173,6 +216,8 @@ public class EditController {
         emailLabel.setText("");
         websiteField.setText("");
         websiteLabel.setText("");
+        imageView.setImage(null);
+        imageField.setText("");
         setUserID(null);
         ControllerContext.change_scene(MainMenuController.SCENE_NUM);
     }
