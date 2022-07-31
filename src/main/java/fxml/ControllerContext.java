@@ -1,6 +1,7 @@
 package fxml;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -56,20 +57,7 @@ public class ControllerContext extends Application {
         }
     }
 
-    public static void change_scene(int sceneNum) {
-        switch (sceneNum) {
-            case LoginController.SCENE_NUM -> mainStage.setScene(LoginController.getScene());
-            case RegisterController.SCENE_NUM -> mainStage.setScene(RegisterController.getScene());
-            case MainMenuController.SCENE_NUM -> mainStage.setScene(MainMenuController.getScene());
-            case EditController.SCENE_NUM -> mainStage.setScene(EditController.getScene());
-            case RestorePasswordController.SCENE_NUM -> mainStage.setScene(RestorePasswordController.getScene());
-            case PostsController.SCENE_NUM -> mainStage.setScene(PostsController.getScene());
-        }
+    public static void change_scene(Scene scene) {
+        mainStage.setScene(scene);
     }
-    // login = 0
-    // register = 1
-    // mainMenu = 2
-    // edit = 3
-    // restore password = 4
-    // posts = 10
 }

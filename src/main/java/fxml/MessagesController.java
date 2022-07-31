@@ -1,19 +1,23 @@
 package fxml;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class PostsController {
+public class MessagesController {
     private static String userID;
 
     public static void setUserID(String userID) {
-        PostsController.userID = userID;
+        MessagesController.userID = userID;
     }
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("Posts.fxml"));
+
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("messages.fxml"));
     private static Parent root;
     static {
         try {
@@ -37,13 +41,21 @@ public class PostsController {
         return scene;
     }
 
-    public static PostsController getController() {
+    public static MessagesController getController() {
         return fxmlLoader.getController();
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
+    @FXML
+    private Button inboxButton;
+    @FXML
+    private Button sendButton;
+    @FXML
+    private Button searchButton;
 
-
-
+    public void go_to_inbox(ActionEvent event) {
+        InboxController.setUserID(userID);
+        ControllerContext.change_scene(InboxController.getScene());
+    }
 }

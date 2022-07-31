@@ -21,8 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterController {
-    public static final int SCENE_NUM = 1;
-
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("register.fxml"));
     private static Parent root;
     static {
@@ -47,7 +45,7 @@ public class RegisterController {
         return scene;
     }
 
-    public static RegisterController getRegisterController() {
+    public static RegisterController getController() {
         return fxmlLoader.getController();
     }
 
@@ -196,13 +194,13 @@ public class RegisterController {
     }
 
     public void browse_image(ActionEvent event) {
-        Stage stage = new Stage();
-        stage.setTitle("Choose image");
-        stage.initModality(Modality.APPLICATION_MODAL);
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose image");
-        File file = fileChooser.showOpenDialog(stage);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+        );
+        File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
             String profilePicture = file.toURI().toString();
@@ -214,6 +212,6 @@ public class RegisterController {
     }
 
     public void go_to_login(ActionEvent event) {
-        ControllerContext.change_scene(LoginController.SCENE_NUM);
+        ControllerContext.change_scene(LoginController.getScene());
     }
 }

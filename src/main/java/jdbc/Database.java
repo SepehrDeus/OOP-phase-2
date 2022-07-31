@@ -444,6 +444,15 @@ public class Database {
         return preparedStatement.executeQuery();
     }
 
+    public static ResultSet related_messages(String userID) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM messgaes WHERE senderID=? OR receiverID=? ORDER BY id DESC"
+        );
+        preparedStatement.setString(1, userID);
+        preparedStatement.setString(2, userID);
+        return preparedStatement.executeQuery();
+    }
+
     public static boolean isRelated(int messageID, String userID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT senderID, receiverID FROM messages WHERE id=?"
@@ -460,6 +469,13 @@ public class Database {
         );
         preparedStatement.setInt(1, messageID);
         return preparedStatement.executeQuery();
+    }
+
+    public static ResultSet get_AllMessages() throws SQLException {;
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(
+                "SELECT id,text,time FROM messages"
+        );
     }
 
 

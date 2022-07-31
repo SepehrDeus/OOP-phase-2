@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RegisterController">
    <children>
-      <TextField fx:id="idField" layoutX="378.0" layoutY="31.0" promptText="\@id (must bu filled)" />
-      <TextField fx:id="usernameField" layoutX="378.0" layoutY="75.0" promptText="username (must be filled)" />
-      <TextField fx:id="passwordField" layoutX="378.0" layoutY="118.0" promptText="password (must be filled)" />
-      <Button fx:id="registerButton" layoutX="419.0" layoutY="510.0" mnemonicParsing="false" onAction="#register" text="Register" />
-      <Button fx:id="cancelButton" layoutX="423.0" layoutY="544.0" mnemonicParsing="false" onAction="#go_to_login" text="Cancel" />
-      <Label fx:id="idErrLabel" layoutX="536.0" layoutY="35.0" prefHeight="18.0" prefWidth="150.0" />
-      <Label fx:id="unErrLabel" layoutX="538.0" layoutY="79.0" prefHeight="18.0" prefWidth="161.0" />
-      <Label fx:id="pwErrLabel" layoutX="534.0" layoutY="121.0" prefHeight="18.0" prefWidth="364.0" />
-      <Label layoutX="126.0" layoutY="35.0" prefHeight="18.0" prefWidth="190.0" text="only alphanumerical and _ allowed." />
-      <Label layoutX="29.0" layoutY="121.0" text="At least 8 characters, including both numbers and capital letters." />
-      <CheckBox fx:id="businessBox" layoutX="369.0" layoutY="169.0" mnemonicParsing="false" text="This is a business account." />
-      <TextArea fx:id="biographyArea" layoutX="317.0" layoutY="200.0" prefHeight="126.0" prefWidth="270.0" promptText="biography" />
-      <TextField fx:id="emailField" layoutX="374.0" layoutY="345.0" promptText="email" />
-      <TextField fx:id="websiteField" layoutX="374.0" layoutY="389.0" promptText="website" />
-      <Label fx:id="endLabel" layoutX="368.0" layoutY="482.0" prefHeight="18.0" prefWidth="161.0" />
-      <TextField fx:id="petField" layoutX="374.0" layoutY="433.0" promptText="last pet (must be filled)" />
-      <Label fx:id="petErrLabel" layoutX="538.0" layoutY="436.0" prefHeight="18.0" prefWidth="190.0" />
-      <Label layoutX="236.0" layoutY="437.0" text="Safety question" />
+      <TextField fx:id="idField" layoutX="528.0" layoutY="31.0" promptText="\@id (must bu filled)" />
+      <TextField fx:id="usernameField" layoutX="528.0" layoutY="74.0" promptText="username (must be filled)" />
+      <TextField fx:id="passwordField" layoutX="528.0" layoutY="117.0" promptText="password (must be filled)" />
+      <Button fx:id="registerButton" layoutX="382.0" layoutY="492.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Button fx:id="cancelButton" layoutX="386.0" layoutY="536.0" mnemonicParsing="false" onAction="#go_to_login" text="Cancel" />
+      <Label fx:id="idErrLabel" layoutX="687.0" layoutY="35.0" prefHeight="18.0" prefWidth="202.0" />
+      <Label fx:id="unErrLabel" layoutX="689.0" layoutY="78.0" prefHeight="18.0" prefWidth="201.0" />
+      <Label fx:id="pwErrLabel" layoutX="696.0" layoutY="121.0" prefHeight="41.0" prefWidth="202.0" />
+      <Label layoutX="317.0" layoutY="35.0" prefHeight="18.0" prefWidth="190.0" text="only alphanumerical and _ allowed." />
+      <Label layoutX="167.0" layoutY="121.0" text="At least 8 characters, including both numbers and capital letters." />
+      <CheckBox fx:id="businessBox" layoutX="521.0" layoutY="154.0" mnemonicParsing="false" text="This is a business account." />
+      <TextArea fx:id="biographyArea" layoutX="467.0" layoutY="182.0" prefHeight="126.0" prefWidth="270.0" promptText="biography" />
+      <TextField fx:id="emailField" layoutX="526.0" layoutY="327.0" promptText="email" />
+      <TextField fx:id="websiteField" layoutX="526.0" layoutY="369.0" promptText="website" />
+      <Label fx:id="endLabel" layoutX="331.0" layoutY="449.0" prefHeight="18.0" prefWidth="161.0" />
+      <TextField fx:id="petField" layoutX="526.0" layoutY="410.0" promptText="last pet (must be filled)" />
+      <Label fx:id="petErrLabel" layoutX="687.0" layoutY="413.0" prefHeight="18.0" prefWidth="202.0" />
+      <Label layoutX="433.0" layoutY="414.0" text="Safety question" />
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="99.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="imageButton" layoutX="154.0" layoutY="423.0" mnemonicParsing="false" onAction="#browse_image" text="Browse image" />
+      <TextField fx:id="imageField" layoutX="125.0" layoutY="382.0" promptText="image url" />
    </children>
 </AnchorPane>

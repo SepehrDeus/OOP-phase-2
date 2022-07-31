@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginController {
-    public static final int SCENE_NUM = 0;
-
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("login.fxml"));
-
     private static Parent root;
     static {
         try {
@@ -39,7 +36,7 @@ public class LoginController {
         return scene;
     }
 
-    public static LoginController getLoginController() {
+    public static LoginController getController() {
         return fxmlLoader.getController();
     }
 
@@ -76,7 +73,7 @@ public class LoginController {
             idField.setText("");
             passwordField.setText("");
             MainMenuController.setUserID(id);
-            ControllerContext.change_scene(MainMenuController.SCENE_NUM);
+            ControllerContext.change_scene(MainMenuController.getScene());
         }
     }
 
@@ -108,14 +105,14 @@ public class LoginController {
     }
 
     public void go_to_register(ActionEvent event) {
-        ControllerContext.change_scene(RegisterController.SCENE_NUM);
+        ControllerContext.change_scene(RegisterController.getScene());
     }
 
     public void go_to_restorePassword(ActionEvent event) {
         String id = idField.getText();
         if (!id.isEmpty()) {
-            RestorePasswordController.getRestorePasswordController().setUserID(id);
-            ControllerContext.change_scene(RestorePasswordController.SCENE_NUM);
+            RestorePasswordController.setUserID(id);
+            ControllerContext.change_scene(RestorePasswordController.getScene());
         }
         else idErrLabel.setText("id can't be empty.");
     }

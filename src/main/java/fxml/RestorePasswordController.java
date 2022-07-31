@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RestorePasswordController {
-    public static final int SCENE_NUM = 4;
     private static String userID;
 
     public static void setUserID(String userID) {
@@ -47,7 +46,7 @@ public class RestorePasswordController {
         return scene;
     }
 
-    public static RestorePasswordController getRestorePasswordController() {
+    public static RestorePasswordController getController() {
         return fxmlLoader.getController();
     }
 
@@ -120,6 +119,6 @@ public class RestorePasswordController {
 
     public void go_to_login(ActionEvent event) {
         setUserID(null);
-        ControllerContext.change_scene(LoginController.SCENE_NUM);
+        ControllerContext.change_scene(LoginController.getScene());
     }
 }

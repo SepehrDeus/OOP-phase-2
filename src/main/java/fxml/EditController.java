@@ -23,7 +23,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EditController {
-    public static final int SCENE_NUM = 3;
     private static String userID;
 
     public static void setUserID(String userID) {
@@ -55,7 +54,7 @@ public class EditController {
         return scene;
     }
 
-    public static EditController getEditController() {
+    public static EditController getController() {
         return fxmlLoader.getController();
     }
 
@@ -188,13 +187,13 @@ public class EditController {
     }
 
     public void browse_image(ActionEvent event) {
-        Stage stage = new Stage();
-        stage.setTitle("Choose image");
-        stage.initModality(Modality.APPLICATION_MODAL);
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose image");
-        File file = fileChooser.showOpenDialog(stage);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+        );
+        File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
             String profilePicture = file.toURI().toString();
@@ -219,6 +218,6 @@ public class EditController {
         imageView.setImage(null);
         imageField.setText("");
         setUserID(null);
-        ControllerContext.change_scene(MainMenuController.SCENE_NUM);
+        ControllerContext.change_scene(MainMenuController.getScene());
     }
 }
