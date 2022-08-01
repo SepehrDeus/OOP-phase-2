@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class PostsController {
+public class UpdatePostController {
     private static String userID;
 
     public static void setUserID(String userID) {
-        PostsController.userID = userID;
+        UpdatePostController.userID = userID;
     }
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("Posts.fxml"));
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("UpdatePost.fxml"));
     private static Parent root;
     static {
         try {
@@ -37,13 +37,11 @@ public class PostsController {
         return scene;
     }
 
-    public static PostsController getController() {
+    public static UpdatePostController getController() {
         return fxmlLoader.getController();
     }
 
+
+
     //-----------------------------------------------------------------------------------------------------------------
-
-
-
-
 }

@@ -786,11 +786,11 @@ public class Database {
 
 
     //  POSTS
-    public static int get_postNum () throws SQLException {
+    public static int get_postNum (String userID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT postsNum FROM users WHERE Logged_in=?"
+                "SELECT postsNum FROM users WHERE id=?"
         );
-        preparedStatement.setString(1,"yes");
+        preparedStatement.setString(1,userID);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return  resultSet.getInt("postsNum");
@@ -803,8 +803,8 @@ public class Database {
                         "WHERE id=?"
         );
         int a=prepostNum+1;
-        preparedStatement.setString(1,userid);
-        preparedStatement.setInt(2,a);
+        preparedStatement.setString(2,userid);
+        preparedStatement.setInt(1,a);
         return preparedStatement.executeUpdate();
     }
 

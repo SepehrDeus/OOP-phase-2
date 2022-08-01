@@ -14,14 +14,14 @@ public class Post {
     private String field; //field of the post
 
 
-    public Post(String postID,String posterID,boolean ad,String picture,String caption,String time,String field){
+    public Post(String postID,String posterID,boolean ad,String picture,String caption,String time,String field,String location){
         this.postID=postID;
         this.posterID=posterID;
         this.ad=ad;
         this.picture=picture;
         this.caption=caption;
         this.time=time;
-        this.location=null;
+        this.location=location;
         this.field=field;
         this.likesNum=this.commentsNum=viewsNum=0;
     }

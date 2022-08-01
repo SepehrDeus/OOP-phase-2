@@ -50,7 +50,7 @@ public class MainMenuController {
     //-----------------------------------------------------------------------------------------------------------------
 
     @FXML
-    private Button postsButton;
+    private Button HomePageButton;
     @FXML
     private Button messagesButton;
     @FXML
@@ -90,8 +90,10 @@ public class MainMenuController {
         ControllerContext.change_scene(LoginController.getScene());
     }
 
-    public void go_to_posts(ActionEvent event) {
-        PostsController.setUserID(userID);
-        ControllerContext.change_scene(PostsController.getScene());
+    public void go_to_homepage (ActionEvent event) {
+        MyPostsController.setUserID(userID);
+        HomePageController.setUserID(userID);
+        ControllerContext.change_scene(MyPostsController.getScene());
+
     }
 }

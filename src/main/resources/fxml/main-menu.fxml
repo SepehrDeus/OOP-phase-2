@@ -7,8 +7,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainMenuController">
    <children>
-      <Button fx:id="postsButton" layoutX="402.0" layoutY="96.0" mnemonicParsing="false" onAction="#go_to_posts" text="Posts" />
-      <Label layoutX="354.0" layoutY="42.0" text="main menu">
+      <Button fx:id="HomePageButton" layoutX="389.0" layoutY="95.0" mnemonicParsing="false" onAction="#go_to_homepage" text="Home Page" />
+      <Label layoutX="394.0" layoutY="56.0" text="main menu">
          <font>
             <Font size="28.0" />
          </font></Label>
