@@ -2,9 +2,11 @@ package fxml.post;
 
 import fxml.ControllerContext;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
@@ -43,6 +45,18 @@ public class HomePageController {
         return fxmlLoader.getController();
     }
 
+    //-----------------------------------------------------------------------------------------------------------------
+
+    @FXML
+    private Button MyPostButton;
+    @FXML
+    private Button ExploreButton;
+    @FXML
+    private Button UserSuggestionButton;
+    @FXML
+    private Button ReturnButton;
+
+
     public void go_to_My_Posts(ActionEvent actionEvent) {
     }
 
@@ -54,9 +68,4 @@ public class HomePageController {
 
     public void Return_main_menu(ActionEvent actionEvent) {
     }
-
-
-    //-----------------------------------------------------------------------------------------------------------------
-
-
 }

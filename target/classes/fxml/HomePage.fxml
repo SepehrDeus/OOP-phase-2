@@ -9,36 +9,36 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.HomePageController">
-   <left>
-      <AnchorPane id="iphone_pane" prefHeight="600.0" prefWidth="210.0" stylesheets="@../../java/ButtonFirstStyle.css" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" layoutX="52.0" layoutY="-1.0" prefHeight="51.0" prefWidth="159.0" style="-fx-background-color: red;" stylesheets="@../../java/ButtonFirstStyle.css" text="Home Page">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="63.0" fitWidth="81.0" layoutX="-6.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/menuBar.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="MyPostButton" layoutY="115.0" mnemonicParsing="false" onAction="#go_to_My_Posts" prefHeight="66.0" prefWidth="208.0" text="MY POSTS">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
-            <Button fx:id="ExploreButton" layoutY="394.0" mnemonicParsing="false" onAction="#Show_latest_10_post" prefHeight="66.0" prefWidth="208.0" text="EXPLORER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="UserSuggestionButton" layoutY="249.0" mnemonicParsing="false" onAction="#Show_user_suggestion" prefHeight="66.0" prefWidth="208.0" text="USER SUGGESTION">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Button fx:id="ReturnButton" layoutY="556.0" mnemonicParsing="false" onAction="#Retun_main_menu" prefHeight="43.0" prefWidth="77.0" text="RETURN" />
-         </children>
-      </AnchorPane>
-   </left>
+    <left>
+        <AnchorPane prefHeight="600.0" prefWidth="210.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutX="52.0" layoutY="-1.0" prefHeight="51.0" prefWidth="159.0" style="-fx-background-color: red;" text="Home Page">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="63.0" fitWidth="81.0" layoutX="-6.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/menuBar.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="MyPostButton" layoutY="115.0" mnemonicParsing="false" onAction="#go_to_My_Posts" prefHeight="66.0" prefWidth="208.0" text="MY POSTS">
+                    <font>
+                        <Font size="21.0" />
+                    </font>
+                </Button>
+                <Button fx:id="ExploreButton" layoutY="394.0" mnemonicParsing="false" onAction="#Show_latest_10_post" prefHeight="66.0" prefWidth="208.0" text="EXPLORER">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="UserSuggestionButton" layoutY="249.0" mnemonicParsing="false" onAction="#Show_user_suggestion" prefHeight="66.0" prefWidth="208.0" text="USER SUGGESTION">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Button>
+                <Button fx:id="ReturnButton" layoutY="556.0" mnemonicParsing="false" onAction="#Return_main_menu" prefHeight="43.0" prefWidth="77.0" text="RETURN" />
+            </children>
+        </AnchorPane>
+    </left>
 </BorderPane>

@@ -98,6 +98,5 @@ public class MainMenuController {
         MyPostsController.setUserID(userID);
         HomePageController.setUserID(userID);
         ControllerContext.change_scene(MyPostsController.getScene());
-
     }
 }
