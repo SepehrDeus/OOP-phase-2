@@ -474,7 +474,7 @@ public class Database {
     public static ResultSet get_AllMessages() throws SQLException {;
         Statement statement = connection.createStatement();
         return statement.executeQuery(
-                "SELECT id,text,time FROM messages"
+                "SELECT * FROM messages ORDER BY id DESC"
         );
     }
 

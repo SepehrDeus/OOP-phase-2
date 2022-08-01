@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MessagesController {
     private static String userID;
@@ -59,8 +60,8 @@ public class MessagesController {
         ControllerContext.change_scene(SendMessage1Controller.getScene());
     }
 
-    public void go_to_inbox(ActionEvent event) {
-        if (InboxController.getController().set_messages(userID)) {
+    public void go_to_inbox(ActionEvent event) throws SQLException {
+        if (InboxController.getController().init_messages(userID)) {
             InboxController.setUserID(userID);
             ControllerContext.change_scene(InboxController.getScene());
         }

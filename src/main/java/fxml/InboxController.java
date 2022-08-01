@@ -14,6 +14,7 @@ import jdbc.Database;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class InboxController {
     private static String userID;
@@ -63,25 +64,59 @@ public class InboxController {
     private Button returnButton;
 
 
-    public void search_message(ActionEvent event) {
+    public void search_message(ActionEvent event) throws SQLException {
         String searchText = searchField.getText();
         if (!searchText.isEmpty()) {
-
+            vBox.getChildren().clear();
+            ResultSet resultSet = Database.get_AllMessages();
+            while (resultSet.next()) {
+                if (resultSet.getString("text").contains(searchText)) {
+                    String message = "from @" + resultSet.getString("senderID") + ":\n" +
+                            resultSet.getString("text") + "\n" +
+                            resultSet.getString("time") + "\n" +
+                            "@" + resultSet.getInt("id") + "\n";
+                    Label messageLabel = new Label(message);
+                    messageLabel.setMaxSize(900,-1);
+                    vBox.getChildren().add(messageLabel);
+                }
+            }
         }
+        else init_messages(userID);
     }
 
-    public boolean set_messages(String userID) {
+    public boolean init_messages(String userID) {
         try {
             vBox.getChildren().clear();
 
             ResultSet resultSet = Database.received_messages(userID);
             while (resultSet.next()) {
-                String message = "from @" + resultSet.getString("senderID") + ":\n" +
-                        resultSet.getString("text") + "\n" +
-                        resultSet.getString("time") + "\n" +
-                        "@" + resultSet.getInt("id") + "\n";
+                String senderID = resultSet.getString("senderID");
+                String text = resultSet.getString("text");
+                String time = resultSet.getString("time");
+                int messageID = resultSet.getInt("id");
+
+                String message = "from @" + senderID + ":\n" +
+                        text + "\n" +
+                        time + "\n" +
+                        "@" + messageID + "\n";
+
                 Label messageLabel = new Label(message);
                 messageLabel.setMaxSize(900,-1);
+
+                // forward
+                messageLabel.setOnMouseClicked(mouseEvent -> {
+                            try {
+                                ForwardMessage.display(text, senderID, userID);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                );
+
+                // reply
+                messageLabel.setOnMouseDragged(mouseEvent -> ReplyMessage.display(messageID, senderID, userID));
+
+
                 vBox.getChildren().add(messageLabel);
             }
 
