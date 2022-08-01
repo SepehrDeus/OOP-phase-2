@@ -62,10 +62,10 @@ public class ReplyMessage {
     private Button replyButton;
 
     public static void display(int messageID, String senderID, String userID) {
-        stage.showAndWait();
         setMessageID(messageID);
         setSenderID(senderID);
         setUserID(userID);
+        stage.showAndWait();
     }
 
     public void reply(ActionEvent event) {

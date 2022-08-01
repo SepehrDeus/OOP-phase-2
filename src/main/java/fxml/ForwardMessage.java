@@ -60,11 +60,10 @@ public class ForwardMessage {
 
 
     public static void display(String text, String senderID, String userID) {
-        stage.showAndWait();
         setText(text);
         setSenderID(senderID);
         setUserID(userID);
-        System.out.println(senderID);
+        stage.showAndWait();
     }
 
     public void forward(ActionEvent event) throws SQLException {
