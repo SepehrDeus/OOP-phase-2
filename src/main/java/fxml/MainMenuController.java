@@ -12,11 +12,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class MainMenuController {
-    public static final int SCENE_NUM = 2;
     private static String userID;
 
-    public static void setUserID(String userID) {
-        MainMenuController.userID = userID;
+    public static void setUserID(String ID) {
+        MainMenuController.userID = ID;
     }
 
 
@@ -44,14 +43,14 @@ public class MainMenuController {
         return scene;
     }
 
-    public static MainMenuController getMainMenuController() {
+    public static MainMenuController getController() {
         return fxmlLoader.getController();
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
     @FXML
-    private Button postsButton;
+    private Button HomePageButton;
     @FXML
     private Button messagesButton;
     @FXML
@@ -80,12 +79,13 @@ public class MainMenuController {
             e.printStackTrace();
         }
         setUserID(null);
-        ControllerContext.change_scene(LoginController.SCENE_NUM);
+        ControllerContext.change_scene(LoginController.getScene());
     }
 
-    public void go_to_posts(ActionEvent event) {
-        PostsController.setUserID(userID);
-        ControllerContext.change_scene(PostsController.SCENE_NUM);
+    public void go_to_homepage (ActionEvent event) {
+        MyPostsController.setUserID(userID);
+        HomePageController.setUserID(userID);
+        ControllerContext.change_scene(MyPostsController.getScene());
 
     }
 }

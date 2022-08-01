@@ -6,15 +6,14 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class EditController {
+public class ShowLikesController {
     private static String userID;
 
     public static void setUserID(String userID) {
-        EditController.userID = userID;
+        ShowLikesController.userID = userID;
     }
 
-
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("edit.fxml"));
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("ShowLikes.fxml"));
     private static Parent root;
     static {
         try {
@@ -38,11 +37,11 @@ public class EditController {
         return scene;
     }
 
-    public static EditController getController() {
+    public static ShowLikesController getController() {
         return fxmlLoader.getController();
     }
 
+
+
     //-----------------------------------------------------------------------------------------------------------------
-
-
 }

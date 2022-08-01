@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterController {
-    public static final int SCENE_NUM = 1;
+
 
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("register.fxml"));
     private static Parent root;
@@ -41,7 +41,7 @@ public class RegisterController {
         return scene;
     }
 
-    public static RegisterController getRegisterController() {
+    public static RegisterController getController() {
         return fxmlLoader.getController();
     }
 
@@ -183,6 +183,6 @@ public class RegisterController {
     }
 
     public void go_to_login(ActionEvent event) {
-        ControllerContext.change_scene(LoginController.SCENE_NUM);
+        ControllerContext.change_scene(LoginController.getScene());
     }
 }
