@@ -15,5 +15,6 @@
       </Label>
       <Button fx:id="sendButton" layoutX="241.0" layoutY="100.0" mnemonicParsing="false" onAction="#go_to_send" text="Send new message" />
       <Button fx:id="sentButton" layoutX="280.0" layoutY="187.0" mnemonicParsing="false" onAction="#go_to_sent" text="Sent" />
+      <Button fx:id="mainMenuButton" layoutX="261.0" layoutY="225.0" mnemonicParsing="false" onAction="#go_to_mainMenu" text="Main menu" />
    </children>
 </AnchorPane>

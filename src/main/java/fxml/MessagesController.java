@@ -16,7 +16,6 @@ public class MessagesController {
         MessagesController.userID = userID;
     }
 
-
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("messages.fxml"));
     private static Parent root;
     static {
@@ -61,12 +60,19 @@ public class MessagesController {
     }
 
     public void go_to_inbox(ActionEvent event) {
-        InboxController.setUserID(userID);
-        ControllerContext.change_scene(InboxController.getScene());
+        if (InboxController.getController().set_messages(userID)) {
+            InboxController.setUserID(userID);
+            ControllerContext.change_scene(InboxController.getScene());
+        }
     }
 
     public void go_to_sent(ActionEvent event) {
         SentController.setUserID(userID);
         ControllerContext.change_scene(SentController.getScene());
+    }
+
+    public void go_to_mainMenu(ActionEvent event) {
+        setUserID(null);
+        ControllerContext.change_scene(MainMenuController.getScene());
     }
 }
