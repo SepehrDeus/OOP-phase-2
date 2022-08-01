@@ -107,7 +107,7 @@ public class CreatePostController implements Initializable {
 
         boolean ad = check_AD_Post.isSelected();
         String PictureURL= PicURL;
-        if(PictureURL.isEmpty()){
+        if(PictureURL==null || PictureURL.isEmpty()){
             AlertBox.display("Error","URL is not correct!",true);
         }
         String time=post_time();
