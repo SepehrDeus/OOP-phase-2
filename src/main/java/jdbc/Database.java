@@ -830,8 +830,7 @@ public class Database {
 
     public static int add_post(Post post) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO  posts (id, posterID, ad, caption, pictureid, likesNum, commentsNum, time, Location, field, viewsNum) " +
-                        "VALUES(?, ?, ?, ?, ?, 0, 0, ?, ?, ?, 0)"
+                "INSERT INTO  posts VALUES(?, ?, ?, ?, ?, 0, 0, ?, ?, ?, 0)"
         );
         preparedStatement.setString(1,post.getPostID() );
         preparedStatement.setString(2, post.getPosterID() );

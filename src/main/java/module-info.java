@@ -7,4 +7,10 @@ module fxml.p10 {
 
     opens fxml to javafx.fxml;
     exports fxml;
+    exports fxml.post;
+    opens fxml.post to javafx.fxml;
+    exports fxml.message;
+    opens fxml.message to javafx.fxml;
+    exports fxml.user;
+    opens fxml.user to javafx.fxml;
 }

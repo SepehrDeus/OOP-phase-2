@@ -115,6 +115,8 @@ public class RegisterController {
                 emailField.setText("");
                 websiteField.setText("");
                 petField.setText("");
+                imageField.setText("");
+                imageView.setImage(null);
                 endLabel.setText("Registered successfully.");
             }
             else endLabel.setText("Something went wrong!\nPlease try again.");

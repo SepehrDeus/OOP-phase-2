@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ReplyMessage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.message.ReplyMessage">
    <children>
       <TextField fx:id="idField" layoutX="226.0" layoutY="37.0" promptText="receiver id" />
       <Label fx:id="idErrLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="75.0" prefHeight="18.0" prefWidth="600.0" />

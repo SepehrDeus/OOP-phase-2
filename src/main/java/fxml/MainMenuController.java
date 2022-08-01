@@ -1,5 +1,9 @@
 package fxml;
 
+import fxml.message.MessagesController;
+import fxml.post.HomePageController;
+import fxml.post.MyPostsController;
+import fxml.user.EditController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

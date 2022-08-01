@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.HomePageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.HomePageController">
    <left>
       <AnchorPane id="iphone_pane" prefHeight="600.0" prefWidth="210.0" stylesheets="@../../java/ButtonFirstStyle.css" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +37,7 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button fx:id="ReturnButton" layoutY="556.0" mnemonicParsing="false" onAction="#Retun_main_menu" prefHeight="43.0" prefWidth="77.0" text="RETURN" />
+            <Button fx:id="ReturnButton" layoutY="556.0" mnemonicParsing="false" onAction="#Return_main_menu" prefHeight="43.0" prefWidth="77.0" text="RETURN" />
          </children>
       </AnchorPane>
    </left>

@@ -60,4 +60,8 @@ public class ControllerContext extends Application {
     public static void change_scene(Scene scene) {
         mainStage.setScene(scene);
     }
+
+    public static Stage getMainStage() {
+        return mainStage;
+    }
 }
