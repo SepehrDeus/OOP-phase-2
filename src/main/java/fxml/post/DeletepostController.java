@@ -1,19 +1,20 @@
-package fxml;
+package fxml.post;
 
+import fxml.ControllerContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class UpdatePostController {
+public class DeletepostController {
     private static String userID;
 
     public static void setUserID(String userID) {
-        UpdatePostController.userID = userID;
+        DeletepostController.userID = userID;
     }
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("UpdatePost.fxml"));
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("Deletepost.fxml"));
     private static Parent root;
     static {
         try {
@@ -37,8 +38,8 @@ public class UpdatePostController {
         return scene;
     }
 
-    public static UpdatePostController getController() {
-        return fxmlLoader.getController();
+    public static DeletepostController getController() {
+       return fxmlLoader.getController();
     }
 
 

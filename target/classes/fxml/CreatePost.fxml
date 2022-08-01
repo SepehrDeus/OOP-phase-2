@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.CreatePostController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.CreatePostController">
    <children>
       <Label alignment="CENTER" layoutX="222.0" layoutY="51.0" prefHeight="51.0" prefWidth="76.0" text="Field : ">
          <font>
@@ -42,7 +42,7 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="pictureTxtArea11" layoutX="286.0" layoutY="418.0" prefHeight="76.0" prefWidth="276.0" promptText="Location" text="Picture URL">
+      <TextArea fx:id="pictureTxtArea11" layoutX="286.0" layoutY="418.0" prefHeight="76.0" prefWidth="276.0" promptText="Picture url">
          <font>
             <Font size="15.0" />
          </font>

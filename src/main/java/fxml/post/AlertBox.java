@@ -1,4 +1,4 @@
-package fxml;
+package fxml.post;
 
 import javafx.scene.image.Image;
 import javafx.stage.*;

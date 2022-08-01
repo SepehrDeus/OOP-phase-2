@@ -18,8 +18,9 @@ public class User {
     private String groupsTableName; // id+"GroupsTable"
     private String Logged_in;
     private String pet;
+    private String profilePicture;
 
-    public User(String id, String username, String password, boolean business, String biography, String email, String website, String pet) {
+    public User(String id, String username, String password, boolean business, String biography, String email, String website, String pet, String profilePicture) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -33,6 +34,7 @@ public class User {
         groupsTableName = Database.create_groupsTable(id);
         this.Logged_in="no";
         this.pet = pet;
+        this.profilePicture = profilePicture;
     }
 
     public User() {}
@@ -75,6 +77,10 @@ public class User {
 
     public String getPet() {
         return pet;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
     }
 
     public int isBusiness() {
@@ -121,8 +127,8 @@ public class User {
         Logged_in = logged_in;
     }
 
-    public void setPet(String pet) {
-        this.pet = pet;
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     @Override

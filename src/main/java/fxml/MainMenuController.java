@@ -1,5 +1,9 @@
 package fxml;
 
+import fxml.message.MessagesController;
+import fxml.post.HomePageController;
+import fxml.post.MyPostsController;
+import fxml.user.EditController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +18,8 @@ import java.sql.SQLException;
 public class MainMenuController {
     private static String userID;
 
-    public static void setUserID(String ID) {
-        MainMenuController.userID = ID;
+    public static void setUserID(String userID) {
+        MainMenuController.userID = userID;
     }
 
 
@@ -61,9 +65,17 @@ public class MainMenuController {
     private Button editButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private Button profileButton;
+
+    public void go_to_messages(ActionEvent event) {
+        MessagesController.setUserID(userID);
+        ControllerContext.change_scene(MessagesController.getScene());
+    }
 
     public void go_to_edit(ActionEvent event) {
-
+        EditController.setUserID(userID);
+        ControllerContext.change_scene(EditController.getScene());
     }
 
     public void go_to_login(ActionEvent event) {
@@ -86,6 +98,5 @@ public class MainMenuController {
         MyPostsController.setUserID(userID);
         HomePageController.setUserID(userID);
         ControllerContext.change_scene(MyPostsController.getScene());
-
     }
 }

@@ -7,16 +7,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jdbc.Database;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterController {
-
-
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("register.fxml"));
     private static Parent root;
     static {
@@ -77,6 +81,12 @@ public class RegisterController {
     private TextField petField;
     @FXML
     private Label petErrLabel;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Button imageButton;
+    @FXML
+    private TextField imageField;
 
 
     public void register(ActionEvent event) throws SQLException {
@@ -93,9 +103,10 @@ public class RegisterController {
         String email = emailField.getText();
         String website = websiteField.getText();
         String pet = petField.getText();
+        String profilePicture = imageField.getText();
 
         if (safe_id(id) && safe_username(username) && safe_password(password) && safe_pet(pet)) {
-            if (Database.add_user(new User(id, username, password, business, biography, email, website, pet)) > 0) {
+            if (Database.add_user(new User(id, username, password, business, biography, email, website, pet, profilePicture)) > 0) {
                 idField.setText("");
                 usernameField.setText("");
                 passwordField.setText("");
@@ -104,6 +115,8 @@ public class RegisterController {
                 emailField.setText("");
                 websiteField.setText("");
                 petField.setText("");
+                imageField.setText("");
+                imageView.setImage(null);
                 endLabel.setText("Registered successfully.");
             }
             else endLabel.setText("Something went wrong!\nPlease try again.");
@@ -180,6 +193,24 @@ public class RegisterController {
         }
 
         return true;
+    }
+
+    public void browse_image(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+        );
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            String profilePicture = file.toURI().toString();
+            Image image = new Image(profilePicture);
+
+            imageField.setText(profilePicture);
+            imageView.setImage(image);
+        }
     }
 
     public void go_to_login(ActionEvent event) {

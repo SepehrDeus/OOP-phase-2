@@ -1,20 +1,20 @@
-package fxml;
+package fxml.post;
 
-import javafx.event.ActionEvent;
+import fxml.ControllerContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class HomePageController {
+public class ShowLikesController {
     private static String userID;
 
     public static void setUserID(String userID) {
-        HomePageController.userID = userID;
+        ShowLikesController.userID = userID;
     }
 
-    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("HomePage.fxml"));
+    private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("ShowLikes.fxml"));
     private static Parent root;
     static {
         try {
@@ -38,24 +38,11 @@ public class HomePageController {
         return scene;
     }
 
-    public static HomePageController getController() {
+    public static ShowLikesController getController() {
         return fxmlLoader.getController();
     }
 
-    public void go_to_My_Posts(ActionEvent actionEvent) {
-    }
-
-    public void Show_latest_10_post(ActionEvent actionEvent) {
-    }
-
-    public void Show_user_suggestion(ActionEvent actionEvent) {
-    }
-
-    public void Retun_main_menu(ActionEvent actionEvent) {
-    }
 
 
     //-----------------------------------------------------------------------------------------------------------------
-
-
 }

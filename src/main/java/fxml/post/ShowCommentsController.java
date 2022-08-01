@@ -1,5 +1,6 @@
-package fxml;
+package fxml.post;
 
+import fxml.ControllerContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,8 +41,6 @@ public class ShowCommentsController {
     public static ShowCommentsController getController() {
         return fxmlLoader.getController();
     }
-
-
 
     //-----------------------------------------------------------------------------------------------------------------
 }

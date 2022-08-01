@@ -12,7 +12,7 @@ public class JDBC {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/deus",
                     "root",
-                    "9248bzm@#troy"
+                    "19283746"
             );
 
             JDBC.connection = connection;
@@ -59,6 +59,7 @@ public class JDBC {
                         "groupsTableName varchar (300) NOT NULL , " +
                         "Logged_in varchar(10) NOT NULL, " +
                         "Pet varchar(255) NOT NULL, " +
+                        "profilePicture varchar(500), " +
                         "PRIMARY KEY (id))"
         );
 
