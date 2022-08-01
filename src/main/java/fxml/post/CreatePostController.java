@@ -107,11 +107,6 @@ public class CreatePostController implements Initializable {
 
         boolean ad = check_AD_Post.isSelected();
         String PictureURL= PicURL;
-        try {
-            Image image =new Image(PicURL);
-        }catch (Exception e){
-            AlertBox.display("Error","No image found!",true);
-        }
         if(PictureURL.isEmpty()){
             AlertBox.display("Error","URL is not correct!",true);
         }
