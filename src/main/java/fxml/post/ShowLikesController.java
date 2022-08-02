@@ -73,6 +73,7 @@ public class ShowLikesController {
         @FXML
         void Return_myPosts(ActionEvent event) {
             setUserID(null);
+            PostORCommentID.setText("");
             vBox.getChildren().clear();
             ControllerContext.change_scene(MyPostsController.getScene());
         }
@@ -100,14 +101,14 @@ public class ShowLikesController {
 
                                 vBox.getChildren().add(imageView);
                                 Label message = new Label(temp.getString(1) +
-                                        " Liked the post.\n"+"\n");
+                                        " Liked the post.\n"+"----------------------");
                                 message.setMaxSize(900,-1);
                                 vBox.getChildren().add(message);
                             }
                             }
 
                         if(!LikerIDs.next()){
-                            Label label =new Label("No more Likes.");
+                            Label label =new Label("No  Likes.");
                             label.setMaxSize(900,-1);
                             vBox.getChildren().add(label);
                         }
@@ -138,19 +139,19 @@ public class ShowLikesController {
 
                                 vBox.getChildren().add(imageView);
                                 Label message = new Label(temp.getString(1) +
-                                        " Liked the comment.\n"+"\n");
+                                        " Liked the comment.\n"+"----------------------");
                                 message.setMaxSize(900,-1);
                                 vBox.getChildren().add(message);
                             }
                         }
                         if(!LikerIDs.next()){
-                            Label label =new Label("No more Likes.");
+                            Label label =new Label("No  Likes.");
                             label.setMaxSize(900,-1);
                             vBox.getChildren().add(label);
                         }
                         return ;
                     }else {
-                        AlertBox.display("Error","No posts Found!",true);
+                        AlertBox.display("Error","No comments Found!",true);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

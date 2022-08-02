@@ -977,28 +977,25 @@ public static int get_likesNum_from_comments (String id) throws SQLException {
         resultSet.next();
         return  resultSet.getInt("likesNum");
         }
-public static void SHOW_COMMENTS_comment (String post_ID)throws SQLException{
+
+public static ResultSet SHOW_COMMENTS_comment (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
         "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
         preparedStatement.setString(1,post_ID+"#");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-        System.out.println("@"+resultSet.getString("commenterid")+" commented: "+
-        resultSet.getString("comment_caption")+" at comment: "+post_ID);
-        }
-        }
-public static void SHOW_COMMENTS_post (String post_ID)throws SQLException{
+    return preparedStatement.executeQuery();
+    }
+
+public static ResultSet SHOW_COMMENTS_post (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=? "
+        "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
         preparedStatement.setString(1,post_ID+"*");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-        System.out.println(resultSet.getString("commenterid")+"commented :"+
-        resultSet.getString("comment_caption")+" at post:"+post_ID);
-        }
-        }
+        return preparedStatement.executeQuery();
+    }
+
 // LIKES
 public static int add_likes(Like like) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -1031,6 +1028,13 @@ public static boolean delete_like (String id) throws SQLException {
         preparedStatement.setString(1, post_ID+"#");
         return preparedStatement.executeQuery();
     }
+    public static ResultSet get_commentsCaption (String comment_ID)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT comment_caption FROM comments WHERE id=?"
+        );
+        preparedStatement.setString(1, comment_ID);
+        return preparedStatement.executeQuery();
+    }
     public static ResultSet get_usernameANDpictureurl (String user_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT username, profilepicture FROM users WHERE id=?"
@@ -1048,5 +1052,5 @@ public static void SHOW_VIEWS_post (String post_ID)throws SQLException{
         while (resultSet.next()){
         System.out.println(post_ID+"viewsNum:"+resultSet.getString("viewsNum"));
         }
-        }
-        }
+    }
+}

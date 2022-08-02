@@ -17,11 +17,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="choiceBoxField" layoutX="298.0" layoutY="58.0" prefHeight="38.0" prefWidth="251.0" />
-      <Label alignment="CENTER" layoutX="562.0" layoutY="51.0" prefHeight="51.0" prefWidth="219.0" text="(Shouldn't be empty)">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
       <CheckBox fx:id="check_AD_Post" layoutX="268.0" layoutY="134.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="312.0" selected="true" text="Is this an advertising post?">
          <opaqueInsets>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
