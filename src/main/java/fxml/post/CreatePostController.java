@@ -109,18 +109,15 @@ public class CreatePostController implements Initializable {
 
         boolean ad = check_AD_Post.isSelected();
         String PictureURL= pictureTxtArea11.getText();
-        if(PictureURL==null || PictureURL.isEmpty()){
-            AlertBox.display("Error","URL is not correct!",true);
+        if(PictureURL.isEmpty()){
+            AlertBox.display("Error","URL is empty!",true);
         }
         String time=post_time();
         String field = choiceBoxField.getValue();
         String Location = LocationTxtArea1.getText();
-        if(Location.isEmpty()){
-            Location = null;
-        }
 
         try {
-            if(safe_caption(caption) && safe_ad(ad) && safe_postID() && safe_posterID() && (!(PictureURL==null || PictureURL.isEmpty()))){
+            if(safe_caption(caption) && safe_ad(ad) && safe_postID() && safe_posterID() && (! PictureURL.isEmpty())){
                 if (Database.add_post(new Post( postID, posterID, ad,
                         PictureURL,caption,time,field,Location)) > 0){
                     AlertBox.display("Success","Posted Successfully!",false);
@@ -184,8 +181,14 @@ public class CreatePostController implements Initializable {
     private  void safe_picture (){
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(ControllerContext.getMainStage());
-        pictureTxtArea11.setText(file.toURI().toString());
+        if(file == null){
+            pictureTxtArea11.setText("");
+            AlertBox.display("Error","URL is not correct!",true);
+            return;
+        }else {
 
+            pictureTxtArea11.setText(file.toURI().toString());
+        }
     }
 
     private  String post_time (){
@@ -201,6 +204,11 @@ public class CreatePostController implements Initializable {
 
     @FXML
     public void return_MyPosts(ActionEvent actionEvent) {
+        choiceBoxField.setValue("1.sports");
+        CaptionTxtArea.setText("");
+        check_AD_Post.setSelected(true);
+        LocationTxtArea1.setText("");
+        pictureTxtArea11.setText("");
         ControllerContext.change_scene(MyPostsController.getScene());
     }
 }
