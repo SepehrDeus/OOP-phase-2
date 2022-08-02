@@ -1,5 +1,6 @@
 package fxml.message;
 
+import entity.Message;
 import fxml.ControllerContext;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jdbc.Database;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ReplyMessage {
 
@@ -52,10 +55,6 @@ public class ReplyMessage {
 
 
     @FXML
-    private TextField idField;
-    @FXML
-    private Label idErrLabel;
-    @FXML
     private TextArea replyArea;
     @FXML
     private Label replyErrLabel;
@@ -69,7 +68,13 @@ public class ReplyMessage {
         stage.showAndWait();
     }
 
-    public void reply(ActionEvent event) {
-
+    public void reply(ActionEvent event) throws SQLException {
+        String replyText = replyArea.getText();
+        if (!replyText.isEmpty()) {
+            String message = "reply to message @" + messageID + ":\n" + replyText;
+            if (Database.add_message(new Message(message, userID, senderID)) > 0)
+                stage.close();
+        }
+        else replyErrLabel.setText("Please fill the field.");
     }
 }

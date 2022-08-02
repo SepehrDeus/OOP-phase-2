@@ -70,8 +70,10 @@ public class MessagesController {
     }
 
     public void go_to_sent(ActionEvent event) {
-        SentController.setUserID(userID);
-        ControllerContext.change_scene(SentController.getScene());
+        if (SentController.getController().init_messages(userID)) {
+            SentController.setUserID(userID);
+            ControllerContext.change_scene(SentController.getScene());
+        }
     }
 
     public void go_to_mainMenu(ActionEvent event) {

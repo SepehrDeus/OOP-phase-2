@@ -99,4 +99,7 @@ public class MainMenuController {
         HomePageController.setUserID(userID);
         ControllerContext.change_scene(MyPostsController.getScene());
     }
+
+    public static class RestorePasswordController {
+    }
 }
