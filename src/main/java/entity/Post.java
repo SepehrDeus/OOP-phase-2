@@ -48,15 +48,15 @@ public class Post {
     }
 
     public String getLocation() {
-        return location;
+            return location;
     }
 
 
-    public String isAd() {
+    public int isAd() {
         if(this.ad){
-            return "yes";
+            return 1;
         }else {
-            return "no";
+            return 0;
         }
     }
 

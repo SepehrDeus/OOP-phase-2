@@ -1,5 +1,9 @@
 package fxml.post;
-
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import fxml.ControllerContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,4 +49,30 @@ public class ShowLikesController {
 
 
     //-----------------------------------------------------------------------------------------------------------------
-}
+
+         @FXML
+        private Button RetunButton;
+        @FXML
+        private ToggleButton CommentToggle;
+
+        @FXML
+        private ToggleGroup IDs;
+
+        @FXML
+        private ToggleButton PostToggle;
+
+        @FXML
+        void post_comment_toggle(ActionEvent event) {
+            if(event.getSource() == PostToggle){
+
+            }else if(event.getSource() == CommentToggle){
+
+            }
+        }
+
+        @FXML
+        void Return_myPosts(ActionEvent event) {
+
+        }
+
+    }

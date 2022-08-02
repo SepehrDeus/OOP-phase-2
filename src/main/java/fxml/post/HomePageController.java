@@ -1,6 +1,7 @@
 package fxml.post;
 
 import fxml.ControllerContext;
+import fxml.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,5 +68,7 @@ public class HomePageController {
     }
 
     public void Return_main_menu(ActionEvent actionEvent) {
+        MainMenuController.setUserID(userID);
+        ControllerContext.change_scene(MainMenuController.getScene());
     }
 }
