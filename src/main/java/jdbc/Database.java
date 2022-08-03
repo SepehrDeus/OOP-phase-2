@@ -911,9 +911,18 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
     }
     public  static ResultSet get_URl(String userID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT id, pictureid FROM posts WHERE posterid=?"
+                "SELECT id, pictureid, ad FROM posts WHERE posterid=?"
         );
         preparedStatement.setString(1,userID);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return preparedStatement.executeQuery();
+    }
+
+    public  static ResultSet get_likeANDview_num (String postID) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT likesNum, viewsNum FROM posts WHERE id=?"
+        );
+        preparedStatement.setString(1,postID);
         ResultSet resultSet = preparedStatement.executeQuery();
         return preparedStatement.executeQuery();
     }

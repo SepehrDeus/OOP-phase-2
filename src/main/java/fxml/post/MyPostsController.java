@@ -84,12 +84,16 @@ public class MyPostsController {
 
     public void go_to_show_stats(ActionEvent actionEvent) {
         ShowStatsController.setUserID(userID);
-        ControllerContext.change_scene(ShowStatsController.getScene());
+        if(ShowStatsController.getController().init_deletePost()){
+            ControllerContext.change_scene(ShowStatsController.getScene());
+        }
     }
 
     public void go_to_update_caption(ActionEvent actionEvent) {
         UpdatePostController.setUserID(userID);
-        ControllerContext.change_scene(UpdatePostController.getScene());
+        if(UpdatePostController.getController().init_deletePost()){
+            ControllerContext.change_scene(UpdatePostController.getScene());
+        }
     }
 
     public void Return_HomePage(ActionEvent actionEvent) {

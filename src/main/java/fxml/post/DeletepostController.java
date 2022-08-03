@@ -2,6 +2,8 @@ package fxml.post;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -17,7 +19,6 @@ import java.sql.SQLException;
 
 public class DeletepostController {
     private static String userID;
-    private String PicURL;
 
     public static void setUserID(String userID) {
         DeletepostController.userID = userID;
@@ -55,6 +56,8 @@ public class DeletepostController {
 
     //-----------------------------------------------------------------------------------------------------------------
 
+    @FXML
+    private TextField PostIDText;
 
     @FXML
     private Button DeleteButton;
@@ -67,13 +70,14 @@ public class DeletepostController {
 
     @FXML
     void Delete_post(ActionEvent event) {
-        if( PicURL == null || PicURL.isEmpty() ){
+        if( PostIDText.getText() == null || PostIDText.getText().isEmpty() ){
             AlertBox.display("Error","no post is selected",true);
         }else {
             try {
-                if(Database.delete_Post(PicURL)>0){
+                if(Database.delete_Post(PostIDText.getText())>0){
                     AlertBox.display("success","Deleted the post successfully.",false);
                     setUserID(null);
+                    PostIDText.setText("");
                     vBox.getChildren().clear();
                     ControllerContext.change_scene(MyPostsController.getScene());
                     return;
@@ -91,18 +95,20 @@ public class DeletepostController {
             ResultSet resultSet = Database.get_URl(userID);
             while (resultSet.next()){
                 ImageView imageView = new ImageView(resultSet.getString("pictureid"));
-                imageView.setFitHeight(400);
+                imageView.setFitHeight(300);
                 imageView.setPreserveRatio(true);
-
+                Label postID = new Label(resultSet.getString("id"));
                 imageView.setOnMouseClicked(mouseEvent -> {
                     try {
-                        imageView.setEffect(new DropShadow());
-                        PicURL = resultSet.getString("id");
+                        PostIDText.setText(postID.getText());
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                 });
+                imageView.setOnMouseEntered(mouseEvent -> imageView.setEffect(new DropShadow()));
+                imageView.setOnMouseExited(mouseEvent -> imageView.setEffect(null));
                 vBox.getChildren().add(imageView);
+                vBox.getChildren().add(postID);
             }
             return true;
         }catch (Exception e){
@@ -113,6 +119,7 @@ public class DeletepostController {
 
     @FXML
     void Retutn_my_posts(ActionEvent event) {
+        PostIDText.setText("");
         setUserID(null);
         vBox.getChildren().clear();
         ControllerContext.change_scene(MyPostsController.getScene());

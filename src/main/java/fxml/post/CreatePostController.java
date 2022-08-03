@@ -82,18 +82,6 @@ public class CreatePostController implements Initializable {
     private String[] Fields = {"1.sports", "2.entertainment", "3.nature", "4.educational", "5.fashion", "6.political", "7.music", "8.movie", "9.economics"};
 
 
-    // private static void Update_Location(String post_id){
-    //      String new_location = post_location();
-    //      while (true){
-    //          try {
-    //             if(Database.Update_location(new_location,post_id)>0){
-    //                 return;
-    //             }
-    //          }catch (Exception e){
-    //             System.out.println("invalid command!");
-    //           }
-    //   }
-
     @FXML
     private void create_post ()  {
 
