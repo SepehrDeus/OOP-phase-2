@@ -908,7 +908,15 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
         }else{
         return -1;
         }
-        }
+    }
+    public  static ResultSet get_URl(String userID) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT id, pictureid FROM posts WHERE posterid=?"
+        );
+        preparedStatement.setString(1,userID);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return preparedStatement.executeQuery();
+    }
 // COMMENTS
 public static int add_comment(Comment comment) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(

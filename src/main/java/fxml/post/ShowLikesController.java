@@ -95,9 +95,9 @@ public class ShowLikesController {
                             while (temp.next()){
                                 System.out.println(temp.getString(2));
                                 ImageView imageView = new ImageView(temp.getString(2));
-                                imageView.setFitHeight(100);
-                                imageView.setFitWidth(100);
-                                //dont know how to set max size
+                                imageView.setFitHeight(200);
+                                imageView.setPreserveRatio(true);
+
 
                                 vBox.getChildren().add(imageView);
                                 Label message = new Label(temp.getString(1) +
@@ -133,9 +133,10 @@ public class ShowLikesController {
                             temp = Database.get_usernameANDpictureurl(LikerIDs.getString("Liker_ID"));
                             while (temp.next()){
                                 ImageView imageView = new ImageView(temp.getString(2));
-                                imageView.setFitHeight(100);
-                                imageView.setFitWidth(100);
-                                //dont know how to set max size
+                               imageView.setFitHeight(200);
+                                imageView.setPreserveRatio(true);
+
+
 
                                 vBox.getChildren().add(imageView);
                                 Label message = new Label(temp.getString(1) +

@@ -83,10 +83,12 @@ public class MyPostsController {
     }
 
     public void go_to_show_stats(ActionEvent actionEvent) {
+        ShowStatsController.setUserID(userID);
         ControllerContext.change_scene(ShowStatsController.getScene());
     }
 
     public void go_to_update_caption(ActionEvent actionEvent) {
+        UpdatePostController.setUserID(userID);
         ControllerContext.change_scene(UpdatePostController.getScene());
     }
 
@@ -95,6 +97,9 @@ public class MyPostsController {
     }
 
     public void go_to_delete_post(ActionEvent actionEvent) {
-        ControllerContext.change_scene(DeletepostController.getScene());
+        DeletepostController.setUserID(userID);
+        if(DeletepostController.getController().init_deletePost()){
+            ControllerContext.change_scene(DeletepostController.getScene());
+        }
     }
 }
