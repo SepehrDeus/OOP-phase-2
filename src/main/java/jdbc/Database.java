@@ -493,14 +493,16 @@ public class Database {
     // GROUPS
     public static int add_group(Group group) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO groupsAll VALUES (?, ?, NULL, ?, ?, ?, ?)"
+                "INSERT INTO groupsAll VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setString(1, group.getId());
         preparedStatement.setString(2, group.getGroupName());
-        preparedStatement.setString(3, group.getOwnerID());
-        preparedStatement.setString(4, group.getMembersTableName());
-        preparedStatement.setString(5, group.getAdminsTableName());
-        preparedStatement.setString(6, group.getMessagesTableName());
+        preparedStatement.setString(3, group.getBiography());
+        preparedStatement.setString(4, group.getOwnerID());
+        preparedStatement.setString(5, group.getMembersTableName());
+        preparedStatement.setString(6, group.getAdminsTableName());
+        preparedStatement.setString(7, group.getMessagesTableName());
+        preparedStatement.setString(8, group.getGroupPicture());
 
         return preparedStatement.executeUpdate();
     }
@@ -600,7 +602,9 @@ public class Database {
         Group group = new Group(
                 resultSet.getString("id"),
                 resultSet.getString("groupName"),
-                resultSet.getString("ownerID")
+                resultSet.getString("ownerID"),
+                resultSet.getString("biography"),
+                resultSet.getString("groupPicture")
         );
         group.setBiography(resultSet.getString("biography"));
         return group;

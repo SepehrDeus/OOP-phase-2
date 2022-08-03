@@ -1,5 +1,7 @@
 package fxml;
 
+import fxml.user.RegisterController;
+import fxml.user.RestorePasswordController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -96,6 +96,7 @@ public class JDBC {
         statement.close();
     }
 
+    // all groups
     private static void initGroupsAllTable(Statement statement) throws SQLException { // all groups information
         statement.execute(
                 "CREATE TABLE IF NOT EXISTS groupsAll(" +
@@ -106,13 +107,15 @@ public class JDBC {
                         "membersTableName varchar (300) NOT NULL ," +
                         "adminsTableName varchar (300) NOT NULL, " +
                         "messagesTableName varchar (300) NOT NULL, " +
+                        "groupPicture varchar(300), " +
                         "PRIMARY KEY (id))"
         );
 
         statement.close();
     }
 
-    public static void initGroupsTable(String name) throws SQLException { // groups of each user
+    // groups of each user
+    public static void initGroupsTable(String name) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute(
                 "CREATE TABLE IF NOT EXISTS "+name+" (groupsID varchar (255), UNIQUE (groupsID))"

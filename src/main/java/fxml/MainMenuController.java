@@ -1,5 +1,6 @@
 package fxml;
 
+import fxml.group.GroupsController;
 import fxml.message.MessagesController;
 import fxml.post.HomePageController;
 import fxml.post.MyPostsController;
@@ -100,6 +101,10 @@ public class MainMenuController {
         ControllerContext.change_scene(MyPostsController.getScene());
     }
 
-    public static class RestorePasswordController {
+    public void go_to_groups(ActionEvent event) throws SQLException {
+        if (GroupsController.getController().init_groups(userID)) {
+            GroupsController.setUserID(userID);
+            ControllerContext.change_scene(GroupsController.getScene());
+        }
     }
 }
