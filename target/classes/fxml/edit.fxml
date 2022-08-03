@@ -31,7 +31,7 @@
             <Font size="44.0" />
          </font>
       </Label>
-      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="66.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="66.0" layoutY="143.0" pickOnBounds="true" />
       <TextField fx:id="imageField" layoutX="91.0" layoutY="355.0" promptText="image url" />
       <Button fx:id="browseButton" layoutX="120.0" layoutY="421.0" mnemonicParsing="false" onAction="#browse_image" text="Browse image" />
       <Button fx:id="imageChangeButton" layoutX="137.0" layoutY="460.0" mnemonicParsing="false" onAction="#change_profilePicture" text="Change" />

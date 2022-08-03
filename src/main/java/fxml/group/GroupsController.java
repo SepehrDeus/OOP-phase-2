@@ -90,7 +90,8 @@ public class GroupsController {
                         ChatController.setUserID(userID);
                         ChatController.setAdmin(Database.isAdmin(userID, groupID));
                         ChatController.setOwner(Database.isOwner(userID, groupID));
-                        if (ChatController.getController().init_groupMessages(groupID))
+                        if (ChatController.getController().init_groupMessages(groupID) &&
+                                ChatController.getController().init_menuBar(userID, groupID))
                             ControllerContext.change_scene(ChatController.getScene());
                     }
                     catch (Exception e) {

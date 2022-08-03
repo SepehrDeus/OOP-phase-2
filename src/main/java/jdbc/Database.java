@@ -628,6 +628,15 @@ public class Database {
         return preparedStatement.executeUpdate();
     }
 
+    public static int update_groupPicture(String groupID, String groupPicture) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE groupsAll SET groupPicture=? WHERE id=?"
+        );
+        preparedStatement.setString(1, groupPicture);
+        preparedStatement.setString(2, groupID);
+        return preparedStatement.executeUpdate();
+    }
+
     public static ResultSet get_membersTable(String groupID) throws SQLException {
         String membersTableName = groupID + "MembersTable";
         Statement statement = connection.createStatement();
