@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class SendMessage1Controller {
+
     private static String userID;
 
     public static void setUserID(String userID) {
@@ -110,6 +111,7 @@ public class SendMessage1Controller {
 
     public void go_to_messages(ActionEvent event) {
         setUserID(null);
+        textArea.setText("");
         ControllerContext.change_scene(MessagesController.getScene());
     }
 }

@@ -6,6 +6,7 @@ import fxml.post.HomePageController;
 import fxml.post.MyPostsController;
 import fxml.user.EditController;
 import fxml.user.ProfileController;
+import fxml.user.SearchUserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,5 +115,10 @@ public class MainMenuController {
             ProfileController.setUserID(userID);
             ControllerContext.change_scene(ProfileController.getScene());
         }
+    }
+
+    public void go_to_searchUser(ActionEvent event) {
+        SearchUserController.setWatcherUserID(userID);
+        ControllerContext.change_scene(SearchUserController.getScene());
     }
 }
