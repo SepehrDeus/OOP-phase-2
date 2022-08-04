@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.RemoveAdmin">
+    <children>
+        <TextField fx:id="idField" layoutX="157.0" layoutY="102.0" promptText="user id" />
+        <Label fx:id="label" alignment="CENTER" layoutY="141.0" prefHeight="18.0" prefWidth="450.0" />
+        <Button fx:id="addButton" layoutX="195.0" layoutY="180.0" mnemonicParsing="false" onAction="#remove_admin" text="Remove" />
+    </children>
+</AnchorPane>

@@ -25,6 +25,7 @@ public class GroupMembers {
         stage.setResizable(false);
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
+        stage.setOnCloseRequest(windowEvent -> getController().vBox.getChildren().clear());
     }
     private static final FXMLLoader fxmlLoader = new FXMLLoader(ControllerContext.class.getResource("group-members.fxml"));
     private static Scene scene;

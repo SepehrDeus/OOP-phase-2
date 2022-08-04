@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import jdbc.Database;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ChatController {
@@ -65,16 +66,6 @@ public class ChatController {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private MenuItem refreshItem;
-    @FXML
-    private MenuItem infoItem;
-    @FXML
-    private MenuItem membersItem;
-    @FXML
-    private MenuItem leaveItem;
-    @FXML
-    private MenuItem returnButton;
-    @FXML
     private VBox messagesVBox;
     @FXML
     private TextArea textArea;
@@ -108,7 +99,7 @@ public class ChatController {
     }
 
     private void init_groupMenu() {
-        MenuItem refresh = new MenuItem("messages");
+        MenuItem refresh = new MenuItem("refresh messages");
         refresh.setOnAction(event -> init_groupMessages(groupID));
 
         MenuItem groupInfo = new MenuItem("Group info");
@@ -130,6 +121,14 @@ public class ChatController {
         });
 
         MenuItem leave = new MenuItem("Leave");
+        leave.setOnAction(event -> {
+            try {
+                if (Database.leave(userID, groupID) > 1)
+                    go_to_groups(event);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
 
         MenuItem Return = new MenuItem("Return");
         Return.setOnAction(event -> {
@@ -153,10 +152,13 @@ public class ChatController {
         });
 
         MenuItem addMember = new MenuItem("Add member");
+        addMember.setOnAction(event -> AddMember.display(groupID));
 
         MenuItem addAdmin = new MenuItem("Add admin");
+        addAdmin.setOnAction(event -> AddAdmin.display(groupID));
 
         MenuItem kickMember = new MenuItem("Kick member");
+        kickMember.setOnAction(event -> KickMember.display(groupID));
 
         Menu menu = new Menu("Admin options");
         menu.getItems().addAll(edit, addMember, addAdmin, kickMember);
@@ -165,10 +167,36 @@ public class ChatController {
 
     private void init_ownerMenu() {
         MenuItem removeAdmin = new MenuItem("Remove admin");
+        removeAdmin.setOnAction(event -> RemoveAdmin.display(groupID));
 
         MenuItem kickAdmin = new MenuItem("Kick admin");
+        kickAdmin.setOnAction(event -> KickAdmin.display(groupID));
 
         MenuItem destroy = new MenuItem("Destroy");
+        destroy.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Destroy");
+            alert.setHeaderText("You're about to destroy the group.");
+            alert.setContentText("Are you sure?");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+                try {
+                    ResultSet resultSet = Database.get_membersTable(groupID);
+                    while (resultSet.next()) Database.leave(resultSet.getString(1), groupID);
+
+                    if (Database.destroy(groupID) > 0) {
+                        go_to_groups(event);
+                        Alert endAlert = new Alert(Alert.AlertType.INFORMATION);
+                        endAlert.setTitle("Result");
+                        endAlert.setHeaderText("Result");
+                        endAlert.setContentText("Group destroyed successfully.");
+                        endAlert.showAndWait();
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Menu menu = new Menu("Owner options");
         menu.getItems().addAll(removeAdmin, kickAdmin, destroy);
@@ -183,10 +211,6 @@ public class ChatController {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public void refresh(ActionEvent event) {
-        init_groupMessages(groupID);
     }
 
     public void go_to_groups(ActionEvent event) throws SQLException {

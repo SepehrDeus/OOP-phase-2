@@ -655,12 +655,12 @@ public class Database {
 
     public static boolean isOwner(String userID, String groupID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT COUNT(ownerID) FROM groupsAll WHERE id=?"
+                "SELECT ownerID FROM groupsAll WHERE id=?"
         );
         preparedStatement.setString(1,groupID);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        return resultSet.getInt(1) > 0;
+        return resultSet.getString(1).equals(userID);
     }
 
     public static int leave(String userID, String groupID) throws SQLException {
@@ -702,12 +702,12 @@ public class Database {
         preparedStatement1.setString(1, memberID);
 
         String groupsTableName = memberID+"GroupsTable";
-        PreparedStatement preparedStatement3 = connection.prepareStatement(
+        PreparedStatement preparedStatement2 = connection.prepareStatement(
                 "DELETE FROM "+groupsTableName+" WHERE groupsID=?"
         );
-        preparedStatement3.setString(1, groupID);
+        preparedStatement2.setString(1, groupID);
 
-        return preparedStatement1.executeUpdate() + preparedStatement3.executeUpdate();
+        return preparedStatement1.executeUpdate() + preparedStatement2.executeUpdate();
     }
 
     public static int kick_admin(String adminID, String groupID) throws SQLException {
