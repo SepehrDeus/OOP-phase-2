@@ -1,5 +1,6 @@
 package fxml.group;
 
+import entity.Message;
 import fxml.ControllerContext;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -203,8 +204,42 @@ public class ChatController {
         menuBar.getMenus().add(menu);
     }
 
+    public void send_message(ActionEvent event) throws SQLException {
+        String text = textArea.getText();
+        if (!text.isEmpty()) {
+            if (Database.send_message_to_group(new Message(text, userID, groupID)) > 0 && init_groupMessages(groupID)) {
+                textArea.setText("");
+                textErrLabel.setText("Message sent successfully.");
+            }
+        }
+        else textErrLabel.setText("Please fill the field.");
+    }
+
     public boolean init_groupMessages(String groupID) {
         try {
+            messagesVBox.getChildren().clear();
+
+            ResultSet resultSet = Database.get_groupMessagesTable(groupID);
+            while (resultSet.next()) {
+                String senderID = resultSet.getString("senderID");
+                String text = resultSet.getString("text");
+                String time = resultSet.getString("time");
+                int messageID = resultSet.getInt("id");
+
+                String message = "from @" + senderID + ":\n" +
+                        text + "\n" +
+                        time + "\n" +
+                        "@" + messageID + "\n";
+
+                Label messageLabel = new Label(message);
+                messageLabel.setMaxSize(900,-1);
+
+                // reply
+                messageLabel.setOnMouseDragged(mouseEvent -> textArea.setText("reply to message @" + messageID + ":\n"));
+
+                messagesVBox.getChildren().add(messageLabel);
+            }
+
             return true;
         }
         catch (Exception e) {

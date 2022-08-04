@@ -5,6 +5,7 @@ import fxml.message.MessagesController;
 import fxml.post.HomePageController;
 import fxml.post.MyPostsController;
 import fxml.user.EditController;
+import fxml.user.ProfileController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -105,6 +106,13 @@ public class MainMenuController {
         if (GroupsController.getController().init_groups(userID)) {
             GroupsController.setUserID(userID);
             ControllerContext.change_scene(GroupsController.getScene());
+        }
+    }
+
+    public void go_to_profile(ActionEvent event) {
+        if (ProfileController.getController().init_profile(userID)) {
+            ProfileController.setUserID(userID);
+            ControllerContext.change_scene(ProfileController.getScene());
         }
     }
 }
