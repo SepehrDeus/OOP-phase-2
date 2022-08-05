@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.KickAdmin">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.KickAdmin">
     <children>
-        <TextField fx:id="idField" layoutX="157.0" layoutY="102.0" promptText="user id" />
+        <TextField fx:id="idField" layoutX="150.0" layoutY="128.0" promptText="user id" />
         <Label fx:id="label" alignment="CENTER" layoutY="141.0" prefHeight="18.0" prefWidth="450.0" />
-        <Button fx:id="addButton" layoutX="199.0" layoutY="180.0" mnemonicParsing="false" onAction="#kick_admin" text="Kick" />
+        <Button id="big-yellow" fx:id="addButton" layoutX="183.0" layoutY="174.0" mnemonicParsing="false" onAction="#kick_admin" stylesheets="@../css/Buttons.css" text="Kick" />
     </children>
 </AnchorPane>

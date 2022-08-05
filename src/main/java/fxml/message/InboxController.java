@@ -85,7 +85,9 @@ public class InboxController {
                             "@" + messageID + "\n";
 
                     Label messageLabel = new Label(message);
-                    messageLabel.setMaxSize(900,-1);
+                    messageLabel.setMaxSize(850,-1);
+                    messageLabel.setStyle("../css/Buttons.css");
+                    messageLabel.setId("shiny-orange");
 
                     // forward
                     messageLabel.setOnMouseClicked(mouseEvent -> ForwardMessage.display(text, senderID, userID));
@@ -116,7 +118,9 @@ public class InboxController {
                         "@" + messageID + "\n";
 
                 Label messageLabel = new Label(message);
-                messageLabel.setMaxSize(900,-1);
+                messageLabel.setMaxSize(850,-1);
+                messageLabel.setStyle("../css/Buttons.css");
+                messageLabel.setId("shiny-orange");
 
                 // forward
                 messageLabel.setOnMouseClicked(mouseEvent -> ForwardMessage.display(text, senderID, userID));

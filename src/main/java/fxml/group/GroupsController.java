@@ -82,7 +82,9 @@ public class GroupsController {
                 String groupID = resultSet.getString(1);
 
                 Label groupLabel = new Label(groupID);
-                groupLabel.setMaxSize(600, -1);
+                groupLabel.setMaxSize(550, -1);
+                groupLabel.setStyle("../css/Buttons.css");
+                groupLabel.setId("shiny-orange");
 
                 groupLabel.setOnMouseClicked(mouseEvent -> {
                     try {

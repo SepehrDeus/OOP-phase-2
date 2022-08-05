@@ -5,11 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.ProfileController">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.ProfileController">
    <children>
       <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" />
-      <Label fx:id="label" alignment="TOP_LEFT" layoutX="286.0" layoutY="14.0" prefHeight="250.0" prefWidth="300.0" />
-      <Button fx:id="returnButton" layoutX="260.0" layoutY="312.0" mnemonicParsing="false" onAction="#go_to_mainMenu" text="Return" />
-      <Button fx:id="deleteAccount" layoutX="238.0" layoutY="349.0" mnemonicParsing="false" onAction="#delete_account" text="Delete account" />
+      <Label id="shiny-orange" fx:id="label" alignment="TOP_LEFT" layoutX="286.0" layoutY="14.0" prefHeight="250.0" prefWidth="300.0" stylesheets="@../css/Buttons.css" />
+      <Button id="big-yellow" fx:id="returnButton" layoutX="252.0" layoutY="281.0" mnemonicParsing="false" onAction="#go_to_mainMenu" stylesheets="@../css/Buttons.css" text="Return" />
+      <Button id="big-yellow" fx:id="deleteAccount" layoutX="229.0" layoutY="338.0" mnemonicParsing="false" onAction="#delete_account" stylesheets="@../css/Buttons.css" text="Delete account" />
    </children>
 </AnchorPane>

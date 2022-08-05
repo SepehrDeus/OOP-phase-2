@@ -8,13 +8,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.RegisterController">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.RegisterController">
    <children>
       <TextField fx:id="idField" layoutX="528.0" layoutY="31.0" promptText="\@id (must bu filled)" />
       <TextField fx:id="usernameField" layoutX="528.0" layoutY="74.0" promptText="username (must be filled)" />
       <TextField fx:id="passwordField" layoutX="528.0" layoutY="117.0" promptText="password (must be filled)" />
-      <Button fx:id="registerButton" layoutX="382.0" layoutY="492.0" mnemonicParsing="false" onAction="#register" text="Register" />
-      <Button fx:id="cancelButton" layoutX="386.0" layoutY="536.0" mnemonicParsing="false" onAction="#go_to_login" text="Cancel" />
+      <Button id="big-yellow" fx:id="registerButton" layoutX="381.0" layoutY="482.0" mnemonicParsing="false" onAction="#register" stylesheets="@../css/Buttons.css" text="Register" />
+      <Button id="big-yellow" fx:id="cancelButton" layoutX="385.0" layoutY="538.0" mnemonicParsing="false" onAction="#go_to_login" stylesheets="@../css/Buttons.css" text="Cancel" />
       <Label fx:id="idErrLabel" layoutX="687.0" layoutY="35.0" prefHeight="18.0" prefWidth="202.0" />
       <Label fx:id="unErrLabel" layoutX="689.0" layoutY="78.0" prefHeight="18.0" prefWidth="201.0" />
       <Label fx:id="pwErrLabel" layoutX="696.0" layoutY="121.0" prefHeight="41.0" prefWidth="202.0" />

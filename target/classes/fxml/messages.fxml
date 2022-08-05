@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.message.MessagesController">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.message.MessagesController">
    <children>
-      <Button fx:id="inboxButton" layoutX="277.0" layoutY="141.0" mnemonicParsing="false" onAction="#go_to_inbox" text="Inbox" />
-      <Label layoutX="244.0" layoutY="42.0" text="Messages">
+      <Button id="big-yellow" fx:id="inboxButton" layoutX="254.0" layoutY="176.0" mnemonicParsing="false" onAction="#go_to_inbox" stylesheets="@../css/Buttons.css" text="Inbox" />
+      <Label layoutX="213.0" layoutY="41.0" text="Messages">
          <font>
-            <Font size="26.0" />
+            <Font size="40.0" />
          </font>
       </Label>
-      <Button fx:id="sendButton" layoutX="241.0" layoutY="100.0" mnemonicParsing="false" onAction="#go_to_send" text="Send new message" />
-      <Button fx:id="sentButton" layoutX="280.0" layoutY="187.0" mnemonicParsing="false" onAction="#go_to_sent" text="Sent" />
-      <Button fx:id="mainMenuButton" layoutX="261.0" layoutY="225.0" mnemonicParsing="false" onAction="#go_to_mainMenu" text="Main menu" />
+      <Button id="big-yellow" fx:id="sendButton" layoutX="218.0" layoutY="110.0" mnemonicParsing="false" onAction="#go_to_send" stylesheets="@../css/Buttons.css" text="Send new message" />
+      <Button id="big-yellow" fx:id="sentButton" layoutX="257.0" layoutY="243.0" mnemonicParsing="false" onAction="#go_to_sent" stylesheets="@../css/Buttons.css" text="Sent" />
+      <Button id="big-yellow" fx:id="mainMenuButton" layoutX="238.0" layoutY="306.0" mnemonicParsing="false" onAction="#go_to_mainMenu" stylesheets="@../css/Buttons.css" text="Main menu" />
    </children>
 </AnchorPane>

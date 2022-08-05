@@ -3,8 +3,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="fxml.group.GroupMembers">
+<ScrollPane id="green" maxWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.GroupMembers">
    <content>
-      <VBox fx:id="vBox" maxWidth="600.0" />
+      <VBox id="green" fx:id="vBox" maxWidth="600.0" minWidth="150.0" stylesheets="@../css/Buttons.css" />
    </content>
 </ScrollPane>

@@ -6,16 +6,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.SearchUserController">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.SearchUserController">
    <children>
-      <TextField fx:id="idField" layoutX="151.0" layoutY="27.0" promptText="user id" />
-      <Button fx:id="searchButton" layoutX="324.0" layoutY="27.0" mnemonicParsing="false" onAction="#search_user" text="Search" />
+      <TextField fx:id="idField" layoutX="139.0" layoutY="27.0" promptText="user id" />
+      <Button id="big-yellow" fx:id="searchButton" layoutX="325.0" layoutY="16.0" mnemonicParsing="false" onAction="#search_user" stylesheets="@../css/Buttons.css" text="Search" />
       <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="93.0" pickOnBounds="true" />
-      <Label fx:id="label" alignment="TOP_LEFT" layoutX="386.0" layoutY="75.0" prefHeight="250.0" prefWidth="200.0" />
-      <Button fx:id="followButton" layoutX="274.0" layoutY="260.0" mnemonicParsing="false" onAction="#update_follow" text="Follow" visible="false" />
-      <Button fx:id="mainMenuButton" layoutX="261.0" layoutY="360.0" mnemonicParsing="false" onAction="#go_to_mainMenu" text="Main menu" />
-      <Button fx:id="sendButton" layoutX="253.0" layoutY="325.0" mnemonicParsing="false" onAction="#send_message" text="Send message" visible="false" />
-      <Button fx:id="postsButton" layoutX="261.0" layoutY="293.0" mnemonicParsing="false" onAction="#show_posts" text="Show posts" visible="false" />
+      <Label id="shiny-orange" fx:id="label" alignment="TOP_LEFT" layoutX="386.0" layoutY="75.0" prefHeight="250.0" prefWidth="200.0" stylesheets="@../css/Buttons.css" />
+      <Button id="big-yellow" fx:id="followButton" layoutX="252.0" layoutY="169.0" mnemonicParsing="false" onAction="#update_follow" stylesheets="@../css/Buttons.css" text="Follow" visible="false" />
+      <Button id="big-yellow" fx:id="mainMenuButton" layoutX="238.0" layoutY="338.0" mnemonicParsing="false" onAction="#go_to_mainMenu" stylesheets="@../css/Buttons.css" text="Main menu" />
+      <Button id="big-yellow" fx:id="sendButton" layoutX="230.0" layoutY="283.0" mnemonicParsing="false" onAction="#send_message" stylesheets="@../css/Buttons.css" text="Send message" visible="false" />
+      <Button id="big-yellow" fx:id="postsButton" layoutX="239.0" layoutY="224.0" mnemonicParsing="false" onAction="#show_posts" stylesheets="@../css/Buttons.css" text="Show posts" visible="false" />
       <Label fx:id="idErrLabel" alignment="CENTER" layoutX="136.0" layoutY="66.0" prefHeight="18.0" prefWidth="180.0" />
    </children>
 </AnchorPane>
