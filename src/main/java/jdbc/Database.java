@@ -658,16 +658,19 @@ public static int get_postNum (String userID) throws SQLException {
         }
 public static ResultSet get_ADposts() throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement(
-            "SELECT id, posterid, likesNum, viewsNum, field, timy FROM posts WHERE ad=?"
+            "SELECT id, posterid, likesNum, viewsNum, field, timy, pictureid FROM posts WHERE ad=?",
+            ResultSet.TYPE_SCROLL_SENSITIVE,
+            ResultSet.CONCUR_UPDATABLE
     );
     preparedStatement.setInt(1, 1);
     return preparedStatement.executeQuery();
     }
-public static ResultSet getLikes(String likerID) throws SQLException {
+public static ResultSet getLikes() throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement(
-            "SELECT * FROM Likes WHERE Liker_ID=?"
+            "SELECT * FROM Likes",
+            ResultSet.TYPE_SCROLL_SENSITIVE,
+            ResultSet.CONCUR_UPDATABLE
     );
-    preparedStatement.setString(1, likerID);
     return preparedStatement.executeQuery();
     }
 public static int Update_postNum(String userid,int prepostNum) throws SQLException {

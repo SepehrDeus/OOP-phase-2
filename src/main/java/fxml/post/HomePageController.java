@@ -26,6 +26,8 @@ public class HomePageController {
     private static String userID;
     private final Image like = new Image("like.jpg");
     private final Image dislike = new Image("dislike.jpg");
+    private  boolean ADposts=false;
+    private boolean Explorer=false;
 
     public static void setUserID(String userID) {
         HomePageController.userID = userID;
@@ -60,6 +62,8 @@ public class HomePageController {
     }
 
     //-----------------------------------------------------------------------------------------------------------------
+    @FXML
+    private Button ADPostsButton;
 
     @FXML
     private Button ExploreButton;
@@ -93,9 +97,12 @@ public class HomePageController {
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(new Shadow());
+        ADPostsButton.setEffect(null);
         vBox.getChildren().clear();
 
-
+            if(Explorer){
+                Show_latest_10_post_prim();return;
+            }
         try {
             ResultSet resultSet_posts = Database.SHOW_LATEST_posts_10();
             ResultSet resultSet_comments = Database.get_AllComments();
@@ -162,6 +169,7 @@ public class HomePageController {
                 }
                 counter++;
             }
+            Explorer = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -225,6 +233,7 @@ public class HomePageController {
                         comment.setText(comments_caption.get(i));break;
                     }
                 }
+                comment.setMaxSize(700,-1);
                 vBox.getChildren().add(comment);
                 comment.setOnMouseClicked(mouseEvent -> {
                     CommentsOfPostsController.setUserID(userID);
@@ -247,14 +256,18 @@ public class HomePageController {
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(new Shadow());
         ExploreButton.setEffect(null);
+        ADPostsButton.setEffect(null);
 
     }
     @FXML
      void Return_main_menu(ActionEvent actionEvent) {
         MainMenuController.setUserID(userID);
         MyPostsButton.setEffect(null);
+        ADPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(null);
+        ADposts =false;
+        Explorer = false;
         ControllerContext.change_scene(MainMenuController.getScene());
     }
 
@@ -299,6 +312,178 @@ public class HomePageController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    //there is three ways for scoring for an AD post:
+    //having more LikesNum and ViewsNum.
+    //having the most liked field by the user(the similarity wanted between posts)
+    //having been liked by user's followers and followings (because the following and followers probably will have the same taste in fields of a post as the taste of the user)
+    @FXML
+    void AD_posts(ActionEvent event) {
+        vBox.getChildren().clear();
+        MyPostsButton.setEffect(null);
+        UserSuggestionButton.setEffect(null);
+        ExploreButton.setEffect(null);
+        ADPostsButton.setEffect(new Shadow());
+        try {
+            String UserID = userID;
+            ResultSet resultSetLikes = Database.getLikes();
+            ArrayList <String> postIDs_likedByUSer = new ArrayList<>();
+            while (resultSetLikes.next()){
+                if(resultSetLikes.getString(1).contains("*") && !resultSetLikes.getString(1).contains("#") && resultSetLikes.getString("Liker_ID").equals(userID)){
+                    postIDs_likedByUSer.add(resultSetLikes.getString(1).substring(0,resultSetLikes.getString(1).length()-1));
+                }
+            }
+            //giving scores based on popularity in userLiked AD-posts
+            int [] fields_likes = new int[9];
+            ResultSet resultSet_AD_posts = Database.get_ADposts();
+            //considering ids and scores for ADposts
+            ArrayList <String> ids_AD_posts = new ArrayList<>();
+            ArrayList <Double> Scores = new ArrayList<>();
+            ArrayList <String > pictureID = new ArrayList<>();
+            ArrayList <String> posterID = new ArrayList<>();
+            ArrayList <Integer> viewsNum = new ArrayList<>();
+            while (resultSet_AD_posts.next()){
+                //The first way of scoring : (next two lines)
+                ids_AD_posts.add(resultSet_AD_posts.getString("id"));
+                pictureID.add(resultSet_AD_posts.getString("pictureid"));
+                posterID.add(resultSet_AD_posts.getString("posterid"));
+                viewsNum.add(resultSet_AD_posts.getInt("viewsNum"));
+                Scores.add(Double.parseDouble(resultSet_AD_posts.getString("likesNum"))/10+Double.parseDouble(resultSet_AD_posts.getString("viewsNum"))/100);
+                //                1.sports
+                //                2.entertainment
+                //                3.nature
+                //                4.educational
+                //                5.fashion
+                //                6.political
+                //                7.music
+                //                8.movie
+                //                9.economics
+
+                for (String postID_liked : postIDs_likedByUSer) {
+                    //checking for being AD between posts that are liked by user
+                    if(postID_liked.equals(resultSet_AD_posts.getString("id"))){
+
+                        switch (resultSet_AD_posts.getString("field")){
+                            case "1.sports": fields_likes[0]+=1;break;
+                            case "2.entertainment": fields_likes[1]+=1;break;
+                            case "3.nature": fields_likes[2]+=1;break;
+                            case "4.educational": fields_likes[3]+=1;break;
+                            case "5.fashion": fields_likes[4]+=1;break;
+                            case "6.political": fields_likes[5]+=1;break;
+                            case "7.music": fields_likes[6]+=1;break;
+                            case "8.movie": fields_likes[7]+=1;break;
+                            case "9.economics": fields_likes[8]+=1;break;
+                        }
+
+                    }
+                }
+            }
+            //second way of scoring :
+            resultSet_AD_posts.beforeFirst();
+            int counter=0;
+            while (resultSet_AD_posts.next()){
+                switch (resultSet_AD_posts.getString("field")){
+                    case "1.sports": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[0]/postIDs_likedByUSer.size());break;
+                    case "2.entertainment": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[1]/postIDs_likedByUSer.size());break;
+                    case "3.nature": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[2]/postIDs_likedByUSer.size());break;
+                    case "4.educational": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[3]/postIDs_likedByUSer.size());break;
+                    case "5.fashion": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[4]/postIDs_likedByUSer.size());break;
+                    case "6.political": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[5]/postIDs_likedByUSer.size());break;
+                    case "7.music": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[6]/postIDs_likedByUSer.size());break;
+                    case "8.movie": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[7]/postIDs_likedByUSer.size());break;
+                    case "9.economics": Scores.set(counter,Scores.get(counter)+(double)10*fields_likes[8]/postIDs_likedByUSer.size());break;
+                }
+                counter++;
+            }
+
+
+
+            resultSet_AD_posts.beforeFirst();
+            ResultSet Followers = Database.get_followersTable(userID);
+            ResultSet Followings = Database.get_followingTable(userID);
+            ArrayList <String> followings = new ArrayList<>();
+            ArrayList <String> followers = new ArrayList<>();
+            while (Followings.next()){
+                followings.add(Followings.getString(1));
+            }
+            while (Followers.next()){
+                followers.add(Followers.getString(1));
+            }
+            resultSetLikes.beforeFirst();
+            ArrayList <String> postIDs_likedBy_following_followers = new ArrayList<>();
+            //the third way of scoring
+            while (resultSetLikes.next()){
+                for (String follower : followers) {
+                    if(resultSetLikes.getString("Liker_ID").equals(follower)){
+                        postIDs_likedBy_following_followers.add(resultSetLikes.getString(1).substring(0,resultSetLikes.getString(1).length()-1));
+                    }
+                }
+                for (String following : followings) {
+                    if(resultSetLikes.getString("Liker_ID").equals(following)){
+                        postIDs_likedBy_following_followers.add(resultSetLikes.getString(1).substring(0,resultSetLikes.getString(1).length()-1));
+                    }
+                }
+            }
+            counter=0;
+            while (resultSet_AD_posts.next()){
+                for (String s : postIDs_likedBy_following_followers) {
+                    if(resultSet_AD_posts.getString("id").equals(s)){
+                        Scores.set(counter,Scores.get(counter)+0.01);
+                    }
+                }
+                counter++;
+            }
+
+            String BlankString ;
+            Double BlankInt;
+            int Blankint;
+            for (int i = 0; i < Scores.size(); i++) {
+                for (int i1 = 0; i1 < Scores.size()-1; i1++) {
+                    if(Scores.get(i1)<Scores.get(i1+1)){
+                        BlankInt = Scores.get(i1);
+                        Scores.set(i1,Scores.get(i1+1))  ;
+                        Scores.set(i1+1,BlankInt)  ;
+                        Blankint = viewsNum.get(i1);
+                        viewsNum.set(i1,viewsNum.get(i1+1))  ;
+                        viewsNum.set(i1+1,Blankint)  ;
+                        BlankString = ids_AD_posts.get(i1);
+                        ids_AD_posts.set(i1,ids_AD_posts.get(i1+1))  ;
+                        ids_AD_posts.set(i1+1,BlankString)  ;
+                        BlankString = pictureID.get(i1);
+                        pictureID.set(i1,pictureID.get(i1+1));
+                        pictureID.set(i1+1,BlankString);
+                        BlankString = posterID.get(i1);
+                        posterID.set(i1,posterID.get(i1+1));
+                        posterID.set(i1+1,BlankString);
+                    }
+                }
+            }
+
+            for (int i = 0; i < ids_AD_posts.size() && i<5; i++) {
+                ImageView imageView = new ImageView(pictureID.get(i));
+                imageView.setFitHeight(200);
+                imageView.setPreserveRatio(true);
+                vBox.getChildren().add(imageView);
+
+                Label id_poster = new Label(posterID.get(i)+"\n------------------------------");
+                id_poster.setMaxSize(700,-1);
+                vBox.getChildren().add(id_poster);
+
+                if(!ADposts){
+                    if(Database.Update_post_view(ids_AD_posts.get(i),viewsNum.get(i))>0){
+
+                    }
+                }
+            }
+            if(!ADposts){
+                AlertBox.display("listen","you have viewed all this five posts",false);
+                ADposts = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

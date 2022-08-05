@@ -56,6 +56,11 @@
                   <Font size="17.0" />
                </font>
             </Button>
+            <Button fx:id="ADPostsButton" layoutY="460.0" mnemonicParsing="false" onAction="#AD_posts" prefHeight="62.0" prefWidth="200.0" text="AD Posts">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </left>
