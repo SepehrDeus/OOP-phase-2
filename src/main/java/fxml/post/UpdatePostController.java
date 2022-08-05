@@ -112,7 +112,7 @@ public class UpdatePostController {
         }
     }
 
-    public boolean init_deletePost(){
+     boolean init_deletePost(){
         try {
             ResultSet resultSet = Database.get_URl(userID);
             while (resultSet.next()){

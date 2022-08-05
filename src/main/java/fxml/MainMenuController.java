@@ -95,8 +95,7 @@ public class MainMenuController {
     }
 
     public void go_to_homepage (ActionEvent event) {
-        MyPostsController.setUserID(userID);
         HomePageController.setUserID(userID);
-        ControllerContext.change_scene(MyPostsController.getScene());
+        ControllerContext.change_scene(HomePageController.getScene());
     }
 }

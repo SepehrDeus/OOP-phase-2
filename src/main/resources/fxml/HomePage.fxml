@@ -12,47 +12,51 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.HomePageController">
-    <left>
-        <AnchorPane prefHeight="600.0" prefWidth="210.0" BorderPane.alignment="CENTER">
-            <Label alignment="CENTER" layoutX="52.0" layoutY="-1.0" prefHeight="51.0" prefWidth="159.0" style="-fx-background-color: red;" text="Home Page">
-                <font>
-                    <Font size="25.0" />
-                </font>
-            </Label>
-            <ImageView fitHeight="63.0" fitWidth="81.0" layoutX="-6.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../image/menuBar.png" />
-            </ImageView>
-            <Button fx:id="MyPostButton" layoutY="115.0" mnemonicParsing="false" onAction="#go_to_My_Posts" prefHeight="66.0" prefWidth="208.0" text="MY POSTS">
-                <font>
-                    <Font size="21.0" />
-                </font>
-            </Button>
-            <Button fx:id="ExploreButton" layoutY="394.0" mnemonicParsing="false" onAction="#Show_latest_10_post" prefHeight="66.0" prefWidth="208.0" text="EXPLORER">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </Button>
-            <Button fx:id="UserSuggestionButton" layoutY="249.0" mnemonicParsing="false" onAction="#Show_user_suggestion" prefHeight="66.0" prefWidth="208.0" text="USER SUGGESTION">
-                <font>
-                    <Font size="17.0" />
-                </font>
-            </Button>
-            <Button fx:id="ReturnButton" layoutY="556.0" mnemonicParsing="false" onAction="#Return_main_menu" prefHeight="43.0" prefWidth="77.0" text="RETURN" />
-        </AnchorPane>
-    </left>
    <center>
-      <ScrollPane maxWidth="900.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <VBox fx:id="vBox" alignment="TOP_RIGHT" layoutX="20.0" layoutY="-6.0" maxWidth="900.0" spacing="20.0">
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </content>
+      <ScrollPane maxWidth="700.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_RIGHT" maxWidth="700.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
       </ScrollPane>
    </center>
+   <left>
+      <AnchorPane prefHeight="600.0" prefWidth="202.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="55.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/menuBar.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="52.0" layoutY="-1.0" prefHeight="57.0" prefWidth="148.0" text="Home Page">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Button fx:id="MyPostsButton" layoutY="87.0" mnemonicParsing="false" onAction="#go_to_My_Posts" prefHeight="62.0" prefWidth="200.0" text="My Posts">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
+            <Button fx:id="ExploreButton" layoutY="335.0" mnemonicParsing="false" onAction="#Show_latest_10_post" prefHeight="62.0" prefWidth="200.0" text="Explorer">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
+            <Button fx:id="UserSuggestionButton" layoutY="209.0" mnemonicParsing="false" onAction="#Show_user_suggestion" prefHeight="62.0" prefWidth="200.0" text="User Suggestion">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="ReturnButton" layoutX="-2.0" layoutY="556.0" mnemonicParsing="false" onAction="#Return_main_menu" prefHeight="44.0" prefWidth="108.0" text="Return">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </left>
 </BorderPane>

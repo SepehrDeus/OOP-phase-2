@@ -738,25 +738,12 @@ public static int add_post(Post post) throws SQLException {
         preparedStatement.setString(8, post.getField());
         return preparedStatement.executeUpdate();
         }
-public static void SHOW_LATEST_posts_10 ()throws SQLException{
+public static ResultSet SHOW_LATEST_posts_10 ()throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT * FROM posts ORDER BY Timy DESC"
+                "SELECT * FROM posts ORDER BY Timy DESC"
         );
-        ResultSet resultSet = preparedStatement.executeQuery();
-        int counter = 0;
-        while (resultSet.next() && counter<10){
-        System.out.println(resultSet.getString("caption"));
-        System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-        +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-        System.out.println("Location: "+resultSet.getString("Location"));
-        System.out.println("field: "+resultSet.getString(10));
-        counter++;
-        if(Update_post_view(resultSet.getString("id"),resultSet.getInt("viewsNum"))>0) {
-        System.out.println("updated view num");
-        System.out.println("---------------------------");
-        }
-        }
-        }
+        return preparedStatement.executeQuery();
+    }
 public static boolean CheckForDuplicateLike (String postCommentID,String LikerID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
         "SELECT * FROM Likes WHERE post_OR_comment_ID=? AND Liker_ID=?"
@@ -766,6 +753,7 @@ public static boolean CheckForDuplicateLike (String postCommentID,String LikerID
         ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet.next();
         }
+
 public static int Update_post_view (String ID,int views)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
         "UPDATE posts SET viewsNum=? WHERE id=?"
@@ -877,6 +865,12 @@ public static int Update_commentNum_from_posts (String id,int new_commentNum)thr
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
         }
+    public static ResultSet get_AllComments() throws SQLException {;
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(
+                "SELECT * FROM comments ORDER BY timy ASC "
+        );
+    }
 public static int get_commentNum_from_posts (String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
         "SELECT commentsNum FROM posts WHERE id=?"
@@ -944,8 +938,9 @@ public static boolean delete_comment(String id) throws SQLException {
         "DELETE FROM comments WHERE id=?"
         );
         preparedStatement.setString(1, id);
-        return preparedStatement.execute();
+        return preparedStatement.executeUpdate()>0;
         }
+
 public static int Update_comment(String new_text,String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
         "UPDATE comments " +
@@ -1024,13 +1019,15 @@ public static int add_likes(Like like) throws SQLException {
         preparedStatement.setString(3, like.getLiker_id());
         return preparedStatement.executeUpdate();
         }
+
 public static boolean delete_like (String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
         "DELETE FROM Likes WHERE Like_ID=?"
         );
         preparedStatement.setString(1, id);
-        return preparedStatement.execute();
+        return preparedStatement.executeUpdate()>0;
         }
+
     public static ResultSet SHOW_LIKES_post (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT * FROM Likes WHERE post_OR_comment_ID=?"

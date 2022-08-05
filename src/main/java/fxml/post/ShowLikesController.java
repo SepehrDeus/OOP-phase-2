@@ -53,6 +53,7 @@ public class ShowLikesController {
 
     //-----------------------------------------------------------------------------------------------------------------
 
+
          @FXML
         private Button RetunButton;
         @FXML
@@ -71,6 +72,10 @@ public class ShowLikesController {
         VBox vBox ;
 
         @FXML
+        private TextField LikesNum;
+
+
+    @FXML
         void Return_myPosts(ActionEvent event) {
             setUserID(null);
             PostORCommentID.setText("");
@@ -129,20 +134,19 @@ public class ShowLikesController {
                     if(Database.check_existence_comment(id)){
                         ResultSet LikerIDs = Database.SHOW_LIKES_comment(id);
                         ResultSet temp;
+                        int count=0;
                         while (LikerIDs.next()){
                             temp = Database.get_usernameANDpictureurl(LikerIDs.getString("Liker_ID"));
                             while (temp.next()){
                                 ImageView imageView = new ImageView(temp.getString(2));
                                imageView.setFitHeight(200);
                                 imageView.setPreserveRatio(true);
-
-
-
                                 vBox.getChildren().add(imageView);
                                 Label message = new Label(temp.getString(1) +
                                         " Liked the comment.\n"+"----------------------");
                                 message.setMaxSize(900,-1);
                                 vBox.getChildren().add(message);
+                                count++;
                             }
                         }
                         if(!LikerIDs.next()){
@@ -150,6 +154,7 @@ public class ShowLikesController {
                             label.setMaxSize(900,-1);
                             vBox.getChildren().add(label);
                         }
+                        LikesNum.setText(Integer.toString(count));
                         return ;
                     }else {
                         AlertBox.display("Error","No comments Found!",true);
