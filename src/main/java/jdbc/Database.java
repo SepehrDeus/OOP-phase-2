@@ -1,7 +1,6 @@
 package jdbc;
 import entity.*;
 import java.sql.*;
-import java.util.ArrayList;
 public class Database {
     private static Connection connection;
     public static void setConnection(Connection connection) {
@@ -993,13 +992,6 @@ public static boolean delete_like (String id) throws SQLException {
         preparedStatement.setString(1, post_ID+"#");
         return preparedStatement.executeQuery();
     }
-    public static ResultSet get_commentsCaption (String comment_ID)throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT comment_caption FROM comments WHERE id=?"
-        );
-        preparedStatement.setString(1, comment_ID);
-        return preparedStatement.executeQuery();
-    }
     public static ResultSet get_usernameANDpictureurl (String user_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT username, profilepicture FROM users WHERE id=?"
@@ -1008,14 +1000,4 @@ public static boolean delete_like (String id) throws SQLException {
         return preparedStatement.executeQuery();
     }
 
-public static void SHOW_VIEWS_post (String post_ID)throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT viewsNum FROM posts WHERE id=?"
-        );
-        preparedStatement.setString(1,post_ID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-        System.out.println(post_ID+"viewsNum:"+resultSet.getString("viewsNum"));
-        }
-    }
 }
