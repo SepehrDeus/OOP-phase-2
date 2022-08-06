@@ -12,7 +12,7 @@ public class JDBC {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/deus",
                     "root",
-                    "9248bzm@#troy"
+                    "19283746"
             );
 
             JDBC.connection = connection;
