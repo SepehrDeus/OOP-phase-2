@@ -26,6 +26,11 @@ public class CommentsOfPostsController {
     private static String userID;
     private final Image like = new Image("like.jpg");
     private final Image dislike = new Image("dislike.jpg");
+    private static String ButtonPressed ;
+
+    public static void setButtonPressed(String buttonPressed) {
+        ButtonPressed = buttonPressed;
+    }
 
     public static void setUserID(String userID) {
         CommentsOfPostsController.userID = userID;
@@ -76,16 +81,17 @@ public class CommentsOfPostsController {
         try {
             vBox.getChildren().clear();
             PostID.setText(id);
-
+            //scene.getStylesheets().add();
             for (int i = 0; i < comments_OR_postID.size(); i++) {
-                if(comments_OR_postID.get(i).substring(0,id.length()).equals(id)){
+                if( id.length()<=comments_OR_postID.get(i).length() &&   comments_OR_postID.get(i).startsWith(id)){
                     Label commentlabel = new Label();
+
                     String Comment_id = comments_id.get(i);
                     commentlabel.setOnMouseClicked(mouseEvent -> {
                         create_comment(Comment_id+"#");
                         });
                     commentlabel.setOnMouseDragged(mouseEvent -> {
-                        delete_comment(Comment_id);
+                        delete_comment(Comment_id+"#");
                     });
                     //setting commentID
 
@@ -190,9 +196,14 @@ public class CommentsOfPostsController {
                     vBox.getChildren().clear();
                     PostID.setText("");
                     CAptionText.setText("");
-                    HomePageController.getController().Show_latest_10_post_prim();
                     HomePageController.setUserID(userID);
                     setUserID(null);
+                    switch (ButtonPressed){
+                        case "ADPostsButton": HomePageController.getController().AD_posts();
+                        case "ShowPostsButton" : HomePageController.getController().Show_posts();
+                        case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
+                        case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+                    }
                     ControllerContext.change_scene(HomePageController.getScene());
                 }else  AlertBox.display("Error","couldn't create the comment",true);
             } catch (SQLException e) {
@@ -207,17 +218,14 @@ public class CommentsOfPostsController {
             if(Database.delete_comment(cap)){
                 int index =0;
                 for (int i = cap.length()-1 ; i >= 0 ; i--) {
-                    if(cap.charAt(i)=='*' || cap.charAt(i)=='#' ){
+                    if(cap.charAt(i)=='*' || cap.charAt(i)=='#'){
                         index= i;break;
                     }
                 }
                 int a;
                 String post_comment_id = cap.substring(0,index+1);
-                if(post_comment_id.charAt(post_comment_id.length()-1)=='#'){
-                    a = Database.get_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1))-1;
-                    Database.Update_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1),a);
-                }
-                else if(post_comment_id.charAt(post_comment_id.length()-1)=='*'){
+
+                if(post_comment_id.charAt(post_comment_id.length()-1)=='*'){
                     a = Database.get_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1))-1;
                     Database.Update_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1),a);
                 }
@@ -226,7 +234,12 @@ public class CommentsOfPostsController {
                 PostID.setText("");
                 CAptionText.setText("");
                 HomePageController.setUserID(userID);
-                HomePageController.getController().Show_latest_10_post_prim();
+                switch (ButtonPressed){
+                    case "ADPostsButton": HomePageController.getController().AD_posts();
+                    case "ShowPostsButton" : HomePageController.getController().Show_posts();
+                    case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
+                    case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+                }
                 ControllerContext.change_scene(HomePageController.getScene());
                 return;
             }else {
@@ -253,7 +266,12 @@ public class CommentsOfPostsController {
         PostID.setText("");
         CAptionText.setText("");
         HomePageController.setUserID(userID);
-        HomePageController.getController().Show_latest_10_post_prim();
+        switch (ButtonPressed){
+            case "ADPostsButton": HomePageController.getController().AD_posts();
+            case "ShowPostsButton" : HomePageController.getController().Show_posts();
+            case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
+            case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+        }
         ControllerContext.change_scene(HomePageController.getScene());
     }
 

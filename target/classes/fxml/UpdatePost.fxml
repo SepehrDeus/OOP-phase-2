@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.UpdatePostController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.UpdatePostController">
    <top>
-      <AnchorPane prefHeight="108.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="108.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <TextArea fx:id="LocationArea" layoutX="241.0" layoutY="5.0" prefHeight="97.0" prefWidth="188.0" promptText="new Location">
                <font>
@@ -28,16 +28,16 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="68.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="68.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ReturnButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#Return" prefHeight="45.0" prefWidth="114.0" text="Retun" />
-            <Button fx:id="UpdateButton" layoutX="556.0" layoutY="11.0" mnemonicParsing="false" onAction="#Update" prefHeight="45.0" prefWidth="114.0" text="UPDATE" />
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#Return" prefHeight="45.0" prefWidth="114.0" text="Retun" />
+            <Button id="big-yellow" fx:id="UpdateButton" layoutX="556.0" layoutY="11.0" mnemonicParsing="false" onAction="#Update" prefHeight="45.0" prefWidth="114.0" text="UPDATE" />
             <TextField fx:id="PostIDText" layoutX="362.0" layoutY="12.0" prefHeight="42.0" prefWidth="176.0" promptText="Post ID" />
          </children>
       </AnchorPane>
    </bottom>
    <center>
-      <ScrollPane maxWidth="900.0" BorderPane.alignment="CENTER">
+      <ScrollPane id="iphone" maxWidth="900.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="vBox" alignment="TOP_CENTER" maxWidth="900.0" spacing="20.0">
                <padding>

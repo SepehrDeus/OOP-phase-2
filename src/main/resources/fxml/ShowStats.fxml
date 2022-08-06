@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowStatsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowStatsController">
    <top>
-      <AnchorPane prefHeight="78.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="78.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER_RIGHT" layoutX="66.0" layoutY="16.0" prefHeight="46.0" prefWidth="141.0" text="Likes Number : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="51.0" layoutY="15.0" prefHeight="46.0" prefWidth="141.0" text="Likes Number : ">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="574.0" layoutY="16.0" prefHeight="46.0" prefWidth="149.0" text="Views Number : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="556.0" layoutY="15.0" prefHeight="46.0" prefWidth="149.0" text="Views Number : ">
                <font>
                   <Font size="20.0" />
                </font>
@@ -30,27 +30,23 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="77.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="77.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ShowStatsButton" layoutX="561.0" layoutY="19.0" mnemonicParsing="false" onAction="#Show_Stats" prefHeight="40.0" prefWidth="127.0" text="Show Stats" />
-            <Button fx:id="ReturnButton" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#Return" prefHeight="40.0" prefWidth="127.0" text="Return" />
+            <Button id="big-yellow" fx:id="ShowStatsButton" layoutX="561.0" layoutY="19.0" mnemonicParsing="false" onAction="#Show_Stats" prefHeight="40.0" prefWidth="127.0" text="Show Stats" />
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#Return" prefHeight="40.0" prefWidth="127.0" text="Return" />
             <TextField fx:id="PostIDText" layoutX="401.0" layoutY="19.0" prefHeight="40.0" prefWidth="149.0" promptText="Post Id" />
          </children>
       </AnchorPane>
    </bottom>
-   <center>
-      <ScrollPane maxWidth="900.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <VBox fx:id="vBox" alignment="TOP_CENTER" layoutX="50.0" layoutY="-14.0" maxWidth="900.0" spacing="20.0">
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </content>
+   <right>
+      <ScrollPane id="iphone" maxWidth="907.0" prefHeight="444.0" prefWidth="907.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_CENTER" maxWidth="900.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
       </ScrollPane>
-   </center>
+   </right>
 </BorderPane>

@@ -9,20 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.CreatePostController">
+<AnchorPane id="green" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.CreatePostController">
    <children>
-      <Label alignment="CENTER" layoutX="222.0" layoutY="51.0" prefHeight="51.0" prefWidth="76.0" text="Field : ">
+      <Label id="shiny-orange" alignment="CENTER" layoutX="173.0" layoutY="49.0" prefHeight="55.0" prefWidth="112.0" text="Field : ">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
       <ChoiceBox fx:id="choiceBoxField" layoutX="298.0" layoutY="58.0" prefHeight="38.0" prefWidth="251.0" />
-      <CheckBox fx:id="check_AD_Post" layoutX="268.0" layoutY="134.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="312.0" selected="true" text="Is this an advertising post?">
+      <CheckBox id="shiny-orange" fx:id="check_AD_Post" layoutX="268.0" layoutY="134.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="296.0" selected="true" text="Is this an advertising post?">
          <opaqueInsets>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </opaqueInsets>
          <font>
-            <Font size="23.0" />
+            <Font size="52.0" />
          </font>
       </CheckBox>
       <TextArea fx:id="CaptionTxtArea" layoutX="286.0" layoutY="202.0" prefHeight="76.0" prefWidth="276.0" promptText="Caption(must be filled)">
@@ -30,19 +30,19 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <Button fx:id="PostingButton" layoutX="372.0" layoutY="515.0" mnemonicParsing="false" onAction="#create_post" prefHeight="38.0" prefWidth="104.0" text="POST" />
-      <Button fx:id="ReturnButton" layoutX="22.0" layoutY="535.0" mnemonicParsing="false" onAction="#return_MyPosts" prefHeight="38.0" prefWidth="104.0" text="RETURN" />
+      <Button id="big-yellow" fx:id="PostingButton" layoutX="372.0" layoutY="515.0" mnemonicParsing="false" onAction="#create_post" prefHeight="38.0" prefWidth="104.0" text="POST" />
+      <Button id="big-yellow" fx:id="ReturnButton" layoutX="22.0" layoutY="535.0" mnemonicParsing="false" onAction="#return_MyPosts" prefHeight="48.0" prefWidth="120.0" text="RETURN" />
       <TextArea fx:id="LocationTxtArea1" layoutX="286.0" layoutY="288.0" prefHeight="76.0" prefWidth="276.0" promptText="Location">
          <font>
             <Font size="15.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="pictureTxtArea11" layoutX="286.0" layoutY="418.0" prefHeight="76.0" prefWidth="276.0" promptText="Picture url">
+      <TextArea fx:id="pictureTxtArea11" layoutX="285.0" layoutY="429.0" prefHeight="76.0" prefWidth="276.0" promptText="Picture url">
          <font>
             <Font size="15.0" />
          </font>
       </TextArea>
-      <Button fx:id="PicURLButton" layoutX="358.0" layoutY="373.0" mnemonicParsing="false" onAction="#safe_picture" prefHeight="38.0" prefWidth="130.0" text="Choose picture">
+      <Button id="big-yellow" fx:id="PicURLButton" layoutX="330.0" layoutY="373.0" mnemonicParsing="false" onAction="#safe_picture" prefHeight="55.0" prefWidth="185.0" text="Choose picture">
          <font>
             <Font size="16.0" />
          </font>

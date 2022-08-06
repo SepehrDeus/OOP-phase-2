@@ -97,6 +97,8 @@ public class DeletepostController {
                 ImageView imageView = new ImageView(resultSet.getString("pictureid"));
                 imageView.setFitHeight(300);
                 imageView.setPreserveRatio(true);
+                Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                vBox.getChildren().add(caption);
                 Label postID = new Label(resultSet.getString("id"));
                 imageView.setOnMouseClicked(mouseEvent -> {
                     try {

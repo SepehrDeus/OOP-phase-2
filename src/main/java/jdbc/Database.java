@@ -533,15 +533,15 @@ public static ResultSet get_adminsTable(String groupID) throws SQLException {
         "SELECT * FROM "+adminsTableName
         );
         }
-public static boolean isOwner(String userID, String groupID) throws SQLException {
+    public static boolean isOwner(String userID, String groupID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT COUNT(ownerID) FROM groupsAll WHERE id=?"
+                "SELECT ownerID FROM groupsAll WHERE id=?"
         );
         preparedStatement.setString(1,groupID);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        return resultSet.getInt(1) > 0;
-        }
+        return resultSet.getString(1).equals(userID);
+    }
 public static int leave(String userID, String groupID) throws SQLException {
         String membersTableName = groupID + "MembersTable";
         PreparedStatement preparedStatement1 = connection.prepareStatement(
@@ -658,7 +658,7 @@ public static int get_postNum (String userID) throws SQLException {
         }
 public static ResultSet get_ADposts() throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement(
-            "SELECT id, posterid, likesNum, viewsNum, field, timy, pictureid FROM posts WHERE ad=?",
+            "SELECT id, posterid, likesNum, viewsNum, field, timy, pictureid, caption FROM posts WHERE ad=?",
             ResultSet.TYPE_SCROLL_SENSITIVE,
             ResultSet.CONCUR_UPDATABLE
     );
@@ -793,65 +793,13 @@ public static int Update_location(String new_location,String id)throws SQLExcept
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
         }
-public static void show_posts(String id,ResultSet Followings,ResultSet  Followers)throws  SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT * FROM posts ORDER BY Timy DESC"
-        );
-        ResultSet resultSet = preparedStatement.executeQuery();
-        int counter = 0;
-        String poster_id;
-        ArrayList <String> followings = new ArrayList<>();
-        ArrayList <String> followers = new ArrayList<>();
-        while (Followings.next()){
-        followings.add(Followings.getString(1));
-        }
-        while (Followers.next()){
-        followers.add(Followers.getString(1));
-        }
-        while (resultSet.next() && counter<10){
-        poster_id = resultSet.getString("posterid");
-        if(resultSet.getString("posterid").equalsIgnoreCase(id)){
-        System.out.println(resultSet.getString("caption"));
-        System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-        +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-        System.out.println("Location: "+resultSet.getString("Location"));
-        System.out.println("field: "+resultSet.getString(10));
-        counter++;
-        if(Update_post_view(resultSet.getString("id"),resultSet.getInt("viewsNum"))>0) {
-        System.out.println("updated view num");
-        System.out.println("-----------------");
-        }
-        }
-        for (String following : followings) {
-        if(following.equals((resultSet.getString("posterid")))){
-        System.out.println(resultSet.getString("caption"));
-        System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-        +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-System.out.println("Location: "+resultSet.getString("Location"));
-        System.out.println("field: "+resultSet.getString(10));
-        counter++;
-        if(Update_post_view(resultSet.getString("id"),resultSet.getInt("viewsNum"))>0) {
-        System.out.println("updated view num");
-        System.out.println("-----------------");
-        }
-        }
-        }
-        for (String follower : followers) {
-        if(follower.equals((resultSet.getString("posterid")))){
-        System.out.println(resultSet.getString("caption"));
-        System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-        +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-        System.out.println("Location: "+resultSet.getString("Location"));
-        System.out.println("field: "+resultSet.getString(10));
-        counter++;
-        if(Update_post_view(resultSet.getString("id"),resultSet.getInt("viewsNum"))>0) {
-        System.out.println("updated view num");
-        System.out.println("-----------------");
-        }
-        }
-        }
-        }
-        }
+public static ResultSet show_posts()throws  SQLException {
+    Statement statement = connection.createStatement();
+    return statement.executeQuery(
+            "SELECT * FROM posts ORDER BY Timy DESC"
+    );
+}
+
 public static String FollowersID(String id){
         return id+"followersID";
         }
@@ -908,7 +856,7 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
     }
     public  static ResultSet get_URl(String userID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT id, pictureid, ad FROM posts WHERE posterid=?"
+                "SELECT id, pictureid, ad, caption FROM posts WHERE posterid=?"
         );
         preparedStatement.setString(1,userID);
         ResultSet resultSet = preparedStatement.executeQuery();

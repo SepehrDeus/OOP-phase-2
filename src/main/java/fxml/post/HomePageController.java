@@ -26,8 +26,9 @@ public class HomePageController {
     private static String userID;
     private final Image like = new Image("like.jpg");
     private final Image dislike = new Image("dislike.jpg");
-    private  boolean ADposts=false;
-    private boolean Explorer=false;
+    private  boolean ADposts = false;
+    private boolean Explorer = false;
+    private boolean ShowPosts = false;
 
     public static void setUserID(String userID) {
         HomePageController.userID = userID;
@@ -66,6 +67,9 @@ public class HomePageController {
     private Button ADPostsButton;
 
     @FXML
+    private Button ShowPostsButton;
+
+    @FXML
     private Button ExploreButton;
 
     @FXML
@@ -82,22 +86,23 @@ public class HomePageController {
 
 
     @FXML
-    void go_to_My_Posts (ActionEvent actionEvent) {
-
+    void go_to_My_Posts () {
         MyPostsController.setUserID(userID);
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(null);
+        ShowPostsButton.setEffect(null);
         HomePageController.setUserID(null);
         ControllerContext.change_scene(MyPostsController.getScene());
     }
 
     @FXML
-     void Show_latest_10_post (ActionEvent actionEvent) {
+     void Show_latest_10_post () {
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(new Shadow());
         ADPostsButton.setEffect(null);
+        ShowPostsButton.setEffect(null);
         vBox.getChildren().clear();
 
             if(Explorer){
@@ -147,7 +152,8 @@ public class HomePageController {
                         create_likes(id+"*",userID);
                     }
                 });
-
+                Label caption = new Label("Caption : "+resultSet_posts.getString("caption"));
+                vBox.getChildren().add(caption);
                 // comment
                 Label comment = new Label("No comments yet.");
                 for (int i = 0; i < comments_OR_postID.size(); i++) {
@@ -158,8 +164,11 @@ public class HomePageController {
                 vBox.getChildren().add(comment);
                 comment.setOnMouseClicked(mouseEvent -> {
                     CommentsOfPostsController.setUserID(userID);
+                    CommentsOfPostsController.setButtonPressed("ExploreButton");
                     if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                         setUserID(null);
+                        ExploreButton.setEffect(null);
+
                         ControllerContext.change_scene(CommentsOfPostsController.getScene());
                     }
                 });
@@ -180,6 +189,8 @@ public class HomePageController {
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(new Shadow());
+        ADPostsButton.setEffect(null);
+        ShowPostsButton.setEffect(null);
         vBox.getChildren().clear();
 
         try {
@@ -225,7 +236,9 @@ public class HomePageController {
                         create_likes(id+"*",userID);
                     }
                 });
-
+                //Caption
+                Label caption = new Label("Caption : "+resultSet_posts.getString("caption"));
+                vBox.getChildren().add(caption);
                 // comment
                 Label comment = new Label("No comments yet.");
                 for (int i = 0; i < comments_OR_postID.size(); i++) {
@@ -237,8 +250,10 @@ public class HomePageController {
                 vBox.getChildren().add(comment);
                 comment.setOnMouseClicked(mouseEvent -> {
                     CommentsOfPostsController.setUserID(userID);
+                    ExploreButton.setEffect(null);
                     if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                         setUserID(null);
+                        CommentsOfPostsController.setButtonPressed("ExploreButton");
                         ControllerContext.change_scene(CommentsOfPostsController.getScene());
                     }
                 });
@@ -252,22 +267,26 @@ public class HomePageController {
     }
 
     @FXML
-     void Show_user_suggestion (ActionEvent actionEvent) {
+     void Show_user_suggestion () {
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(new Shadow());
         ExploreButton.setEffect(null);
         ADPostsButton.setEffect(null);
+        ShowPostsButton.setEffect(null);
 
     }
     @FXML
-     void Return_main_menu(ActionEvent actionEvent) {
+     void Return_main_menu() {
         MainMenuController.setUserID(userID);
         MyPostsButton.setEffect(null);
         ADPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(null);
+        ShowPostsButton.setEffect(null);
         ADposts =false;
         Explorer = false;
+        ShowPosts = false;
+        vBox.getChildren().clear();
         ControllerContext.change_scene(MainMenuController.getScene());
     }
 
@@ -319,12 +338,13 @@ public class HomePageController {
     //having the most liked field by the user(the similarity wanted between posts)
     //having been liked by user's followers and followings (because the following and followers probably will have the same taste in fields of a post as the taste of the user)
     @FXML
-    void AD_posts(ActionEvent event) {
+    void AD_posts() {
         vBox.getChildren().clear();
         MyPostsButton.setEffect(null);
         UserSuggestionButton.setEffect(null);
         ExploreButton.setEffect(null);
         ADPostsButton.setEffect(new Shadow());
+        ShowPostsButton.setEffect(null);
         try {
             String UserID = userID;
             ResultSet resultSetLikes = Database.getLikes();
@@ -343,12 +363,14 @@ public class HomePageController {
             ArrayList <String > pictureID = new ArrayList<>();
             ArrayList <String> posterID = new ArrayList<>();
             ArrayList <Integer> viewsNum = new ArrayList<>();
+            ArrayList <String> caption = new ArrayList<>();
             while (resultSet_AD_posts.next()){
                 //The first way of scoring : (next two lines)
                 ids_AD_posts.add(resultSet_AD_posts.getString("id"));
                 pictureID.add(resultSet_AD_posts.getString("pictureid"));
                 posterID.add(resultSet_AD_posts.getString("posterid"));
                 viewsNum.add(resultSet_AD_posts.getInt("viewsNum"));
+                caption.add(resultSet_AD_posts.getString("caption"));
                 Scores.add(Double.parseDouble(resultSet_AD_posts.getString("likesNum"))/10+Double.parseDouble(resultSet_AD_posts.getString("viewsNum"))/100);
                 //                1.sports
                 //                2.entertainment
@@ -456,6 +478,9 @@ public class HomePageController {
                         BlankString = posterID.get(i1);
                         posterID.set(i1,posterID.get(i1+1));
                         posterID.set(i1+1,BlankString);
+                        BlankString = caption.get(i1);
+                        caption.set(i1,caption.get(i1+1));
+                        caption.set(i1+1,BlankString);
                     }
                 }
             }
@@ -466,7 +491,7 @@ public class HomePageController {
                 imageView.setPreserveRatio(true);
                 vBox.getChildren().add(imageView);
 
-                Label id_poster = new Label(posterID.get(i)+"\n------------------------------");
+                Label id_poster = new Label(posterID.get(i)+"\n Caption : "+caption.get(i)+"\n------------------------------");
                 id_poster.setMaxSize(700,-1);
                 vBox.getChildren().add(id_poster);
 
@@ -480,6 +505,213 @@ public class HomePageController {
                 AlertBox.display("listen","you have viewed all this five posts",false);
                 ADposts = true;
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void Show_posts() {
+        vBox.getChildren().clear();
+        MyPostsButton.setEffect(null);
+        UserSuggestionButton.setEffect(null);
+        ExploreButton.setEffect(null);
+        ADPostsButton.setEffect(null);
+        ShowPostsButton.setEffect(new Shadow());
+        try {
+            ResultSet resultSet_comments = Database.get_AllComments();
+            ArrayList <String> comments_OR_postID = new ArrayList<>();
+            ArrayList <String> comments_caption = new ArrayList<>();
+            ArrayList <String> comments_id = new ArrayList<>();
+
+            while (resultSet_comments.next()){
+                comments_OR_postID.add(resultSet_comments.getString("postORcommentID"));
+                comments_caption.add(resultSet_comments.getString("comment_caption"));
+                comments_id.add(resultSet_comments.getString("id"));
+            }
+
+            int counter = 0;
+            if(!ShowPosts){
+                AlertBox.display("listen","you have viewed all this ten posts",false);
+            }
+
+            ResultSet resultSet = Database.show_posts();
+            ResultSet Followings = Database.get_followingTable(userID);
+            ResultSet Followers = Database.get_followersTable(userID);
+
+            ArrayList <String> followings = new ArrayList<>();
+            ArrayList <String> followers = new ArrayList<>();
+            while (Followings.next()){
+                followings.add(Followings.getString(1));
+            }
+            while (Followers.next()){
+                followers.add(Followers.getString(1));
+            }
+
+            while (resultSet.next() && counter<10){
+
+                if(resultSet.getString("posterid").equalsIgnoreCase(userID)){
+                    //post
+                    ImageView imageView = new ImageView(resultSet.getString("pictureid"));
+                    imageView.setFitHeight(200);
+                    imageView.setPreserveRatio(true);
+                    vBox.getChildren().add(imageView);
+
+                    String id = resultSet.getString("id");
+
+                    //like
+                    ImageView Like = new ImageView();
+                    if(Database.CheckForDuplicateLike(id+"*",userID)){
+                        Like.setImage(like);
+                    }else {
+                        Like.setImage(dislike);
+                    }
+                    Like.setFitHeight(50);
+                    Like.setPreserveRatio(true);
+                    vBox.getChildren().add(Like);
+                    Like.setOnMouseClicked(mouseEvent -> {
+                        if(Like.getImage()==like){
+                            Like.setImage(dislike);
+                            Delete_Like(id+"*"+userID);
+                        }else if(Like.getImage()==dislike){
+                            Like.setImage(like);
+                            create_likes(id+"*",userID);
+                        }
+                    });
+                    Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                    vBox.getChildren().add(caption);
+                    // comment
+                    Label comment = new Label("No comments yet.");
+                    for (int i = 0; i < comments_OR_postID.size(); i++) {
+                        if(comments_OR_postID.get(i).startsWith(id)){
+                            comment.setText(comments_caption.get(i));break;
+                        }
+                    }
+                    vBox.getChildren().add(comment);
+                    comment.setOnMouseClicked(mouseEvent -> {
+                        CommentsOfPostsController.setUserID(userID);
+                        CommentsOfPostsController.setButtonPressed("ShowPostsButton");
+                        if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
+                            setUserID(null);
+                            ShowPostsButton.setEffect(null);
+                            ControllerContext.change_scene(CommentsOfPostsController.getScene());
+                        }
+                    });
+
+                    counter++;
+                }
+                for (String following : followings) {
+                    if(following.equals((resultSet.getString("posterid")))){
+                        //post
+                        ImageView imageView = new ImageView(resultSet.getString("pictureid"));
+                        imageView.setFitHeight(200);
+                        imageView.setPreserveRatio(true);
+                        vBox.getChildren().add(imageView);
+
+                        String id = resultSet.getString("id");
+
+                        //like
+                        ImageView Like = new ImageView();
+                        if(Database.CheckForDuplicateLike(id+"*",userID)){
+                            Like.setImage(like);
+                        }else {
+                            Like.setImage(dislike);
+                        }
+                        Like.setFitHeight(50);
+                        Like.setPreserveRatio(true);
+                        vBox.getChildren().add(Like);
+                        Like.setOnMouseClicked(mouseEvent -> {
+                            if(Like.getImage()==like){
+                                Like.setImage(dislike);
+                                Delete_Like(id+"*"+userID);
+                            }else if(Like.getImage()==dislike){
+                                Like.setImage(like);
+                                create_likes(id+"*",userID);
+                            }
+                        });
+                        Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                        vBox.getChildren().add(caption);
+                        // comment
+                        Label comment = new Label("No comments yet.");
+                        for (int i = 0; i < comments_OR_postID.size(); i++) {
+                            if(comments_OR_postID.get(i).startsWith(id)){
+                                comment.setText(comments_caption.get(i));break;
+                            }
+                        }
+                        vBox.getChildren().add(comment);
+                        comment.setOnMouseClicked(mouseEvent -> {
+                            CommentsOfPostsController.setUserID(userID);
+                            CommentsOfPostsController.setButtonPressed("ShowPostsButton");
+                            if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
+                                setUserID(null);
+                                ShowPostsButton.setEffect(null);
+
+                                ControllerContext.change_scene(CommentsOfPostsController.getScene());
+                            }
+                        });
+                        counter++;
+                    }
+                }
+                for (String follower : followers) {
+                    if(follower.equals((resultSet.getString("posterid")))){
+                        //post
+                        ImageView imageView = new ImageView(resultSet.getString("pictureid"));
+                        imageView.setFitHeight(200);
+                        imageView.setPreserveRatio(true);
+                        vBox.getChildren().add(imageView);
+
+                        String id = resultSet.getString("id");
+
+                        //like
+                        ImageView Like = new ImageView();
+                        if(Database.CheckForDuplicateLike(id+"*",userID)){
+                            Like.setImage(like);
+                        }else {
+                            Like.setImage(dislike);
+                        }
+                        Like.setFitHeight(50);
+                        Like.setPreserveRatio(true);
+                        vBox.getChildren().add(Like);
+                        Like.setOnMouseClicked(mouseEvent -> {
+                            if(Like.getImage()==like){
+                                Like.setImage(dislike);
+                                Delete_Like(id+"*"+userID);
+                            }else if(Like.getImage()==dislike){
+                                Like.setImage(like);
+                                create_likes(id+"*",userID);
+                            }
+                        });
+                        Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                        vBox.getChildren().add(caption);
+                        // comment
+                        Label comment = new Label("No comments yet.");
+                        for (int i = 0; i < comments_OR_postID.size(); i++) {
+                            if(comments_OR_postID.get(i).startsWith(id)){
+                                comment.setText(comments_caption.get(i));break;
+                            }
+                        }
+                        vBox.getChildren().add(comment);
+                        comment.setOnMouseClicked(mouseEvent -> {
+                            CommentsOfPostsController.setUserID(userID);
+                            ShowPostsButton.setEffect(null);
+                            if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
+                                setUserID(null);
+
+                                CommentsOfPostsController.setButtonPressed("ShowPostsButton");
+                                ControllerContext.change_scene(CommentsOfPostsController.getScene());
+                            }
+                        });
+
+                        counter++;
+                    }
+                }
+                if(!ShowPosts){
+                    if(Database.Update_post_view(resultSet.getString("id"),resultSet.getInt("viewsNum"))>0) {
+                    }
+                }
+            }
+            ShowPosts = true;
         }catch (Exception e){
             e.printStackTrace();
         }

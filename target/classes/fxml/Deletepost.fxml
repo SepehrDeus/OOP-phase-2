@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.DeletepostController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.DeletepostController">
    <bottom>
-      <AnchorPane prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="90.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ReturnMyposts" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#Retutn_my_posts" prefHeight="43.0" prefWidth="98.0" text="Return" />
-            <Button fx:id="DeleteButton" layoutX="564.0" layoutY="23.0" mnemonicParsing="false" onAction="#Delete_post" prefHeight="43.0" prefWidth="98.0" text="DELETE" />
+            <Button id="big-yellow" fx:id="ReturnMyposts" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#Retutn_my_posts" prefHeight="62.0" prefWidth="124.0" text="Return" />
+            <Button id="big-yellow" fx:id="DeleteButton" layoutX="565.0" layoutY="16.0" mnemonicParsing="false" onAction="#Delete_post" prefHeight="60.0" prefWidth="131.0" text="DELETE" />
             <TextField fx:id="PostIDText" layoutX="349.0" layoutY="23.0" prefHeight="44.0" prefWidth="201.0" promptText="Post ID">
                <font>
                   <Font size="19.0" />
@@ -25,9 +25,9 @@
       </AnchorPane>
    </bottom>
    <top>
-      <AnchorPane prefHeight="54.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="54.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="338.0" layoutY="10.0" prefHeight="34.0" prefWidth="224.0" text="Choose the post for delete :">
+            <Label id="shiny-orange" layoutX="338.0" layoutY="5.0" prefHeight="34.0" prefWidth="224.0" text="Choose the post for delete :">
                <font>
                   <Font size="18.0" />
                </font>
@@ -36,7 +36,7 @@
       </AnchorPane>
    </top>
    <center>
-      <ScrollPane maxWidth="900.0" BorderPane.alignment="CENTER">
+      <ScrollPane id="iphone" maxWidth="900.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="vBox" alignment="TOP_CENTER" maxWidth="900.0" spacing="20.0">
                <padding>

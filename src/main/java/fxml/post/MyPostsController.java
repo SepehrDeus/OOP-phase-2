@@ -97,6 +97,7 @@ public class MyPostsController {
     }
 
     public void Return_HomePage(ActionEvent actionEvent) {
+        HomePageController.setUserID(userID);
         ControllerContext.change_scene(HomePageController.getScene());
     }
 

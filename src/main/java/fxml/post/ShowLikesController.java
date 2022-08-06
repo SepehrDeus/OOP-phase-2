@@ -95,10 +95,10 @@ public class ShowLikesController {
                     if(Database.check_existence_post(id)){
                         ResultSet LikerIDs = Database.SHOW_LIKES_post(id);
                         ResultSet temp;
+                        int count=0;
                         while (LikerIDs.next()){
                             temp = Database.get_usernameANDpictureurl(LikerIDs.getString("Liker_ID"));
                             while (temp.next()){
-                                System.out.println(temp.getString(2));
                                 ImageView imageView = new ImageView(temp.getString(2));
                                 imageView.setFitHeight(200);
                                 imageView.setPreserveRatio(true);
@@ -109,7 +109,8 @@ public class ShowLikesController {
                                         " Liked the post.\n"+"----------------------");
                                 message.setMaxSize(900,-1);
                                 vBox.getChildren().add(message);
-                            }
+                                count++;
+                                }
                             }
 
                         if(!LikerIDs.next()){
@@ -117,6 +118,7 @@ public class ShowLikesController {
                             label.setMaxSize(900,-1);
                             vBox.getChildren().add(label);
                         }
+                        LikesNum.setText(Integer.toString(count));return;
                     }else {
                         AlertBox.display("Error","No posts Found!",true);
                     }

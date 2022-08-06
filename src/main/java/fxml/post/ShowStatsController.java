@@ -92,8 +92,8 @@ public class ShowStatsController {
                 if(Database.check_existence_post(PostIDText.getText())){
                     ResultSet resultSet = Database.get_likeANDview_num(PostIDText.getText());
                     if (resultSet.next()){
-                        LikesNum.setText(Integer.toString(resultSet.getInt(1)));
-                        ViewsNum.setText(Integer.toString(resultSet.getInt(2)));
+                        LikesNum.setText(Integer.toString(resultSet.getInt("likesNum")));
+                        ViewsNum.setText(Integer.toString(resultSet.getInt("viewsNum")));
                     }
                 }else {
                     AlertBox.display("Error","no post exists with that ID!",true);return;
@@ -113,6 +113,8 @@ public class ShowStatsController {
                     ImageView imageView = new ImageView(resultSet.getString("pictureid"));
                     imageView.setFitHeight(300);
                     imageView.setPreserveRatio(true);
+                    Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                    vBox.getChildren().add(caption);
                     Label postID = new Label(resultSet.getString("id"));
                     imageView.setOnMouseClicked(mouseEvent -> {
                         try {

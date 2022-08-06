@@ -12,28 +12,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowLikesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowLikesController">
    <top>
-      <AnchorPane prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton fx:id="PostToggle" layoutX="588.0" layoutY="26.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" ">
+            <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="569.0" layoutY="25.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" ">
                <toggleGroup>
                   <ToggleGroup fx:id="IDs" />
                </toggleGroup>
             </ToggleButton>
             <TextField fx:id="PostORCommentID" layoutX="129.0" layoutY="28.0" promptText="Post OR Comment ID" />
-            <Label alignment="CENTER_RIGHT" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="74.0" text="ID : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="74.0" text="ID : ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="513.0" layoutY="26.0" prefHeight="25.0" prefWidth="74.0" text="PostID ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="472.0" layoutY="26.0" prefHeight="38.0" prefWidth="86.0" text="PostID ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ToggleButton fx:id="CommentToggle" layoutX="690.0" layoutY="26.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" " toggleGroup="$IDs" />
-            <Label layoutX="792.0" layoutY="26.0" prefHeight="26.0" prefWidth="96.0" text=" CommentID ">
+            <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="671.0" layoutY="27.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" " toggleGroup="$IDs" />
+            <Label id="shiny-orange" layoutX="784.0" layoutY="26.0" prefHeight="38.0" prefWidth="118.0" text=" CommentID ">
                <font>
                   <Font size="16.0" />
                </font>
@@ -42,24 +42,24 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="58.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="green" prefHeight="58.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ReturnButton" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#Return_myPosts" prefHeight="26.0" prefWidth="89.0" text="Return">
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#Return_myPosts" prefHeight="62.0" prefWidth="117.0" text="Return">
                <font>
-                  <Font size="15.0" />
+                  <Font size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="LikesNum" layoutX="408.0" layoutY="17.0" promptText=" " />
-            <Label alignment="CENTER_RIGHT" layoutX="289.0" layoutY="18.0" prefHeight="26.0" prefWidth="118.0" text="LikesNumber : ">
+            <TextField fx:id="LikesNum" layoutX="407.0" layoutY="24.0" promptText=" " />
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="279.0" layoutY="15.0" prefHeight="26.0" prefWidth="118.0" text="LikesNumber : ">
                <font>
-                  <Font size="16.0" />
+                  <Font size="56.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
    </bottom>
    <center>
-      <ScrollPane maxWidth="900.0" BorderPane.alignment="CENTER">
+      <ScrollPane id="iphone" maxWidth="900.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="vBox" maxWidth="900.0" spacing="20.0">
                <padding>
