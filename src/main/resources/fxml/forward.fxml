@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.message.ForwardMessage">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.message.ForwardMessage">
    <children>
-      <Button fx:id="forwardButton" layoutX="121.0" layoutY="120.0" mnemonicParsing="false" onAction="#forward" text="Forward" />
-      <TextField fx:id="idField" layoutX="76.0" layoutY="52.0" promptText="receiverID" />
-      <Label fx:id="idErrLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="91.0" prefHeight="18.0" prefWidth="300.0" />
+      <Button id="big-yellow" fx:id="forwardButton" layoutX="98.0" layoutY="138.0" mnemonicParsing="false" onAction="#forward" stylesheets="@../css/Buttons.css" text="Forward" />
+      <TextField fx:id="idField" layoutX="75.0" layoutY="68.0" promptText="receiverID" />
+      <Label fx:id="idErrLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="107.0" prefHeight="18.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

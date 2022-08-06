@@ -25,7 +25,6 @@ public class ControllerContext extends Application {
         mainStage.setOnCloseRequest(
                 event -> {
                     event.consume();
-                    logout();
                     exit();
                 }
         );
@@ -40,7 +39,10 @@ public class ControllerContext extends Application {
         alert.setTitle("exit");
         alert.setHeaderText("You're about to close the program.");
         alert.setContentText("Are you sure?");
-        if (alert.showAndWait().get()== ButtonType.OK) mainStage.close();
+        if (alert.showAndWait().get()== ButtonType.OK) {
+            logout();
+            mainStage.close();
+        }
     }
 
     private static void logout() {

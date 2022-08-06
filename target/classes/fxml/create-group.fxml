@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.CreateGroupController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" />
+      <TextField fx:id="imageField" layoutX="39.0" layoutY="231.0" promptText="group picture (must be filled)" />
+      <Button fx:id="browseButton" layoutX="87.0" layoutY="266.0" mnemonicParsing="false" onAction="#browse_image" text="Browse" />
+      <TextField fx:id="idField" layoutX="356.0" layoutY="50.0" promptText="group id (must be filled)" />
+      <TextField fx:id="nameField" layoutX="357.0" layoutY="101.0" promptText="group name (must be filled)" />
+      <TextArea fx:id="bioArea" layoutX="332.0" layoutY="158.0" prefHeight="121.0" prefWidth="200.0" promptText="biography" />
+      <Label fx:id="nameErrLabel" alignment="CENTER" layoutX="337.0" layoutY="139.0" prefHeight="18.0" prefWidth="188.0" />
+      <Label fx:id="idErrLabel" alignment="CENTER" layoutX="337.0" layoutY="83.0" prefHeight="18.0" prefWidth="188.0" />
+      <Button id="big-yellow" fx:id="createButton" layoutX="252.0" layoutY="288.0" mnemonicParsing="false" onAction="#create_group" stylesheets="@../css/Buttons.css" text="Create" />
+      <Button id="big-yellow" fx:id="returnButton" layoutX="251.0" layoutY="338.0" mnemonicParsing="false" onAction="#go_to_groups" stylesheets="@../css/Buttons.css" text="Return" />
+      <Label fx:id="endLabel" alignment="CENTER" layoutX="357.0" layoutY="303.0" prefHeight="18.0" prefWidth="166.0" />
+      <Label layoutX="372.0" layoutY="25.0" text="(alphanumerical and _ )" />
+   </children>
+</AnchorPane>

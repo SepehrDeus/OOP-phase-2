@@ -1,4 +1,4 @@
-module fxml.p10 {
+module fxml.p {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -13,4 +13,6 @@ module fxml.p10 {
     opens fxml.message to javafx.fxml;
     exports fxml.user;
     opens fxml.user to javafx.fxml;
+    exports fxml.group;
+    opens fxml.group to javafx.fxml;
 }

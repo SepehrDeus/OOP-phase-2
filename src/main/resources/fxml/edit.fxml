@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.EditController">
+<AnchorPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.user.EditController">
     <children>
         <TextField fx:id="usernameField" layoutX="375.0" layoutY="124.0" promptText="username" />
         <TextField fx:id="passwordField" layoutX="375.0" layoutY="195.0" promptText="password" />
@@ -19,8 +19,8 @@
         <Button fx:id="passwordButton" layoutX="422.0" layoutY="230.0" mnemonicParsing="false" onAction="#change_password" text="Change" />
         <Button fx:id="biographyButton" layoutX="419.0" layoutY="368.0" mnemonicParsing="false" onAction="#change_biography" text="Change" />
         <Button fx:id="emailButton" layoutX="419.0" layoutY="444.0" mnemonicParsing="false" onAction="#change_email" text="Change" />
-        <Button fx:id="websiteButton" layoutX="420.0" layoutY="524.0" mnemonicParsing="false" onAction="#change_website" onDragDetected="#change_website" text="Change" />
-        <Button fx:id="mainMenuButton" layoutX="409.0" layoutY="560.0" mnemonicParsing="false" onAction="#go_to_mainMenu" text="Main menu" />
+        <Button fx:id="websiteButton" layoutX="419.0" layoutY="517.0" mnemonicParsing="false" onAction="#change_website" onDragDetected="#change_website" text="Change" />
+        <Button id="big-yellow" fx:id="mainMenuButton" layoutX="386.0" layoutY="552.0" mnemonicParsing="false" onAction="#go_to_mainMenu" stylesheets="@../css/Buttons.css" text="Main menu" />
       <Label fx:id="usernameLabel" alignment="CENTER" layoutX="577.0" layoutY="128.0" prefHeight="18.0" prefWidth="306.0" />
       <Label fx:id="passwordLabel" contentDisplay="CENTER" layoutX="578.0" layoutY="198.0" prefHeight="18.0" prefWidth="306.0" />
       <Label fx:id="websiteLabel" alignment="CENTER" layoutX="579.0" layoutY="486.0" prefHeight="18.0" prefWidth="306.0" />
@@ -31,7 +31,7 @@
             <Font size="44.0" />
          </font>
       </Label>
-      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="66.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="66.0" layoutY="143.0" pickOnBounds="true" />
       <TextField fx:id="imageField" layoutX="91.0" layoutY="355.0" promptText="image url" />
       <Button fx:id="browseButton" layoutX="120.0" layoutY="421.0" mnemonicParsing="false" onAction="#browse_image" text="Browse image" />
       <Button fx:id="imageChangeButton" layoutX="137.0" layoutY="460.0" mnemonicParsing="false" onAction="#change_profilePicture" text="Change" />

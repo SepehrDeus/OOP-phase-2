@@ -11,22 +11,22 @@
 <BorderPane id="green" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LoginController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <TextField fx:id="idField" layoutX="360.0" layoutY="200.0" prefHeight="40.0" prefWidth="180.0" promptText="\@id" />
-         <PasswordField fx:id="passwordField" layoutX="358.0" layoutY="247.0" prefHeight="40.0" prefWidth="180.0" promptText="password" />
-         <Button id="big-yellow" fx:id="loginButton" layoutX="393.0" layoutY="315.0" mnemonicParsing="false" onAction="#login" text="Log in">
+         <TextField fx:id="idField" layoutX="353.0" layoutY="199.0" prefHeight="40.0" prefWidth="180.0" promptText="\@id" />
+         <PasswordField fx:id="passwordField" layoutX="353.0" layoutY="247.0" prefHeight="40.0" prefWidth="180.0" promptText="password" />
+         <Button id="big-yellow" fx:id="loginButton" layoutX="393.0" layoutY="314.0" mnemonicParsing="false" onAction="#login" text="Log in">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button id="big-yellow" fx:id="registerButton" layoutX="385.0" layoutY="395.0" mnemonicParsing="false" onAction="#go_to_register" text="Register" />
-         <Label layoutX="368.0" layoutY="89.0" text="welcome">
+         <Button id="big-yellow" fx:id="registerButton" layoutX="391.0" layoutY="375.0" mnemonicParsing="false" onAction="#go_to_register" text="Register" />
+         <Label layoutX="319.0" layoutY="67.0" text="welcome">
             <font>
-               <Font size="41.0" />
+               <Font size="60.0" />
             </font>
          </Label>
          <Label fx:id="idErrLabel" layoutX="552.0" layoutY="202.0" prefHeight="34.0" prefWidth="338.0" />
          <Label fx:id="pwErrLabel" layoutX="552.0" layoutY="253.0" prefHeight="27.0" prefWidth="340.0" />
-         <Button fx:id="forgotButton" layoutX="382.0" layoutY="473.0" mnemonicParsing="false" onAction="#go_to_restorePassword" text="I forgot my password." />
+         <Button id="big-yellow" fx:id="forgotButton" layoutX="355.0" layoutY="436.0" mnemonicParsing="false" onAction="#go_to_restorePassword" stylesheets="@../css/Buttons.css" text="I forgot my password." />
       </AnchorPane>
    </center>
 </BorderPane>

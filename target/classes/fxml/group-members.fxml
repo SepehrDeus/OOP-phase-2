@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane id="green" maxWidth="600.0" stylesheets="@../css/Buttons.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.group.GroupMembers">
+   <content>
+      <VBox id="green" fx:id="vBox" maxWidth="600.0" minWidth="150.0" stylesheets="@../css/Buttons.css" />
+   </content>
+</ScrollPane>
