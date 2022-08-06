@@ -30,14 +30,14 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <Button id="big-yellow" fx:id="PostingButton" layoutX="372.0" layoutY="515.0" mnemonicParsing="false" onAction="#create_post" prefHeight="38.0" prefWidth="104.0" text="POST" />
+      <Button id="big-yellow" fx:id="PostingButton" layoutX="372.0" layoutY="527.0" mnemonicParsing="false" onAction="#create_post" prefHeight="38.0" prefWidth="104.0" text="POST" />
       <Button id="big-yellow" fx:id="ReturnButton" layoutX="22.0" layoutY="535.0" mnemonicParsing="false" onAction="#return_MyPosts" prefHeight="48.0" prefWidth="120.0" text="RETURN" />
       <TextArea fx:id="LocationTxtArea1" layoutX="286.0" layoutY="288.0" prefHeight="76.0" prefWidth="276.0" promptText="Location">
          <font>
             <Font size="15.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="pictureTxtArea11" layoutX="285.0" layoutY="429.0" prefHeight="76.0" prefWidth="276.0" promptText="Picture url">
+      <TextArea fx:id="pictureTxtArea11" layoutX="285.0" layoutY="442.0" prefHeight="76.0" prefWidth="276.0" promptText="Picture url">
          <font>
             <Font size="15.0" />
          </font>

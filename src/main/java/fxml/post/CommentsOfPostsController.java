@@ -91,7 +91,7 @@ public class CommentsOfPostsController {
                         create_comment(Comment_id+"#");
                         });
                     commentlabel.setOnMouseDragged(mouseEvent -> {
-                        delete_comment(Comment_id+"#");
+                        delete_comment(Comment_id);
                     });
                     //setting commentID
 
@@ -145,6 +145,7 @@ public class CommentsOfPostsController {
     }
 
     void Delete_Like (String cap){
+
         try {
             if(Database.delete_like(cap)){
                 int index =0;
