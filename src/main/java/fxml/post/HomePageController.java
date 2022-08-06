@@ -153,9 +153,13 @@ public class HomePageController {
                     }
                 });
                 Label caption = new Label("Caption : "+resultSet_posts.getString("caption"));
+                caption.setStyle("../css/ButtonFirstStyle.css");
+                caption.setId("shiny-orange");
                 vBox.getChildren().add(caption);
                 // comment
                 Label comment = new Label("No comments yet.");
+                comment.setStyle("../css/ButtonFirstStyle.css");
+                comment.setId("shiny-orange");
                 for (int i = 0; i < comments_OR_postID.size(); i++) {
                     if(comments_OR_postID.get(i).startsWith(id)){
                         comment.setText(comments_caption.get(i));break;
@@ -165,6 +169,7 @@ public class HomePageController {
                 comment.setOnMouseClicked(mouseEvent -> {
                     CommentsOfPostsController.setUserID(userID);
                     CommentsOfPostsController.setButtonPressed("ExploreButton");
+
                     if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                         setUserID(null);
                         ExploreButton.setEffect(null);
@@ -238,9 +243,13 @@ public class HomePageController {
                 });
                 //Caption
                 Label caption = new Label("Caption : "+resultSet_posts.getString("caption"));
+                caption.setStyle("../css/ButtonFirstStyle.css");
+                caption.setId("shiny-orange");
                 vBox.getChildren().add(caption);
                 // comment
                 Label comment = new Label("No comments yet.");
+                comment.setStyle("../css/ButtonFirstStyle.css");
+                comment.setId("shiny-orange");
                 for (int i = 0; i < comments_OR_postID.size(); i++) {
                     if(comments_OR_postID.get(i).startsWith(id)){
                         comment.setText(comments_caption.get(i));break;
@@ -492,6 +501,8 @@ public class HomePageController {
                 vBox.getChildren().add(imageView);
 
                 Label id_poster = new Label(posterID.get(i)+"\n Caption : "+caption.get(i)+"\n------------------------------");
+                id_poster.setStyle("../css/ButtonFirstStyle.css");
+                id_poster.setId("shiny-orange");
                 id_poster.setMaxSize(700,-1);
                 vBox.getChildren().add(id_poster);
 
@@ -583,6 +594,8 @@ public class HomePageController {
                     vBox.getChildren().add(caption);
                     // comment
                     Label comment = new Label("No comments yet.");
+                    caption.setStyle("../css/ButtonFirstStyle.css");
+                    caption.setId("shiny-orange");
                     for (int i = 0; i < comments_OR_postID.size(); i++) {
                         if(comments_OR_postID.get(i).startsWith(id)){
                             comment.setText(comments_caption.get(i));break;
@@ -592,6 +605,8 @@ public class HomePageController {
                     comment.setOnMouseClicked(mouseEvent -> {
                         CommentsOfPostsController.setUserID(userID);
                         CommentsOfPostsController.setButtonPressed("ShowPostsButton");
+                        comment.setStyle("../css/ButtonFirstStyle.css");
+                        comment.setId("shiny-orange");
                         if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                             setUserID(null);
                             ShowPostsButton.setEffect(null);
@@ -631,9 +646,13 @@ public class HomePageController {
                             }
                         });
                         Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                        caption.setStyle("../css/ButtonFirstStyle.css");
+                        caption.setId("shiny-orange");
                         vBox.getChildren().add(caption);
                         // comment
                         Label comment = new Label("No comments yet.");
+                        comment.setStyle("../css/ButtonFirstStyle.css");
+                        comment.setId("shiny-orange");
                         for (int i = 0; i < comments_OR_postID.size(); i++) {
                             if(comments_OR_postID.get(i).startsWith(id)){
                                 comment.setText(comments_caption.get(i));break;
@@ -683,9 +702,13 @@ public class HomePageController {
                             }
                         });
                         Label caption = new Label("Caption : "+resultSet.getString("caption"));
+                        caption.setStyle("../css/ButtonFirstStyle.css");
+                        caption.setId("shiny-orange");
                         vBox.getChildren().add(caption);
                         // comment
                         Label comment = new Label("No comments yet.");
+                        comment.setStyle("../css/ButtonFirstStyle.css");
+                        comment.setId("shiny-orange");
                         for (int i = 0; i < comments_OR_postID.size(); i++) {
                             if(comments_OR_postID.get(i).startsWith(id)){
                                 comment.setText(comments_caption.get(i));break;

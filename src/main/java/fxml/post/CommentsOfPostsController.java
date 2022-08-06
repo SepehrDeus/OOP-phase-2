@@ -81,11 +81,11 @@ public class CommentsOfPostsController {
         try {
             vBox.getChildren().clear();
             PostID.setText(id);
-            //scene.getStylesheets().add();
             for (int i = 0; i < comments_OR_postID.size(); i++) {
                 if( id.length()<=comments_OR_postID.get(i).length() &&   comments_OR_postID.get(i).startsWith(id)){
                     Label commentlabel = new Label();
-
+                    commentlabel.setStyle("../css/ButtonFirstStyle.css");
+                    commentlabel.setId("shiny-orange");
                     String Comment_id = comments_id.get(i);
                     commentlabel.setOnMouseClicked(mouseEvent -> {
                         create_comment(Comment_id+"#");
@@ -93,8 +93,8 @@ public class CommentsOfPostsController {
                     commentlabel.setOnMouseDragged(mouseEvent -> {
                         delete_comment(Comment_id);
                     });
-                    //setting commentID
 
+                    //setting commentID
                     commentlabel.setText("id : "+Comment_id+"\n"+comments_caption.get(i));
                     vBox.getChildren().add(commentlabel);
 
