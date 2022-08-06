@@ -83,18 +83,28 @@ public class MyPostsController {
     }
 
     public void go_to_show_stats(ActionEvent actionEvent) {
-        ControllerContext.change_scene(ShowStatsController.getScene());
+        ShowStatsController.setUserID(userID);
+        if(ShowStatsController.getController().init_deletePost()){
+            ControllerContext.change_scene(ShowStatsController.getScene());
+        }
     }
 
     public void go_to_update_caption(ActionEvent actionEvent) {
-        ControllerContext.change_scene(UpdatePostController.getScene());
+        UpdatePostController.setUserID(userID);
+        if(UpdatePostController.getController().init_deletePost()){
+            ControllerContext.change_scene(UpdatePostController.getScene());
+        }
     }
 
     public void Return_HomePage(ActionEvent actionEvent) {
+        HomePageController.setUserID(userID);
         ControllerContext.change_scene(HomePageController.getScene());
     }
 
     public void go_to_delete_post(ActionEvent actionEvent) {
-        ControllerContext.change_scene(DeletepostController.getScene());
+        DeletepostController.setUserID(userID);
+        if(DeletepostController.getController().init_deletePost()){
+            ControllerContext.change_scene(DeletepostController.getScene());
+        }
     }
 }

@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.post.ShowStatsController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowStatsController">
+   <top>
+      <AnchorPane id="green" prefHeight="78.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="51.0" layoutY="15.0" prefHeight="46.0" prefWidth="141.0" text="Likes Number : ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="556.0" layoutY="15.0" prefHeight="46.0" prefWidth="149.0" text="Views Number : ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="LikesNum" layoutX="208.0" layoutY="27.0" />
+            <TextField fx:id="ViewsNum" layoutX="724.0" layoutY="26.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane id="green" prefHeight="77.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="big-yellow" fx:id="ShowStatsButton" layoutX="561.0" layoutY="19.0" mnemonicParsing="false" onAction="#Show_Stats" prefHeight="40.0" prefWidth="127.0" text="Show Stats" />
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#Return" prefHeight="40.0" prefWidth="127.0" text="Return" />
+            <TextField fx:id="PostIDText" layoutX="401.0" layoutY="19.0" prefHeight="40.0" prefWidth="149.0" promptText="Post Id" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <right>
+      <ScrollPane id="iphone" maxWidth="907.0" prefHeight="444.0" prefWidth="907.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_CENTER" maxWidth="900.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </right>
+</BorderPane>

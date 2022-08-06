@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
 
 public class CreatePostController implements Initializable {
     private static String userID;
-    private String PicURL;
 
     public static void setUserID(String userID) {
         CreatePostController.userID = userID;
@@ -61,6 +60,7 @@ public class CreatePostController implements Initializable {
         return fxmlLoader.getController();
     }
 
+
     //-----------------------------------------------------------------------------------------------------------------
     @FXML
     private ChoiceBox<String> choiceBoxField;
@@ -82,20 +82,10 @@ public class CreatePostController implements Initializable {
     private String[] Fields = {"1.sports", "2.entertainment", "3.nature", "4.educational", "5.fashion", "6.political", "7.music", "8.movie", "9.economics"};
 
 
-    // private static void Update_Location(String post_id){
-    //      String new_location = post_location();
-    //      while (true){
-    //          try {
-    //             if(Database.Update_location(new_location,post_id)>0){
-    //                 return;
-    //             }
-    //          }catch (Exception e){
-    //             System.out.println("invalid command!");
-    //           }
-    //   }
-
     @FXML
     private void create_post ()  {
+
+
         String caption = CaptionTxtArea.getText();
         String posterID = userID;
         String postID = null;
@@ -106,20 +96,25 @@ public class CreatePostController implements Initializable {
         }
 
         boolean ad = check_AD_Post.isSelected();
-        String PictureURL= PicURL;
+        String PictureURL= pictureTxtArea11.getText();
         if(PictureURL.isEmpty()){
-            AlertBox.display("Error","URL is not correct!",true);
+            AlertBox.display("Error","URL is empty!",true);
         }
         String time=post_time();
         String field = choiceBoxField.getValue();
         String Location = LocationTxtArea1.getText();
 
         try {
-            if(safe_caption(caption) && safe_ad() && safe_postID() && safe_posterID() && (!PictureURL.isEmpty())){
+            if(safe_caption(caption) && safe_ad(ad) && safe_postID() && safe_posterID() && (! PictureURL.isEmpty())){
                 if (Database.add_post(new Post( postID, posterID, ad,
                         PictureURL,caption,time,field,Location)) > 0){
-                    ControllerContext.change_scene(HomePageController.getScene());
                     AlertBox.display("Success","Posted Successfully!",false);
+                    choiceBoxField.setValue("1.sports");
+                    CaptionTxtArea.setText("");
+                    check_AD_Post.setSelected(true);
+                    LocationTxtArea1.setText("");
+                    pictureTxtArea11.setText("");
+                    ControllerContext.change_scene(MyPostsController.getScene());
                 }else AlertBox.display("Error","Something went wrong! try again.",true);
             }
         } catch (SQLException e) {
@@ -139,38 +134,49 @@ public class CreatePostController implements Initializable {
     }
 
     private  boolean safe_postID() throws SQLException {
-        if(Database.Update_postNum(Database.user_loggedIn(), Database.get_postNum(userID))<=0){
-            AlertBox.display("Error","Something went wrong!",true);return false;
-        }else {
-            return true;
-        }
+            if(Database.Update_postNum(Database.user_loggedIn(), Database.get_postNum(userID))<=0){
+                AlertBox.display("Error","Something went wrong!",true);return false;
+            }else {
+                return true;
+            }
+
     }
 
     private  boolean safe_posterID()  {
-        if(userID.isEmpty()){
-            AlertBox.display("Error","No body is logged in!",true);return false;
-        }else {
-            return true;
-        }
+            if(userID.isEmpty()){
+                AlertBox.display("Error","No body is logged in!",true);return false;
+            }else {
+                return true;
+            }
+
     }
 
-    private  boolean safe_ad() throws SQLException {
-        if(Database.check_ads(userID)){
-            return true;
+    private  boolean safe_ad(boolean ad) throws SQLException {
+        if(ad){
+            if(Database.check_ads(userID)){
+                return true;
+            }else {
+                AlertBox.display("Error","this is not a business account!",true);
+                check_AD_Post.setSelected(false);
+                return false;
+            }
         }else {
-            AlertBox.display("Error","this is not a business account!",true);
-            return false;
+            return true;
         }
-
     }
 
     @FXML
-    private  String safe_picture (){
+    private  void safe_picture (){
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(ControllerContext.getMainStage());
-        pictureTxtArea11.setText(file.toURI().toString());
-        PicURL = file.toURI().toString();
-        return file.toURI().toString();
+        if(file == null){
+            pictureTxtArea11.setText("");
+            AlertBox.display("Error","URL is not correct!",true);
+            return;
+        }else {
+
+            pictureTxtArea11.setText(file.toURI().toString());
+        }
     }
 
     private  String post_time (){
@@ -186,6 +192,11 @@ public class CreatePostController implements Initializable {
 
     @FXML
     public void return_MyPosts(ActionEvent actionEvent) {
+        choiceBoxField.setValue("1.sports");
+        CaptionTxtArea.setText("");
+        check_AD_Post.setSelected(true);
+        LocationTxtArea1.setText("");
+        pictureTxtArea11.setText("");
         ControllerContext.change_scene(MyPostsController.getScene());
     }
 }

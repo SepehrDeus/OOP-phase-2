@@ -2,6 +2,8 @@ package fxml;
 
 import fxml.group.GroupsController;
 import fxml.message.MessagesController;
+import fxml.post.AlertBox;
+import fxml.post.CommentsOfPostsController;
 import fxml.post.HomePageController;
 import fxml.post.MyPostsController;
 import fxml.user.EditController;
@@ -13,10 +15,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import jdbc.Database;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MainMenuController {
     private static String userID;
@@ -100,7 +106,7 @@ public class MainMenuController {
     public void go_to_homepage (ActionEvent event) {
         MyPostsController.setUserID(userID);
         HomePageController.setUserID(userID);
-        ControllerContext.change_scene(MyPostsController.getScene());
+        ControllerContext.change_scene(HomePageController.getScene());
     }
 
     public void go_to_groups(ActionEvent event) throws SQLException {

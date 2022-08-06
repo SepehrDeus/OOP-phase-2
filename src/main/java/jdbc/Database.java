@@ -1,10 +1,7 @@
 package jdbc;
-
-
 import entity.*;
-
 import java.sql.*;
-
+import java.util.ArrayList;
 public class Database {
     private static Connection connection;
 
@@ -807,9 +804,25 @@ public class Database {
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return  resultSet.getInt("postsNum");
+        }
+public static ResultSet get_ADposts() throws SQLException {
+    PreparedStatement preparedStatement = connection.prepareStatement(
+            "SELECT id, posterid, likesNum, viewsNum, field, timy, pictureid, caption FROM posts WHERE ad=?",
+            ResultSet.TYPE_SCROLL_SENSITIVE,
+            ResultSet.CONCUR_UPDATABLE
+    );
+    preparedStatement.setInt(1, 1);
+    return preparedStatement.executeQuery();
     }
-
-    public static int Update_postNum(String userid,int prepostNum) throws SQLException {
+public static ResultSet getLikes() throws SQLException {
+    PreparedStatement preparedStatement = connection.prepareStatement(
+            "SELECT * FROM Likes",
+            ResultSet.TYPE_SCROLL_SENSITIVE,
+            ResultSet.CONCUR_UPDATABLE
+    );
+    return preparedStatement.executeQuery();
+    }
+public static int Update_postNum(String userid,int prepostNum) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE users " +
                         "SET postsNum=? " +
@@ -838,50 +851,81 @@ public class Database {
         preparedStatement.setString(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        return resultSet.getString("ad").equalsIgnoreCase("yes");
-    }
-
-    public static int add_post(Post post) throws SQLException {
+        return resultSet.getInt("ad")==1;
+        }
+public static String check_id_post(String id_post) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "SELECT posterid FROM posts WHERE id=?"
+        );
+        preparedStatement.setString(1, id_post);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getString("posterid");
+        }
+public static boolean check_existence_post(String id_post) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "SELECT * FROM posts WHERE id=?"
+        );
+        preparedStatement.setString(1, id_post);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.next();
+        }
+public static boolean check_existence_comment(String id_post) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "SELECT * FROM comments WHERE id=?"
+        );
+        preparedStatement.setString(1, id_post);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.next();
+        }
+public static int add_post(Post post) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO  posts VALUES(?, ?, ?, ?, ?, 0, 0, ?, ?, ?, 0)"
         );
         preparedStatement.setString(1,post.getPostID() );
         preparedStatement.setString(2, post.getPosterID() );
-        preparedStatement.setString(3, post.isAd());
+        preparedStatement.setInt(3, post.isAd());
         preparedStatement.setString(4,post.getCaption() );
         preparedStatement.setString(5, post.getPicture());
         preparedStatement.setString(6, post.getTime());
         preparedStatement.setString(7, post.getLocation());
         preparedStatement.setString(8, post.getField());
         return preparedStatement.executeUpdate();
-    }
-
-    public static void SHOW_LATEST_posts ()throws SQLException{
+        }
+public static ResultSet SHOW_LATEST_posts_10 ()throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM posts ORDER BY caption DESC"
+                "SELECT * FROM posts ORDER BY Timy DESC"
         );
+        return preparedStatement.executeQuery();
+    }
+public static boolean CheckForDuplicateLike (String postCommentID,String LikerID)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "SELECT * FROM Likes WHERE post_OR_comment_ID=? AND Liker_ID=?"
+        );
+        preparedStatement.setString(1,postCommentID);
+        preparedStatement.setString(2,LikerID);
         ResultSet resultSet = preparedStatement.executeQuery();
-        int counter = 0;
-        while (resultSet.next() && counter<10){
-            System.out.println(resultSet.getString("caption"));
-            System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-                    +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-            System.out.println("Location: "+resultSet.getString("Location"));
-            System.out.println("field: "+resultSet.getString("field "));
-            counter++;
+        return resultSet.next();
         }
     }
 
-    public static boolean delete_Post(String id) throws SQLException {
+public static int Update_post_view (String ID,int views)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "UPDATE posts SET viewsNum=? WHERE id=?"
+        );
+        preparedStatement.setString(2,ID);
+        preparedStatement.setInt(1,views+1);
+        return preparedStatement.executeUpdate();
+        }
+public static int delete_Post(String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "DELETE FROM posts WHERE id=?"
         );
         preparedStatement.setString(1, id);
-        return preparedStatement.execute();
-    }
-
-    // Updating caption of post
-    public static int Update_Caption(String new_caption,String id) throws SQLException {
+        return preparedStatement.executeUpdate();
+        }
+// Updating caption of post
+public static int Update_Caption(String new_caption,String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE posts " +
                         "SET caption=? " +
@@ -894,52 +938,20 @@ public class Database {
 
     public static int Update_location(String new_location,String id)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE posts" +
-                        "SET Location = ? " +
-                        "WHERE id = ?"
+        "UPDATE posts " +
+        "SET Location=? " +
+        "WHERE id=?"
         );
         preparedStatement.setString(1,new_location);
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
-    }
-
-    public static void show_posts(String id,ResultSet Followings,ResultSet  Followers)throws  SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM posts ORDER BY caption DESC"
-        );
-        ResultSet resultSet = preparedStatement.executeQuery();
-        int counter = 0;
-        while (resultSet.next() && counter<10){
-            if(resultSet.getString("posterid").equalsIgnoreCase(id)){
-                System.out.println(resultSet.getString("caption"));
-                System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-                        +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-                System.out.println("Location: "+resultSet.getString("Location"));
-                System.out.println("field: "+resultSet.getString("field "));
-                counter++;
-            }
-            while (Followings.next()){
-                if(Followings.getString(1).equals((resultSet.getString("posterid")))){
-                    System.out.println(resultSet.getString("caption"));
-                    System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-                            +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-                    System.out.println("Location: "+resultSet.getString("Location"));
-                    System.out.println("field: "+resultSet.getString("field "));
-                    counter++;
-                }
-            }
-            while (Followers.next()){
-                if(Followers.getString(1).equals((resultSet.getString("posterid")))){
-                    System.out.println(resultSet.getString("caption"));
-                    System.out.println("likes number: "+resultSet.getString("likesNum")+"\ncomments number: "
-                            +resultSet.getString("commentsNum")+"\nviewsNum: "+resultSet.getString("viewsNum"));
-                    System.out.println("Location: "+resultSet.getString("Location"));
-                    System.out.println("field: "+resultSet.getString("field "));
-                    counter++;
-                }
-            }
         }
-    }
+public static ResultSet show_posts()throws  SQLException {
+    Statement statement = connection.createStatement();
+    return statement.executeQuery(
+            "SELECT * FROM posts ORDER BY Timy DESC"
+    );
+}
 
     public static String FollowersID(String id){
         return id+"followersID";
@@ -951,18 +963,23 @@ public class Database {
 
     public static int Update_commentNum_from_posts (String id,int new_commentNum)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE posts " +
-                        "SET commentsNum = ? " +
-                        "WHERE id = ?"
+        "UPDATE posts " +
+        "SET commentsNum=? " +
+        "WHERE id=?"
         );
         preparedStatement.setInt(1,new_commentNum);
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
+        }
+    public static ResultSet get_AllComments() throws SQLException {;
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(
+                "SELECT * FROM comments ORDER BY timy ASC "
+        );
     }
-
-    public static int get_commentNum_from_posts (String id) throws SQLException {
+public static int get_commentNum_from_posts (String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT commentsNum FROM posts WHERE id=?"
+        "SELECT commentsNum FROM posts WHERE id=?"
         );
         preparedStatement.setString(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -972,41 +989,49 @@ public class Database {
 
     public static int Update_likesNum_into_posts (int new_likesNum,String id)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE posts " +
-                        "SET likesNum = ? " +
-                        "WHERE id = ?"
+        "UPDATE posts " +
+        "SET likesNum=? " +
+        "WHERE id=?"
         );
         preparedStatement.setInt(1,new_likesNum);
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
-    }
-
-    public static int get_likesNum_from_posts (String id) throws SQLException {
+        }
+public static int get_likesNum_from_posts (String ID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT likesNum FROM posts WHERE id=?"
         );
-        preparedStatement.setString(1,id);
+        preparedStatement.setString(1,ID);
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        return  resultSet.getInt("likesNum");
+        if(resultSet.next()){
+        int a=  resultSet.getInt("likesNum");
+        return a ;
+        }else{
+        return -1;
+        }
+    }
+    public  static ResultSet get_URl(String userID) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT id, pictureid, ad, caption FROM posts WHERE posterid=?"
+        );
+        preparedStatement.setString(1,userID);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return preparedStatement.executeQuery();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    // COMMENTS
-    public static int add_comment(Comment comment) throws SQLException {
+    public  static ResultSet get_likeANDview_num (String postID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO  commnets " +
-                        "VALUES(?, ?, ?, ?, 0, 0, ?)"
+                "SELECT likesNum, viewsNum FROM posts WHERE id=?"
+        );
+        preparedStatement.setString(1,postID);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return preparedStatement.executeQuery();
+    }
+// COMMENTS
+public static int add_comment(Comment comment) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+        "INSERT INTO  comments " +
+        "VALUES(?, ?, ?, ?, 0, 0, ?)"
         );
         preparedStatement.setString(1,comment.getPost_OR_commentID());
         preparedStatement.setString(2, comment.getCommentID() );
@@ -1021,25 +1046,25 @@ public class Database {
                 "DELETE FROM comments WHERE id=?"
         );
         preparedStatement.setString(1, id);
-        return preparedStatement.execute();
-    }
+        return preparedStatement.executeUpdate()>0;
+        }
 
     public static int Update_comment(String new_text,String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE comments " +
-                        "SET comment_caption=? " +
-                        "WHERE id = ?"
+        "UPDATE comments " +
+        "SET comment_caption=? " +
+        "WHERE id=?"
         );
-        preparedStatement.setString(1,new_text);
+preparedStatement.setString(1,new_text);
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
     }
 
     public static int Update_commentNum_from_comments (String id,int new_commentNum)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE comments " +
-                        "SET commentsNum=? " +
-                        "WHERE id=?"
+        "UPDATE comments " +
+        "SET commentsNum=? " +
+        "WHERE id=?"
         );
         preparedStatement.setInt(1,new_commentNum);
         preparedStatement.setString(2,id);
@@ -1077,28 +1102,22 @@ public class Database {
         return  resultSet.getInt("likesNum");
     }
 
-    public static void SHOW_COMMENTS_comment (String post_ID)throws SQLException{
+public static ResultSet SHOW_COMMENTS_comment (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
-        preparedStatement.setString(1,post_ID);
+        preparedStatement.setString(1,post_ID+"#");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            System.out.println("@"+resultSet.getString("commenterid")+" commented: "+
-                    resultSet.getString("comment_caption")+" at comment: "+post_ID);
-        }
+    return preparedStatement.executeQuery();
     }
 
-    public static void SHOW_COMMENTS_post (String post_ID)throws SQLException{
+public static ResultSet SHOW_COMMENTS_post (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID = ? "
+        "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
-        preparedStatement.setString(1,post_ID);
+        preparedStatement.setString(1,post_ID+"*");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("commenterid")+"commented :"+
-                    resultSet.getString("comment_caption")+" at post:"+post_ID);
-        }
+        return preparedStatement.executeQuery();
     }
 
 
@@ -1125,32 +1144,39 @@ public class Database {
 
     public static boolean delete_like (String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "DELETE FROM Likes WHERE id=?"
+        "DELETE FROM Likes WHERE Like_ID=?"
         );
         preparedStatement.setString(1, id);
-        return preparedStatement.execute();
-    }
-
-    public static void SHOW_LIKES_post (String post_ID)throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT Liker_ID FROM Likes WHERE post_OR_comment_ID=? "
-        );
-        preparedStatement.setString(1,post_ID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("Liker_ID")+"liked posts:"+post_ID);
+        return preparedStatement.executeUpdate()>0;
         }
-    }
 
-    public static void SHOW_LIKES_comment (String post_ID)throws SQLException{
+    public static ResultSet SHOW_LIKES_post (String post_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT Liker_ID FROM Likes WHERE post_OR_comment_ID=? "
+                "SELECT * FROM Likes WHERE post_OR_comment_ID=?"
         );
-        preparedStatement.setString(1,post_ID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("Liker_ID")+"liked comment:"+post_ID);
-        }
+        preparedStatement.setString(1, post_ID+"*");
+        return preparedStatement.executeQuery();
+    }
+    public static ResultSet SHOW_LIKES_comment (String post_ID)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM Likes WHERE post_OR_comment_ID=?"
+        );
+        preparedStatement.setString(1, post_ID+"#");
+        return preparedStatement.executeQuery();
+    }
+    public static ResultSet get_commentsCaption (String comment_ID)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT comment_caption FROM comments WHERE id=?"
+        );
+        preparedStatement.setString(1, comment_ID);
+        return preparedStatement.executeQuery();
+    }
+    public static ResultSet get_usernameANDpictureurl (String user_ID)throws SQLException{
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT username, profilepicture FROM users WHERE id=?"
+        );
+        preparedStatement.setString(1, user_ID);
+        return preparedStatement.executeQuery();
     }
 
     public static void SHOW_VIEWS_post (String post_ID)throws SQLException{

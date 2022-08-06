@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.post.ShowLikesController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.ShowLikesController">
+   <top>
+      <AnchorPane id="green" prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="569.0" layoutY="25.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" ">
+               <toggleGroup>
+                  <ToggleGroup fx:id="IDs" />
+               </toggleGroup>
+            </ToggleButton>
+            <TextField fx:id="PostORCommentID" layoutX="129.0" layoutY="28.0" promptText="Post OR Comment ID" />
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="74.0" text="ID : ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="472.0" layoutY="26.0" prefHeight="38.0" prefWidth="86.0" text="PostID ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="671.0" layoutY="27.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" " toggleGroup="$IDs" />
+            <Label id="shiny-orange" layoutX="784.0" layoutY="26.0" prefHeight="38.0" prefWidth="118.0" text=" CommentID ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane id="green" prefHeight="58.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#Return_myPosts" prefHeight="62.0" prefWidth="117.0" text="Return">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <TextField fx:id="LikesNum" layoutX="407.0" layoutY="24.0" promptText=" " />
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="279.0" layoutY="15.0" prefHeight="26.0" prefWidth="118.0" text="LikesNumber : ">
+               <font>
+                  <Font size="56.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <ScrollPane id="iphone" maxWidth="900.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" maxWidth="900.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

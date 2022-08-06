@@ -6,29 +6,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fxml.post.MyPostsController">
+<AnchorPane id="green" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.MyPostsController">
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
-   <Label alignment="CENTER" layoutX="251.0" layoutY="36.0" prefHeight="105.0" prefWidth="398.0" text="MY POSTS">
+   <Label id="shiny-orange" alignment="CENTER" layoutX="251.0" layoutY="36.0" prefHeight="105.0" prefWidth="398.0" text="MY POSTS">
       <font>
-         <Font size="62.0"/>
+         <Font size="24.0" />
       </font>
    </Label>
-   <Button fx:id="CreatePostButton" layoutX="73.0" layoutY="194.0" mnemonicParsing="false" onAction="#go_to_create_post"
-           prefHeight="113.0" prefWidth="224.0" text="CREATE POST"/>
-   <Button fx:id="ShowCommentsButton" layoutX="615.0" layoutY="367.0" mnemonicParsing="false"
-           onAction="#go_to_show_comments" prefHeight="113.0" prefWidth="224.0" text="SHOW COMMENTS"/>
-   <Button fx:id="ShowLikesButton" layoutX="338.0" layoutY="367.0" mnemonicParsing="false" onAction="#go_to_show_likes"
-           prefHeight="113.0" prefWidth="224.0" text="SHOW LIKES"/>
-   <Button fx:id="ShowStatsButton" layoutX="73.0" layoutY="367.0" mnemonicParsing="false" onAction="#go_to_show_stats"
-           prefHeight="113.0" prefWidth="224.0" text="SHOW STATS"/>
-   <Button fx:id="DeletePostButton" layoutX="338.0" layoutY="194.0" mnemonicParsing="false"
-           onAction="#go_to_delete_post" prefHeight="113.0" prefWidth="224.0" text="DELETE POST"/>
-   <Button fx:id="UpdatePostButton" layoutX="615.0" layoutY="194.0" mnemonicParsing="false"
-           onAction="#go_to_update_caption" prefHeight="113.0" prefWidth="224.0" text="UPDATE POST"/>
-   <Button fx:id="ReturnHomePageButton" layoutX="73.0" layoutY="523.0" mnemonicParsing="false"
-           onAction="#Return_HomePage" prefHeight="47.0" prefWidth="88.0" text="RETURN"/>
+   <Button id="big-yellow" fx:id="CreatePostButton" layoutX="73.0" layoutY="194.0" mnemonicParsing="false" onAction="#go_to_create_post" prefHeight="113.0" prefWidth="224.0" text="CREATE POST">
+      <font>
+         <Font size="24.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="ShowCommentsButton" layoutX="608.0" layoutY="366.0" mnemonicParsing="false" onAction="#go_to_show_comments" prefHeight="114.0" prefWidth="238.0" text="SHOW COMMENTS">
+      <font>
+         <Font size="20.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="ShowLikesButton" layoutX="338.0" layoutY="367.0" mnemonicParsing="false" onAction="#go_to_show_likes" prefHeight="113.0" prefWidth="224.0" text="SHOW LIKES">
+      <font>
+         <Font size="24.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="ShowStatsButton" layoutX="73.0" layoutY="367.0" mnemonicParsing="false" onAction="#go_to_show_stats" prefHeight="113.0" prefWidth="224.0" text="SHOW STATS">
+      <font>
+         <Font size="24.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="DeletePostButton" layoutX="338.0" layoutY="194.0" mnemonicParsing="false" onAction="#go_to_delete_post" prefHeight="113.0" prefWidth="224.0" text="DELETE POST">
+      <font>
+         <Font size="24.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="UpdatePostButton" layoutX="615.0" layoutY="194.0" mnemonicParsing="false" onAction="#go_to_update_caption" prefHeight="113.0" prefWidth="224.0" text="UPDATE POST">
+      <font>
+         <Font size="24.0" />
+      </font></Button>
+   <Button id="big-yellow" fx:id="ReturnHomePageButton" layoutX="30.0" layoutY="516.0" mnemonicParsing="false" onAction="#Return_HomePage" prefHeight="64.0" prefWidth="154.0" text="RETURN">
+      <font>
+         <Font size="19.0" />
+      </font></Button>
 </AnchorPane>

@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.post.UpdatePostController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/ButtonFirstStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.post.UpdatePostController">
+   <top>
+      <AnchorPane id="green" prefHeight="108.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="LocationArea" layoutX="241.0" layoutY="5.0" prefHeight="97.0" prefWidth="188.0" promptText="new Location">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="CaptionArea" layoutX="470.0" layoutY="5.0" prefHeight="97.0" prefWidth="188.0" promptText="new caption (must be filled)">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane id="green" prefHeight="68.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#Return" prefHeight="45.0" prefWidth="114.0" text="Retun" />
+            <Button id="big-yellow" fx:id="UpdateButton" layoutX="556.0" layoutY="11.0" mnemonicParsing="false" onAction="#Update" prefHeight="45.0" prefWidth="114.0" text="UPDATE" />
+            <TextField fx:id="PostIDText" layoutX="362.0" layoutY="12.0" prefHeight="42.0" prefWidth="176.0" promptText="Post ID" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <ScrollPane id="iphone" maxWidth="900.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_CENTER" maxWidth="900.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
