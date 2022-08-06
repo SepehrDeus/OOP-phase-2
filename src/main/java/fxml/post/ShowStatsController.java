@@ -114,8 +114,11 @@ public class ShowStatsController {
                     imageView.setFitHeight(300);
                     imageView.setPreserveRatio(true);
                     Label caption = new Label("Caption : "+resultSet.getString("caption"));
-                    vBox.getChildren().add(caption);
+                    caption.setStyle("../css/ButtonFirstStyle.css");
+                    caption.setId("shiny-orange");
                     Label postID = new Label(resultSet.getString("id"));
+                    postID.setStyle("../css/ButtonFirstStyle.css");
+                    postID.setId("shiny-orange");
                     imageView.setOnMouseClicked(mouseEvent -> {
                         try {
                             PostIDText.setText(postID.getText());
@@ -127,6 +130,7 @@ public class ShowStatsController {
                     imageView.setOnMouseExited(mouseEvent -> imageView.setEffect(null));
                     vBox.getChildren().add(imageView);
                     vBox.getChildren().add(postID);
+                    vBox.getChildren().add(caption);
                 }
             }
             return true;

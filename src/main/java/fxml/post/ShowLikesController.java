@@ -79,6 +79,7 @@ public class ShowLikesController {
         void Return_myPosts(ActionEvent event) {
             setUserID(null);
             PostORCommentID.setText("");
+            LikesNum.setText("");
             vBox.getChildren().clear();
             ControllerContext.change_scene(MyPostsController.getScene());
         }

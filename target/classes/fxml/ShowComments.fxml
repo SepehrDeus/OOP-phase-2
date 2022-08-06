@@ -16,7 +16,7 @@
     <top>
         <AnchorPane id="green" prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <children>
-                <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="572.0" layoutY="25.0" mnemonicParsing="false" onAction="#post_comment_toggle" prefHeight="26.0" prefWidth="102.0" text=" ">
+                <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="550.0" layoutY="20.0" mnemonicParsing="false" onAction="#post_comment_toggle" prefHeight="26.0" prefWidth="102.0" text=" ">
                     <toggleGroup>
                         <ToggleGroup fx:id="IDs" />
                     </toggleGroup>
@@ -27,13 +27,13 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="480.0" layoutY="13.0" prefHeight="62.0" prefWidth="78.0" text="PostID ">
+                <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="450.0" layoutY="9.0" prefHeight="62.0" prefWidth="94.0" text="PostID ">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="674.0" layoutY="25.0" mnemonicParsing="false" onAction="#post_comment_toggle" prefHeight="26.0" prefWidth="102.0" selected="true" text=" " toggleGroup="$IDs" />
-                <Label id="shiny-orange" layoutX="785.0" layoutY="19.0" prefHeight="51.0" prefWidth="114.0" text=" CommentID ">
+                <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="652.0" layoutY="20.0" mnemonicParsing="false" onAction="#post_comment_toggle" prefHeight="26.0" prefWidth="102.0" selected="true" text=" " toggleGroup="$IDs" />
+                <Label id="shiny-orange" layoutX="764.0" layoutY="14.0" prefHeight="51.0" prefWidth="136.0" text=" CommentID ">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -44,7 +44,7 @@
     <bottom>
         <AnchorPane id="green" prefHeight="58.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <children>
-                <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" mnemonicParsing="false" onAction="#Return_myPosts" prefHeight="50.0" prefWidth="124.0" text="Return">
+                <Button id="big-yellow" fx:id="ReturnButton" layoutX="14.0" layoutY="3.0" mnemonicParsing="false" onAction="#Return_myPosts" prefHeight="50.0" prefWidth="124.0" text="Return">
                     <font>
                         <Font size="15.0" />
                     </font>

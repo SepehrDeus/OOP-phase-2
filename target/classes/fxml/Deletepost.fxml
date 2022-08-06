@@ -27,7 +27,7 @@
    <top>
       <AnchorPane id="green" prefHeight="54.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="shiny-orange" layoutX="338.0" layoutY="5.0" prefHeight="34.0" prefWidth="224.0" text="Choose the post for delete :">
+            <Label id="shiny-orange" layoutX="314.0" layoutY="3.0" prefHeight="48.0" prefWidth="271.0" text="Choose the post for delete :">
                <font>
                   <Font size="18.0" />
                </font>

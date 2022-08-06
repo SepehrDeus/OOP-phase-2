@@ -45,7 +45,7 @@
     -fx-background-insets: 0,1,2,3,0;
     -fx-text-fill: #654b00;
     /* -fx-font-size: 12px;*/
-    -fx-font-weight: bold;
+    /*-fx-font-weight: bold;*/
     -fx-padding: 10 20 10 20;
 }
 #dark-blue {

@@ -29,6 +29,7 @@ public class HomePageController {
     private  boolean ADposts = false;
     private boolean Explorer = false;
     private boolean ShowPosts = false;
+    private boolean UserSuggestion = false;
 
     public static void setUserID(String userID) {
         HomePageController.userID = userID;
@@ -88,21 +89,12 @@ public class HomePageController {
     @FXML
     void go_to_My_Posts () {
         MyPostsController.setUserID(userID);
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(null);
-        ShowPostsButton.setEffect(null);
         HomePageController.setUserID(null);
         ControllerContext.change_scene(MyPostsController.getScene());
     }
 
     @FXML
      void Show_latest_10_post () {
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(new Shadow());
-        ADPostsButton.setEffect(null);
-        ShowPostsButton.setEffect(null);
         vBox.getChildren().clear();
 
             if(Explorer){
@@ -122,7 +114,7 @@ public class HomePageController {
             }
 
             int counter = 0;
-            AlertBox.display("listen","you have viewed all this ten posts",false);
+            AlertBox.display("listen","you have viewed all this posts",false);
 
             while (resultSet_posts.next() && counter<10){
                 //post
@@ -168,12 +160,12 @@ public class HomePageController {
                 vBox.getChildren().add(comment);
                 comment.setOnMouseClicked(mouseEvent -> {
                     CommentsOfPostsController.setUserID(userID);
-                    CommentsOfPostsController.setButtonPressed("ExploreButton");
+
 
                     if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                         setUserID(null);
                         ExploreButton.setEffect(null);
-
+                        CommentsOfPostsController.setButtonPressed("ExploreButton");
                         ControllerContext.change_scene(CommentsOfPostsController.getScene());
                     }
                 });
@@ -191,11 +183,6 @@ public class HomePageController {
     }
 
     public void Show_latest_10_post_prim () {
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(new Shadow());
-        ADPostsButton.setEffect(null);
-        ShowPostsButton.setEffect(null);
         vBox.getChildren().clear();
 
         try {
@@ -277,24 +264,118 @@ public class HomePageController {
 
     @FXML
      void Show_user_suggestion () {
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(new Shadow());
-        ExploreButton.setEffect(null);
-        ADPostsButton.setEffect(null);
-        ShowPostsButton.setEffect(null);
+        vBox.getChildren().clear();
+        try {
+            String SelfID = userID;
+            ResultSet resultSet1 = Database.get_followingTable(SelfID);
+            ArrayList <String> followingSelf = new ArrayList<>();
+            while (resultSet1.next()){
+                followingSelf.add(resultSet1.getString(1));
+            }
+            resultSet1 = Database.get_followersTable(SelfID);
+            ArrayList <String> followerSelf = new ArrayList<>();
+            while (resultSet1.next()){
+                followerSelf.add(resultSet1.getString(1));
+            }
+
+            ArrayList <String> UserIDs = new ArrayList<>();
+            ArrayList <Integer> UserScores = new ArrayList<>();
+            ArrayList <String> UserURLs = new ArrayList<>();
+            ResultSet resultSet_users = Database.get_Users();
+            int counter = 0;
+            while (resultSet_users.next()){
+                UserIDs.add(resultSet_users.getString(1));
+                UserScores.add(0);
+                UserURLs.add(resultSet_users.getString(2));
+                resultSet1 = Database.get_followingTable(resultSet_users.getString(1));
+                while (resultSet1.next()){
+                    for (String s : followingSelf) {
+                        if(resultSet1.getString(1).equalsIgnoreCase(s)){
+                            UserScores.set(counter,UserScores.get(counter)+1);
+                        }
+                    }
+                }
+                counter++;
+            }
+
+
+            counter = 0;
+            resultSet_users.beforeFirst();
+            while (resultSet_users.next()){
+                resultSet1 =Database.get_followersTable(resultSet_users.getString(1));
+                while (resultSet1.next()){
+                    for (String s : followerSelf) {
+                        if(resultSet1.getString(1).equalsIgnoreCase(s)){
+                            UserScores.set(counter,UserScores.get(counter)+1);
+                        }
+                    }
+                }
+                counter++;
+            }
+
+            String BlankString ;
+            int BlankInt;
+            for (int i = 0; i < UserScores.size(); i++) {
+                for (int i1 = 0; i1 < UserScores.size()-1; i1++) {
+                    if(UserScores.get(i1)<UserScores.get(i1+1)){
+                        BlankInt = UserScores.get(i1);
+                        UserScores.set(i1,UserScores.get(i1+1))  ;
+                        UserScores.set(i1+1,BlankInt)  ;
+                        BlankString = UserIDs.get(i1);
+                        UserIDs.set(i1,UserIDs.get(i1+1))  ;
+                        UserIDs.set(i1+1,BlankString)  ;
+                        BlankString = UserURLs.get(i1);
+                        UserURLs.set(i1,UserURLs.get(i1+1))  ;
+                        UserURLs.set(i1+1,BlankString)  ;
+                    }
+                }
+            }
+            boolean existence = false;
+            counter = 1;
+            for (int i = 0; i < UserIDs.size() && counter<6 ; i++) {
+                existence = false;
+                for (String s : followerSelf) {
+                    if(UserIDs.get(i).equals(s)){
+                        existence = true;
+                    }
+                }
+                for (String s : followingSelf) {
+                    if(UserIDs.get(i).equals(s)){
+                        existence = true;
+                    }
+                }
+                if(!UserIDs.get(i).equals(SelfID)){
+                    if(!existence){
+                        counter++;
+                        ImageView imageView = new ImageView(UserURLs.get(i));
+                        imageView.setFitHeight(200);
+                        imageView.setPreserveRatio(true);
+                        vBox.getChildren().add(imageView);
+
+                        Label id_poster = new Label(UserIDs.get(i));
+                        id_poster.setStyle("../css/ButtonFirstStyle.css");
+                        id_poster.setId("shiny-orange");
+                        id_poster.setMaxSize(700,-1);
+                        vBox.getChildren().add(id_poster);
+                        Label line = new Label("------------------------------------------");
+                        line.setMaxSize(700,-1);
+                        vBox.getChildren().add(line);
+                    }
+                }
+            }
+            UserSuggestion = true;
+        }catch (Exception e){
+            e.printStackTrace();return;
+        }
 
     }
     @FXML
      void Return_main_menu() {
         MainMenuController.setUserID(userID);
-        MyPostsButton.setEffect(null);
-        ADPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(null);
-        ShowPostsButton.setEffect(null);
         ADposts =false;
         Explorer = false;
         ShowPosts = false;
+        UserSuggestion = false;
         vBox.getChildren().clear();
         ControllerContext.change_scene(MainMenuController.getScene());
     }
@@ -349,11 +430,6 @@ public class HomePageController {
     @FXML
     void AD_posts() {
         vBox.getChildren().clear();
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(null);
-        ADPostsButton.setEffect(new Shadow());
-        ShowPostsButton.setEffect(null);
         try {
             String UserID = userID;
             ResultSet resultSetLikes = Database.getLikes();
@@ -500,7 +576,7 @@ public class HomePageController {
                 imageView.setPreserveRatio(true);
                 vBox.getChildren().add(imageView);
 
-                Label id_poster = new Label(posterID.get(i)+"\n Caption : "+caption.get(i)+"\n------------------------------");
+                Label id_poster = new Label(posterID.get(i)+"\n Caption : "+caption.get(i));
                 id_poster.setStyle("../css/ButtonFirstStyle.css");
                 id_poster.setId("shiny-orange");
                 id_poster.setMaxSize(700,-1);
@@ -513,7 +589,7 @@ public class HomePageController {
                 }
             }
             if(!ADposts){
-                AlertBox.display("listen","you have viewed all this five posts",false);
+                AlertBox.display("listen","you have viewed all this  posts",false);
                 ADposts = true;
             }
         }catch (Exception e){
@@ -525,11 +601,6 @@ public class HomePageController {
     @FXML
     void Show_posts() {
         vBox.getChildren().clear();
-        MyPostsButton.setEffect(null);
-        UserSuggestionButton.setEffect(null);
-        ExploreButton.setEffect(null);
-        ADPostsButton.setEffect(null);
-        ShowPostsButton.setEffect(new Shadow());
         try {
             ResultSet resultSet_comments = Database.get_AllComments();
             ArrayList <String> comments_OR_postID = new ArrayList<>();
@@ -544,7 +615,7 @@ public class HomePageController {
 
             int counter = 0;
             if(!ShowPosts){
-                AlertBox.display("listen","you have viewed all this ten posts",false);
+                AlertBox.display("listen","you have viewed all this  posts",false);
             }
 
             ResultSet resultSet = Database.show_posts();
@@ -594,6 +665,8 @@ public class HomePageController {
                     vBox.getChildren().add(caption);
                     // comment
                     Label comment = new Label("No comments yet.");
+                    comment.setStyle("../css/ButtonFirstStyle.css");
+                    comment.setId("shiny-orange");
                     caption.setStyle("../css/ButtonFirstStyle.css");
                     caption.setId("shiny-orange");
                     for (int i = 0; i < comments_OR_postID.size(); i++) {
@@ -604,12 +677,10 @@ public class HomePageController {
                     vBox.getChildren().add(comment);
                     comment.setOnMouseClicked(mouseEvent -> {
                         CommentsOfPostsController.setUserID(userID);
-                        CommentsOfPostsController.setButtonPressed("ShowPostsButton");
-                        comment.setStyle("../css/ButtonFirstStyle.css");
-                        comment.setId("shiny-orange");
                         if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                             setUserID(null);
                             ShowPostsButton.setEffect(null);
+                            CommentsOfPostsController.setButtonPressed("ShowPostsButton");
                             ControllerContext.change_scene(CommentsOfPostsController.getScene());
                         }
                     });
@@ -661,11 +732,11 @@ public class HomePageController {
                         vBox.getChildren().add(comment);
                         comment.setOnMouseClicked(mouseEvent -> {
                             CommentsOfPostsController.setUserID(userID);
-                            CommentsOfPostsController.setButtonPressed("ShowPostsButton");
+
                             if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                                 setUserID(null);
                                 ShowPostsButton.setEffect(null);
-
+                                CommentsOfPostsController.setButtonPressed("ShowPostsButton");
                                 ControllerContext.change_scene(CommentsOfPostsController.getScene());
                             }
                         });
@@ -717,10 +788,10 @@ public class HomePageController {
                         vBox.getChildren().add(comment);
                         comment.setOnMouseClicked(mouseEvent -> {
                             CommentsOfPostsController.setUserID(userID);
-                            ShowPostsButton.setEffect(null);
+
                             if(CommentsOfPostsController.getController().init_comments_posts(comments_OR_postID,comments_caption,comments_id, id)){
                                 setUserID(null);
-
+                                ShowPostsButton.setEffect(null);
                                 CommentsOfPostsController.setButtonPressed("ShowPostsButton");
                                 ControllerContext.change_scene(CommentsOfPostsController.getScene());
                             }

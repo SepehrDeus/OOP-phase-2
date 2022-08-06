@@ -27,6 +27,11 @@ public class CommentsOfPostsController {
     private final Image like = new Image("like.jpg");
     private final Image dislike = new Image("dislike.jpg");
     private static String ButtonPressed ;
+    private static String UserId_searchUser;
+
+    public static void setUserId_searchUser(String userId_searchUser) {
+        UserId_searchUser = userId_searchUser;
+    }
 
     public static void setButtonPressed(String buttonPressed) {
         ButtonPressed = buttonPressed;
@@ -200,12 +205,18 @@ public class CommentsOfPostsController {
                     HomePageController.setUserID(userID);
                     setUserID(null);
                     switch (ButtonPressed){
-                        case "ADPostsButton": HomePageController.getController().AD_posts();
-                        case "ShowPostsButton" : HomePageController.getController().Show_posts();
-                        case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
-                        case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+                        case "ADPostsButton": HomePageController.getController().AD_posts();break;
+                        case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
+                        case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();break;
+                        case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();break;
+                        case "UserPosts": ShoPostsUserController.getController().init_posts(UserId_searchUser);break;
                     }
-                    ControllerContext.change_scene(HomePageController.getScene());
+                    if(ButtonPressed.equals("UserPosts")){
+                        ControllerContext.change_scene(ShoPostsUserController.getScene());
+                    }else {
+                        ControllerContext.change_scene(HomePageController.getScene());
+                    }
+                    return;
                 }else  AlertBox.display("Error","couldn't create the comment",true);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -236,12 +247,17 @@ public class CommentsOfPostsController {
                 CAptionText.setText("");
                 HomePageController.setUserID(userID);
                 switch (ButtonPressed){
-                    case "ADPostsButton": HomePageController.getController().AD_posts();
-                    case "ShowPostsButton" : HomePageController.getController().Show_posts();
-                    case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
-                    case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+                    case "ADPostsButton": HomePageController.getController().AD_posts();break;
+                    case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
+                    case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();break;
+                    case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();break;
+                    case "UserPosts": ShoPostsUserController.getController().init_posts(UserId_searchUser);break;
                 }
-                ControllerContext.change_scene(HomePageController.getScene());
+                if(ButtonPressed.equals("UserPosts")){
+                    ControllerContext.change_scene(ShoPostsUserController.getScene());
+                }else {
+                    ControllerContext.change_scene(HomePageController.getScene());
+                }
                 return;
             }else {
                 AlertBox.display("Error","couldn't delete the comment",true);
@@ -268,12 +284,17 @@ public class CommentsOfPostsController {
         CAptionText.setText("");
         HomePageController.setUserID(userID);
         switch (ButtonPressed){
-            case "ADPostsButton": HomePageController.getController().AD_posts();
-            case "ShowPostsButton" : HomePageController.getController().Show_posts();
-            case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();
-            case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();
+            case "ADPostsButton": HomePageController.getController().AD_posts();break;
+            case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
+            case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();break;
+            case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();break;
+            case "UserPosts": ShoPostsUserController.setUserID(userID);ShoPostsUserController.getController().init_posts(UserId_searchUser);break;
         }
-        ControllerContext.change_scene(HomePageController.getScene());
+        if(ButtonPressed.equals("UserPosts")){
+            ControllerContext.change_scene(ShoPostsUserController.getScene());
+        }else {
+            ControllerContext.change_scene(HomePageController.getScene());
+        }
     }
 
 

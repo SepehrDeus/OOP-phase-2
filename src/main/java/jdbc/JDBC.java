@@ -12,7 +12,7 @@ public class JDBC {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/deus",
                     "root",
-                    "19283746"
+                    "9248bzm@#troy"
             );
 
             JDBC.connection = connection;
@@ -188,7 +188,7 @@ public class JDBC {
                         "likesNum int NOT NULL, "+
                         "commentsNum int NOT NULL, "+
                         "timy varchar(255) NOT NULL, "+
-                        "PRIMARY KEY (id) )"
+                        "PRIMARY KEY (timy) )"
         );
 
         statement.close();
@@ -204,8 +204,8 @@ public class JDBC {
                 "CREATE TABLE IF NOT EXISTS "+
                         "Likes(post_OR_comment_ID varchar(255) NOT NULL, "+
                         "Like_ID varchar(255) NOT NULL, "+
-                        "Liker_ID varchar(255) NOT NULL, " +
-                        "PRIMARY KEY (Like_ID) )"
+                        "Liker_ID varchar(255) NOT NULL " +
+                        ")"
         );
         statement.close();
     }

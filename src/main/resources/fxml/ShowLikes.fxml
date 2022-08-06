@@ -16,24 +16,24 @@
    <top>
       <AnchorPane id="green" prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="569.0" layoutY="25.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" ">
+            <ToggleButton id="record-sales" fx:id="PostToggle" layoutX="546.0" layoutY="20.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" ">
                <toggleGroup>
                   <ToggleGroup fx:id="IDs" />
                </toggleGroup>
             </ToggleButton>
             <TextField fx:id="PostORCommentID" layoutX="129.0" layoutY="28.0" promptText="Post OR Comment ID" />
-            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="74.0" text="ID : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="41.0" layoutY="17.0" prefHeight="25.0" prefWidth="74.0" text="ID : ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="472.0" layoutY="26.0" prefHeight="38.0" prefWidth="86.0" text="PostID ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="444.0" layoutY="17.0" prefHeight="46.0" prefWidth="95.0" text="PostID ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="671.0" layoutY="27.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" " toggleGroup="$IDs" />
-            <Label id="shiny-orange" layoutX="784.0" layoutY="26.0" prefHeight="38.0" prefWidth="118.0" text=" CommentID ">
+            <ToggleButton id="record-sales" fx:id="CommentToggle" layoutX="648.0" layoutY="20.0" mnemonicParsing="false" onAction="#show_likes" prefHeight="26.0" prefWidth="102.0" text=" " toggleGroup="$IDs" />
+            <Label id="shiny-orange" layoutX="762.0" layoutY="17.0" prefHeight="46.0" prefWidth="139.0" text=" CommentID ">
                <font>
                   <Font size="16.0" />
                </font>
@@ -49,10 +49,10 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="LikesNum" layoutX="407.0" layoutY="24.0" promptText=" " />
-            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="279.0" layoutY="15.0" prefHeight="26.0" prefWidth="118.0" text="LikesNumber : ">
+            <TextField fx:id="LikesNum" layoutX="405.0" layoutY="21.0" promptText=" " />
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="10.0" prefHeight="48.0" prefWidth="161.0" text="LikesNumber : ">
                <font>
-                  <Font size="56.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>

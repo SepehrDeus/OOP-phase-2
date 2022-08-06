@@ -4,6 +4,7 @@ import entity.User;
 import fxml.ControllerContext;
 import fxml.MainMenuController;
 import fxml.message.SendMessage2Controller;
+import fxml.post.ShoPostsUserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -129,7 +130,13 @@ public class SearchUserController {
         if (Database.unfollow(watcherUserID, showedUserID)) followButton.setText("Follow");
     }
 
-    public void show_posts(ActionEvent event) {
+    @FXML
+    public void show_posts() {
+        ShoPostsUserController.setUserID(watcherUserID);
+        if( ShoPostsUserController.getController().init_posts(showedUserID)){
+            watcherUserID=null;
+            ControllerContext.change_scene(ShoPostsUserController.getScene());
+        }
 
     }
 
@@ -144,8 +151,12 @@ public class SearchUserController {
         sendButton.setVisible(false);
         followButton.setVisible(false);
         idErrLabel.setText("");
+        label.setText(null);
         setWatcherUserID(null);
         setShowedUserID(null);
         ControllerContext.change_scene(MainMenuController.getScene());
     }
+
+
+
 }

@@ -53,6 +53,8 @@ public class ShowCommentsController {
     }
 
     //-----------------------------------------------------------------------------------------------------------------
+    @FXML
+    private TextField LikesNum;
 
     @FXML
     private Button RetunButton;
@@ -89,7 +91,6 @@ public class ShowCommentsController {
                                 ImageView imageView = new ImageView(temp.getString(2));
                                 imageView.setFitHeight(100);
                                 imageView.setFitWidth(100);
-                                //dont know how to set max size
                                 String Comment = CommenterIDs.getString("comment_caption");
 
                                 vBox.getChildren().add(imageView);
@@ -156,7 +157,7 @@ public class ShowCommentsController {
     @FXML
     void Return_myPosts(ActionEvent event) {
         setUserID(null);
-        PostORCommentID.setText("");
+        PostORCommentID.setText(null);
         vBox.getChildren().clear();
         ControllerContext.change_scene(MyPostsController.getScene());
     }

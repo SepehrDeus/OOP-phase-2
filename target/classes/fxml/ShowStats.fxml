@@ -14,12 +14,12 @@
    <top>
       <AnchorPane id="green" prefHeight="78.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="51.0" layoutY="15.0" prefHeight="46.0" prefWidth="141.0" text="Likes Number : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="15.0" prefHeight="51.0" prefWidth="178.0" text="Likes Number : ">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="556.0" layoutY="15.0" prefHeight="46.0" prefWidth="149.0" text="Views Number : ">
+            <Label id="shiny-orange" alignment="CENTER_RIGHT" layoutX="515.0" layoutY="15.0" prefHeight="51.0" prefWidth="191.0" text="Views Number : ">
                <font>
                   <Font size="20.0" />
                </font>

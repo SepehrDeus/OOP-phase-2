@@ -127,4 +127,6 @@ public class MainMenuController {
         SearchUserController.setWatcherUserID(userID);
         ControllerContext.change_scene(SearchUserController.getScene());
     }
+
+
 }
