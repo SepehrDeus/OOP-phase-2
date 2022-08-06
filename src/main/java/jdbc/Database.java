@@ -1,7 +1,6 @@
 package jdbc;
 import entity.*;
 import java.sql.*;
-import java.util.ArrayList;
 public class Database {
     private static Connection connection;
 
@@ -441,40 +440,6 @@ public class Database {
         return preparedStatement.executeQuery();
     }
 
-    public static ResultSet related_messages(String userID) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM messgaes WHERE senderID=? OR receiverID=? ORDER BY id DESC"
-        );
-        preparedStatement.setString(1, userID);
-        preparedStatement.setString(2, userID);
-        return preparedStatement.executeQuery();
-    }
-
-    public static boolean isRelated(int messageID, String userID) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT senderID, receiverID FROM messages WHERE id=?"
-        );
-        preparedStatement.setInt(1, messageID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        return userID.equals(resultSet.getString("senderID")) || userID.equals(resultSet.getString("receiverID"));
-    }
-
-    public static ResultSet forward_text(int messageID) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT senderID, text FROM messages WHERE id=?"
-        );
-        preparedStatement.setInt(1, messageID);
-        return preparedStatement.executeQuery();
-    }
-
-    public static ResultSet get_AllMessages() throws SQLException {;
-        Statement statement = connection.createStatement();
-        return statement.executeQuery(
-                "SELECT * FROM messages ORDER BY id DESC"
-        );
-    }
-
 
 
 
@@ -772,17 +737,6 @@ public class Database {
         return preparedStatement.executeUpdate() + s1 + s2 + s3;
     }
 
-    public static boolean relatedGroup(int messageID, String groupID) throws SQLException {
-        String messagesTableName = groupID + "MessagesTable";
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT COUNT(id) FROM "+messagesTableName+" WHERE id=?"
-        );
-        preparedStatement.setInt(1, messageID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        return resultSet.getInt(1) > 0;
-    }
-
 
 
 
@@ -844,33 +798,16 @@ public static int Update_postNum(String userid,int prepostNum) throws SQLExcepti
         return resultSet.getInt("business")==1;
     }
 
-    public static boolean check_ads_post(String id) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT ad FROM posts WHERE id=?"
-        );
-        preparedStatement.setString(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        return resultSet.getInt("ad")==1;
-        }
-public static String check_id_post(String id_post) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-        "SELECT posterid FROM posts WHERE id=?"
-        );
-        preparedStatement.setString(1, id_post);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        return resultSet.getString("posterid");
-        }
-public static boolean check_existence_post(String id_post) throws SQLException {
+    public static boolean check_existence_post(String id_post) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
         "SELECT * FROM posts WHERE id=?"
         );
         preparedStatement.setString(1, id_post);
         ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet.next();
-        }
-public static boolean check_existence_comment(String id_post) throws SQLException {
+    }
+
+    public static boolean check_existence_comment(String id_post) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
         "SELECT * FROM comments WHERE id=?"
         );
@@ -907,7 +844,6 @@ public static boolean CheckForDuplicateLike (String postCommentID,String LikerID
         ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet.next();
         }
-    }
 
 public static int Update_post_view (String ID,int views)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -953,13 +889,7 @@ public static ResultSet show_posts()throws  SQLException {
     );
 }
 
-    public static String FollowersID(String id){
-        return id+"followersID";
-    }
 
-    public static String FollowingsID(String id){
-        return id+"followingsID";
-    }
 
     public static int Update_commentNum_from_posts (String id,int new_commentNum)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -971,7 +901,7 @@ public static ResultSet show_posts()throws  SQLException {
         preparedStatement.setString(2,id);
         return preparedStatement.executeUpdate();
         }
-    public static ResultSet get_AllComments() throws SQLException {;
+    public static ResultSet get_AllComments() throws SQLException {
         Statement statement = connection.createStatement();
         return statement.executeQuery(
                 "SELECT * FROM comments ORDER BY timy ASC "
@@ -1004,8 +934,7 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
         preparedStatement.setString(1,ID);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
-        int a=  resultSet.getInt("likesNum");
-        return a ;
+            return resultSet.getInt("likesNum");
         }else{
         return -1;
         }
@@ -1015,7 +944,6 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
                 "SELECT id, pictureid, ad, caption FROM posts WHERE posterid=?"
         );
         preparedStatement.setString(1,userID);
-        ResultSet resultSet = preparedStatement.executeQuery();
         return preparedStatement.executeQuery();
     }
 
@@ -1024,7 +952,6 @@ public static int get_likesNum_from_posts (String ID) throws SQLException {
                 "SELECT likesNum, viewsNum FROM posts WHERE id=?"
         );
         preparedStatement.setString(1,postID);
-        ResultSet resultSet = preparedStatement.executeQuery();
         return preparedStatement.executeQuery();
     }
 // COMMENTS
@@ -1048,17 +975,6 @@ public static int add_comment(Comment comment) throws SQLException {
         preparedStatement.setString(1, id);
         return preparedStatement.executeUpdate()>0;
         }
-
-    public static int Update_comment(String new_text,String id) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-        "UPDATE comments " +
-        "SET comment_caption=? " +
-        "WHERE id=?"
-        );
-preparedStatement.setString(1,new_text);
-        preparedStatement.setString(2,id);
-        return preparedStatement.executeUpdate();
-    }
 
     public static int Update_commentNum_from_comments (String id,int new_commentNum)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -1107,7 +1023,6 @@ public static ResultSet SHOW_COMMENTS_comment (String post_ID)throws SQLExceptio
                 "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
         preparedStatement.setString(1,post_ID+"#");
-        ResultSet resultSet = preparedStatement.executeQuery();
     return preparedStatement.executeQuery();
     }
 
@@ -1116,7 +1031,6 @@ public static ResultSet SHOW_COMMENTS_post (String post_ID)throws SQLException{
         "SELECT commenterid, comment_caption FROM comments WHERE postORcommentID=?"
         );
         preparedStatement.setString(1,post_ID+"*");
-        ResultSet resultSet = preparedStatement.executeQuery();
         return preparedStatement.executeQuery();
     }
 
@@ -1164,30 +1078,13 @@ public static ResultSet SHOW_COMMENTS_post (String post_ID)throws SQLException{
         preparedStatement.setString(1, post_ID+"#");
         return preparedStatement.executeQuery();
     }
-    public static ResultSet get_commentsCaption (String comment_ID)throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT comment_caption FROM comments WHERE id=?"
-        );
-        preparedStatement.setString(1, comment_ID);
-        return preparedStatement.executeQuery();
-    }
+
     public static ResultSet get_usernameANDpictureurl (String user_ID)throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT username, profilepicture FROM users WHERE id=?"
         );
         preparedStatement.setString(1, user_ID);
         return preparedStatement.executeQuery();
-    }
-
-    public static void SHOW_VIEWS_post (String post_ID)throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT viewsNum FROM posts WHERE id=?"
-        );
-        preparedStatement.setString(1,post_ID);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            System.out.println(post_ID+"viewsNum:"+resultSet.getString("viewsNum"));
-        }
     }
 }
 
