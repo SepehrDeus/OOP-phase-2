@@ -197,12 +197,13 @@ public class CommentsOfPostsController {
             AlertBox.display("Error","caption shouldn't be empty.",true);
         }else {
             try {
-                if (Database.add_comment(new Comment(post_comment_id,commentID,userID,caption,time)) > 0){
+                if (Database.add_comment(new Comment(post_comment_id,commentID+time,userID,caption,time)) > 0){
                     AlertBox.display("success","created the comment",false);
                     vBox.getChildren().clear();
                     PostID.setText("");
                     CAptionText.setText("");
                     HomePageController.setUserID(userID);
+                    ShoPostsUserController.setUserID(userID);
                     setUserID(null);
                     switch (ButtonPressed){
                         case "ADPostsButton": HomePageController.getController().AD_posts();break;
@@ -216,6 +217,7 @@ public class CommentsOfPostsController {
                     }else {
                         ControllerContext.change_scene(HomePageController.getScene());
                     }
+
                     return;
                 }else  AlertBox.display("Error","couldn't create the comment",true);
             } catch (SQLException e) {
@@ -237,6 +239,11 @@ public class CommentsOfPostsController {
                 int a;
                 String post_comment_id = cap.substring(0,index+1);
 
+                if(post_comment_id.charAt(post_comment_id.length()-1)=='#'){
+                    a = Database.get_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1))-1;
+                    Database.Update_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1),a);
+                }
+
                 if(post_comment_id.charAt(post_comment_id.length()-1)=='*'){
                     a = Database.get_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1))-1;
                     Database.Update_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1),a);
@@ -246,6 +253,7 @@ public class CommentsOfPostsController {
                 PostID.setText("");
                 CAptionText.setText("");
                 HomePageController.setUserID(userID);
+                ShoPostsUserController.setUserID(userID);
                 switch (ButtonPressed){
                     case "ADPostsButton": HomePageController.getController().AD_posts();break;
                     case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
@@ -283,6 +291,7 @@ public class CommentsOfPostsController {
         PostID.setText("");
         CAptionText.setText("");
         HomePageController.setUserID(userID);
+        ShoPostsUserController.setUserID(userID);
         switch (ButtonPressed){
             case "ADPostsButton": HomePageController.getController().AD_posts();break;
             case "ShowPostsButton" : HomePageController.getController().Show_posts();break;

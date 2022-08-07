@@ -92,7 +92,6 @@ public class SearchUserController {
         String showedUserID = idField.getText().trim();
         if (!showedUserID.isEmpty()) {
             if (Database.user_exists(showedUserID)) {
-                if (!showedUserID.equals(watcherUserID)) {
                     setShowedUserID(showedUserID);
                     setIsFollowed(Database.isFollowed(watcherUserID, showedUserID));
                     idField.setText("");
@@ -109,8 +108,6 @@ public class SearchUserController {
                     followButton.setVisible(true);
                     postsButton.setVisible(true);
                     sendButton.setVisible(true);
-                }
-                else idErrLabel.setText("This is yous own account.");
             }
             else idErrLabel.setText("User doesn't exist.");
         }
