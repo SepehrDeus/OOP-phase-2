@@ -1042,7 +1042,16 @@ public class Database {
         preparedStatement.setString(1,post_ID+"*");
         return preparedStatement.executeQuery();
     }
-
+    public static int Update_comment(String new_text,String id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE comments " +
+                        "SET comment_caption=? " +
+                        "WHERE id=?"
+        );
+        preparedStatement.setString(1,new_text);
+        preparedStatement.setString(2,id);
+        return preparedStatement.executeUpdate();
+    }
 
 
 

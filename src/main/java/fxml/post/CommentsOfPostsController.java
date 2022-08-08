@@ -5,6 +5,7 @@ import entity.Like;
 import entity.Time;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import fxml.ControllerContext;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import jdbc.Database;
@@ -74,6 +77,15 @@ public class CommentsOfPostsController {
     private Label PostID;
 
     @FXML
+    private Button CommentButton;
+
+    @FXML
+    private TextField CommentIDTextField;
+
+    @FXML
+    private Button UpdateButton;
+
+    @FXML
     private TextArea CAptionText;
 
     @FXML
@@ -93,12 +105,11 @@ public class CommentsOfPostsController {
                     commentlabel.setId("shiny-orange");
                     String Comment_id = comments_id.get(i);
                     commentlabel.setOnMouseClicked(mouseEvent -> {
-                        create_comment(Comment_id+"#");
+                        CommentIDTextField.setText(Comment_id);
                         });
                     commentlabel.setOnMouseDragged(mouseEvent -> {
                         delete_comment(Comment_id);
                     });
-
                     //setting commentID
                     commentlabel.setText("id : "+Comment_id+"\n"+comments_caption.get(i));
                     vBox.getChildren().add(commentlabel);
@@ -127,6 +138,54 @@ public class CommentsOfPostsController {
             return true;
         }catch (Exception e){
             e.printStackTrace();return false;
+        }
+    }
+
+    @FXML
+    void UpdateComment (){
+       String CommentID = CommentIDTextField.getText();
+        try{
+            if(CommentID.isEmpty()){
+                AlertBox.display("Error","You should choose a comment first!",true);return;
+            }
+            if(!Database.check_existence_comment(CommentID)){
+                AlertBox.display("Error","No comments found!",true);return;
+            }else {
+                CommentID += "#";
+            }
+            String new_caption = CAptionText.getText();
+            if(new_caption.isEmpty()){
+                    AlertBox.display("Error","Caption is empty?!",true);return;
+            }else {
+                if(Database.Update_comment(new_caption,CommentID)>0){
+                    AlertBox.display("Success","Caption updated!",false);
+                    vBox.getChildren().clear();
+                    PostID.setText("");
+                    CAptionText.setText("");
+                    CommentIDTextField.setText("");
+                    HomePageController.setUserID(userID);
+                    ShoPostsUserController.setUserID(userID);
+                    setUserID(null);
+                    switch (ButtonPressed){
+                        case "ADPostsButton": HomePageController.getController().AD_posts();break;
+                        case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
+                        case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();break;
+                        case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();break;
+                        case "UserPosts": ShoPostsUserController.getController().init_posts(UserId_searchUser);break;
+                    }
+                    if(ButtonPressed.equals("UserPosts")){
+                        ControllerContext.change_scene(ShoPostsUserController.getScene());
+                    }else {
+                        ControllerContext.change_scene(HomePageController.getScene());
+                    }
+
+                    return;
+                }else {
+                    AlertBox.display("Error","Comment wasn't found!",true);return;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -174,8 +233,18 @@ public class CommentsOfPostsController {
         }
     }
 
-    void create_comment(String post_comment_id ){
+    @FXML
+    void create_comment( ){
+        String post_comment_id = CommentIDTextField.getText();
     try {
+        if(post_comment_id.isEmpty()){
+            AlertBox.display("Error","You should choose a comment first!",true);return;
+        }
+        if(!Database.check_existence_comment(post_comment_id)){
+            AlertBox.display("Error","No comments found!",true);return;
+        }else {
+            post_comment_id += "#";
+        }
         int a;
         if(post_comment_id.charAt(post_comment_id.length()-1)=='#'){
             a = Database.get_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1))+1;
@@ -202,6 +271,7 @@ public class CommentsOfPostsController {
                     vBox.getChildren().clear();
                     PostID.setText("");
                     CAptionText.setText("");
+                    CommentIDTextField.setText("");
                     HomePageController.setUserID(userID);
                     ShoPostsUserController.setUserID(userID);
                     setUserID(null);
@@ -252,6 +322,7 @@ public class CommentsOfPostsController {
                 vBox.getChildren().clear();
                 PostID.setText("");
                 CAptionText.setText("");
+                CommentIDTextField.setText("");
                 HomePageController.setUserID(userID);
                 ShoPostsUserController.setUserID(userID);
                 switch (ButtonPressed){
@@ -276,9 +347,63 @@ public class CommentsOfPostsController {
 
     }
 
+    void create_comment_prim( String post_comment_id){
+        try {
+            int a;
+            if(post_comment_id.charAt(post_comment_id.length()-1)=='#'){
+                a = Database.get_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1))+1;
+                Database.Update_commentNum_from_comments(post_comment_id.substring(0,post_comment_id.length()-1),a);
+            }
+            else if(post_comment_id.charAt(post_comment_id.length()-1)=='*'){
+                a = Database.get_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1))+1;
+                Database.Update_commentNum_from_posts(post_comment_id.substring(0,post_comment_id.length()-1),a);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String commentID = post_comment_id + userID;
+        String time=comment_time();
+        String caption = CAptionText.getText();
+
+        if(caption.isEmpty()){
+            AlertBox.display("Error","caption shouldn't be empty.",true);
+        }else {
+            try {
+                if (Database.add_comment(new Comment(post_comment_id,commentID+time,userID,caption,time)) > 0){
+                    AlertBox.display("success","created the comment",false);
+                    vBox.getChildren().clear();
+                    PostID.setText("");
+                    CAptionText.setText("");
+                    CommentIDTextField.setText("");
+                    HomePageController.setUserID(userID);
+                    ShoPostsUserController.setUserID(userID);
+                    setUserID(null);
+                    switch (ButtonPressed){
+                        case "ADPostsButton": HomePageController.getController().AD_posts();break;
+                        case "ShowPostsButton" : HomePageController.getController().Show_posts();break;
+                        case "ExploreButton" : HomePageController.getController().Show_latest_10_post_prim();break;
+                        case "UserSuggestionButton" : HomePageController.getController().Show_user_suggestion();break;
+                        case "UserPosts": ShoPostsUserController.getController().init_posts(UserId_searchUser);break;
+                    }
+                    if(ButtonPressed.equals("UserPosts")){
+                        ControllerContext.change_scene(ShoPostsUserController.getScene());
+                    }else {
+                        ControllerContext.change_scene(HomePageController.getScene());
+                    }
+
+                    return;
+                }else  AlertBox.display("Error","couldn't create the comment",true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     @FXML
     void comment_on_post(MouseEvent event) {
-        create_comment(PostID.getText()+"*");
+        create_comment_prim(PostID.getText()+"*");
     }
 
     public static String comment_time (){
@@ -290,6 +415,7 @@ public class CommentsOfPostsController {
         vBox.getChildren().clear();
         PostID.setText("");
         CAptionText.setText("");
+        CommentIDTextField.setText("");
         HomePageController.setUserID(userID);
         ShoPostsUserController.setUserID(userID);
         switch (ButtonPressed){
